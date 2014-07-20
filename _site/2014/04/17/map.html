@@ -1,0 +1,881 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>Linux网络编程 map | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">9</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">Linux网络编程 map</h2>
+    2014年04月17日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>capacity()函数与reserve（）函数的使用</h2>
+
+<h2>capacity()</h2>
+
+<p>这里引出了vector的内存分配策略，以每次2倍当前容量递增:</p>
+
+<blockquote>
+<ul>
+<li>0 1 2 4 8 （如果调用了reserve（），比如修改为99，则下一次分配时，容量为99*2 = 198）... (这样的方式递增)</li>
+</ul>
+</blockquote>
+
+<h2>reserve()</h2>
+
+<p>只能往大了改，不能往小了改。</p>
+
+<h2>1.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 0   0</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;--------------------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">ix</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ix</span> <span class="o">!=</span> <span class="mi">24</span><span class="p">;</span> <span class="o">++</span><span class="n">ix</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ix</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 24 32</span>
+
+        <span class="n">vec</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 24 50</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">//50 50</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">//51 100</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>2.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 0   0</span>
+
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 1   1</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 2   2</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 3   4</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>    <span class="c1">//size 4  capacity 4</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">99</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 5   8</span>
+
+        <span class="n">vec</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">199</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">())</span>
+        <span class="p">{</span>
+                <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">234</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 199 199</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">199</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">vec</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// 200 398</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>再谈String类型的相关函数</h2>
+
+<h2>insert()</h2>
+
+<blockquote>
+<ul>
+<li>8个重载</li>
+<li><a href="http://www.cplusplus.com/reference/string/string/insert/">reference</a></li>
+</ul>
+</blockquote>
+
+<h2>erase()</h2>
+
+<blockquote>
+<ul>
+<li>3个重载</li>
+<li><a href="http://www.cplusplus.com/reference/string/string/erase/">reference</a></li>
+</ul>
+</blockquote>
+
+<h2>append()</h2>
+
+<p>string1.cpp</p>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// pos n</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">//hel</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">));</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;foobar&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>  <span class="c1">// bar</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">);</span>  <span class="c1">// 8 s</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">string</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&quot;zhangsan&quot;</span><span class="p">;</span>
+        <span class="n">string</span><span class="o">::</span><span class="n">iterator</span> <span class="n">it1</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="sc">&#39;h&#39;</span><span class="p">),</span>
+                        <span class="n">it2</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="sc">&#39;g&#39;</span><span class="p">);</span>
+
+
+        <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">it1</span><span class="p">,</span> <span class="n">it2</span><span class="p">);</span>   <span class="c1">//han</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>find()</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+        <span class="c1">// char pos</span>
+        <span class="c1">// char*  pos</span>
+        <span class="c1">// string pos</span>
+        <span class="c1">// char* pos n // not use</span>
+
+        <span class="n">string</span><span class="o">::</span><span class="n">size_type</span> <span class="n">pos1</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">),</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">//</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">pos1</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">pos1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;not found&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+
+<span class="p">}</span></code></pre></div>
+
+<h2>replace()</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+
+        <span class="n">s</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;test&quot;</span><span class="p">);</span>  <span class="c1">// owo -&gt; test</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">//helltestrld</span>
+
+
+        <span class="n">s</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">string</span><span class="p">(</span><span class="s">&quot;foobar&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>   <span class="c1">// tes -&gt; bar</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// hellbartrld</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>string1.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="sc">&#39;s&#39;</span><span class="p">);</span>   <span class="c1">// pos n  value</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+        <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&quot;test&quot;</span><span class="p">);</span>   <span class="c1">// pos  C-style string</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>  <span class="c1">// pos char* len (0 -len-1)</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+        <span class="n">string</span> <span class="n">_tmp</span> <span class="o">=</span> <span class="s">&quot;foobar&quot;</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">_tmp</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">//pos string pos2 len</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">// hellobaworld</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+        <span class="n">string</span> <span class="n">_tmp2</span> <span class="o">=</span> <span class="s">&quot;foobar&quot;</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_tmp2</span><span class="p">);</span>   <span class="c1">// pos  string</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">// foobarhelloworld</span>
+
+        <span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&quot;helloworld&quot;</span><span class="p">;</span>
+
+        <span class="n">s2</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>   <span class="c1">//pos n</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s2</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  <span class="c1">//helld</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>关联容器</h2>
+
+<h2>map容器/pair容器（其承载元素是pair类型）,insert（）函数,erase()函数</h2>
+
+<h2>map.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="cp">#include &lt;stack&gt;</span>
+<span class="cp">#include &lt;queue&gt;</span>
+<span class="cp">#include &lt;typeinfo&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">//void print(const map&lt;string, int&gt;::value_type &amp;p)</span>
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">people</span><span class="p">;</span>
+
+        <span class="n">people</span><span class="p">[</span><span class="s">&quot;shenzhen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="n">people</span><span class="p">[</span><span class="s">&quot;beijing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+        <span class="n">people</span><span class="p">[</span><span class="s">&quot;shanghai&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+
+        <span class="c1">// v[1] = 5;  v[1]</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">people</span><span class="p">[</span><span class="s">&quot;beijing&quot;</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">people</span><span class="p">[</span><span class="s">&quot;beijing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8000</span><span class="p">;</span>  <span class="c1">// OK</span>
+
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">people</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">iter</span> <span class="o">!=</span> <span class="n">people</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+                <span class="c1">// (*iter)   pair</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+                <span class="o">++</span><span class="n">iter</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;----------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">for_each</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">people</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">print</span><span class="p">);</span>
+
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">key_type</span> <span class="n">k1</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span><span class="p">;</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">mapped_type</span> <span class="n">k2</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">value_type</span> <span class="n">k3</span><span class="p">;</span>  <span class="c1">// pair&lt;string, int&gt;</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">k3</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">p1</span><span class="p">;</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">p1</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+
+<span class="c1">//        k3.first = &quot;test&quot;;</span>
+<span class="c1">//        k3.second = 123;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>insert()函数</h2>
+
+<h2>erase()函数</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;test_include.h&quot;</span>
+<span class="cp">#include &lt;stack&gt;</span>
+<span class="cp">#include &lt;queue&gt;</span>
+<span class="cp">#include &lt;typeinfo&gt;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">value_type</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; occurs : &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; times&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">word_count</span><span class="p">;</span>
+        <span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+        <span class="n">word_count</span><span class="p">[</span><span class="s">&quot;test&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">word_count</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="n">word_count</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">word_count</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>   <span class="c1">//count 0 or 1</span>
+
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">word_count</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">word_count</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="n">word_count</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;not found&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">iter</span><span class="o">-&gt;</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">for_each</span><span class="p">(</span><span class="n">word_count</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">word_count</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">print</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;----------&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="c1">//        word_count.erase(iter);</span>
+        <span class="n">word_count</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span>
+        <span class="n">for_each</span><span class="p">(</span><span class="n">word_count</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">word_count</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">print</span><span class="p">);</span>
+
+<span class="p">}</span></code></pre></div>
+
+<h1>笔记</h1>
+
+<p>1.vector的内存分配策略：
+a)  没有满之前不会重新分配内存
+b)  填满之后再添加时，容量翻一倍。
+c)  不一定是2的次幂</p>
+
+<p>2.迭代器思维和下标思维在指定元素范围上的区别：
+a)  迭代器通常使用左闭右开区间表示范围
+b)  下标通常指定一个初始位置和后续的长度</p>
+
+<p>3.map的key必须支持&lt;比较操作
+4.Map实质是一个pair容器，如果存在一个map<string, int>那么对应的pair元素类型为pair<string, int>
+5.Map插入元素的时候根据key的值进行排序
+6.discards qualifiers这种编译错误：检查是否尝试去更改一个const变量
+7.Map中可以通过key去修改value的值，但是key本身的值无法修改
+8.对map进行下标操作，如果该key不存在，那么生成一个新的key，value采用初始化值。
+9.两段等价代码
+a)</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">++</span><span class="p">;</span></code></pre></div>
+
+<p>b)</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="n">ret</span> <span class="o">=</span>
+                <span class="n">word_count</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span>
+                        <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ret</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">++</span><span class="n">ret</span><span class="p">.</span><span class="n">first</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span></code></pre></div>
+
+<blockquote>
+<ul>
+<li>ret: 返回值 pair<map<string, int>::iterator, bool&gt;</li>
+<li>ret.first  map<string, int>::iterator 迭代器</li>
+<li>ret.second 布尔值  bool</li>
+<li>(*ret.first) pair类型： pair<string, int></li>
+<li>ret.first-&gt;first string类型<br></li>
+<li>ret.first-&gt;second int 次数 </li>
+</ul>
+</blockquote>
+
+<ol>
+<li>集合三性质
+确定性、无序性、唯一性</li>
+</ol>
+
+<p>11.练习：
+a)  课件的单词转换练习</p>
+
+<blockquote>
+<ul>
+<li>给出一个 string 对象，把它转换为另一个 string 对象。</li>
+<li>本程序的输入是两个文件。第一个文件包括了若干单词对，每对的第一个单词将出现在输入的字符串中，而第二个单词则是用于输出。</li>
+<li>本质上，这个文件提供的是单词转换的集合——在遇到第一个单词时，应该将之替换为第二个单词。第二个文件则提供了需要转换的文本。</li>
+</ul>
+</blockquote>
+
+<p>单词转换文件
+&#39;em  them 
+cuz  because 
+gratz  grateful
+i  I 
+nah  no 
+483
+pos  supposed
+sez  said 
+tanx  thanks 
+wuz  was </p>
+
+<blockquote>
+<ul>
+<li>而要转换的文本是： 
+nah i sez tanx cuz i wuz pos to 
+not cuz i wuz gratz </li>
+<li>则程序将产生如下输出结果： 
+no I said thanks because I was supposed to 
+not because I was grateful </li>
+</ul>
+</blockquote>
+
+<h2>我的代码（存在几个问题）</h2>
+
+<blockquote>
+<ul>
+<li>没有封装成函数，比如打开文件，转换，读取</li>
+</ul>
+</blockquote>
+
+<div class="highlight"><pre><code class="c--"><span class="cm">/*************************************************************************</span>
+<span class="cm">   &gt; File Name: transfer_string.cpp</span>
+<span class="cm">   &gt; Author: liuwenyu</span>
+<span class="cm">   &gt; Mail:liuwenyu21@gmail.com </span>
+<span class="cm">   &gt; Created Time: Thu 17 Apr 2014 07:13:17 PM CST</span>
+<span class="cm"> ************************************************************************/</span>
+
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;fstream&gt;</span>
+<span class="cp">#include &lt;sstream&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="cp">#include &lt;string&gt;</span>
+<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include &lt;utility&gt;</span>
+<span class="cp">#include &lt;map&gt;</span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">trans_map</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">sline</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">input_file</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">trans_file</span><span class="p">;</span>
+
+    <span class="n">input_file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;./input_file.txt&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+    <span class="n">trans_file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;./trans_file.txt&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="o">::</span><span class="n">in</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">input_file</span> <span class="o">||</span> <span class="o">!</span><span class="n">trans_file</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: unable to open file&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//read from first file</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">sline</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">ist</span><span class="p">(</span><span class="n">sline</span><span class="p">);</span>
+        <span class="n">string</span> <span class="n">first</span><span class="p">;</span>
+        <span class="n">string</span> <span class="n">second</span><span class="p">;</span>
+        
+        <span class="k">while</span> <span class="p">(</span><span class="n">ist</span> <span class="o">&gt;&gt;</span> <span class="n">first</span> <span class="o">&gt;&gt;</span> <span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pair</span><span class="o">&lt;</span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;::</span><span class="n">iterator</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="n">pair_temp</span> <span class="o">=</span> <span class="n">trans_map</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pair_temp</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;this word already existence&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">first</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">second</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">sline</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">input_file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="n">input_file</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="c1">//read from second file</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">trans_file</span> <span class="o">&gt;&gt;</span> <span class="n">sline</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter_trans</span> <span class="o">=</span> <span class="n">trans_map</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">sline</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">trans_map</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">!=</span> <span class="n">iter_trans</span><span class="p">)</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">trans_map</span><span class="p">[</span><span class="n">sline</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">trans_file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="n">trans_file</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>b)  综合查询</p>
+
+<blockquote>
+<p>我们的程序将读取用户指定的任意文本文件，然后允许用户从该文件中查找单词。查询的结果是该单词出现的次数，并列出每次出现所在的行。如果某单词在同一行中多次出现，程序将只显示该行一次。行号按升序显示，即第 7 行应该在第 9 行之前输出，依此类推。
+例如，以本章的内容作为文件输入，然后查找单词“element”。输出的前
+几行应为： 
+element occurs 125 times 
+(line 62) element with a given key. 
+(line 64) second element with the same key. 
+(line 153) element |==| operator. 
+(line 250) the element type. 
+(line 398) corresponding element.</p>
+</blockquote>
+
+<h2>需求分析</h2>
+
+<blockquote>
+<p>我们的程序需要支持如下任务： 
+1. 它必须允许用户指明要处理的文件名字。程序将存储该文件的内容，以便输出每个单词所在的原始行。 
+2. 它必须将每一行分解为各个单词，并记录每个单词所在的所有行。在输出行号时，应保证以升序输出，并且不重复。 
+3. 对特定单词的查询将返回出现该单词的所有行的行号。 
+4. 输出某单词所在的行文本时，程序必须能根据给定的行号从输入文件中获取相应的行</p>
+
+<ul>
+<li><p>使用一个 vector<string> 类型的对象存储整个输入文件的副本。输入文件的每一行是该 vector 对象的一个元素。因而，在希望输出某一行时，只需以行号为下标获取该行所在的元素即可。</p></li>
+<li><p>将每个单词所在的行号存储在一个 set 容器对象中。使用 set 就可确保每行只有一个条目，而且行号将自动按升序排列。 </p></li>
+<li><p>使用一个 map 容器将每个单词与一个 set 容器对象关联起来，该 set 容器对象记录此单词所在的行号。</p></li>
+</ul>
+</blockquote>
+
+<h2>我的代码</h2>
+
+<h2>text_search.h</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cm">/*************************************************************************</span>
+<span class="cm">   &gt; File Name: text_search.h</span>
+<span class="cm">   &gt; Author: liuwenyu   </span>
+<span class="cm">   &gt; Mail:liuwenyu21@gmail.com </span>
+<span class="cm">   &gt; Created Time: Thu 17 Apr 2014 08:08:12 PM CST</span>
+<span class="cm"> ************************************************************************/</span>
+
+<span class="cp">#ifndef _TEXT_SEARCH_H_ </span>
+<span class="cp">#define _TEXT_SEARCH_H_</span>
+
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;fstream&gt;</span>
+<span class="cp">#include &lt;sstream&gt;</span>
+<span class="cp">#include &lt;algorithm&gt;</span>
+<span class="cp">#include &lt;string&gt;</span>
+<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include &lt;set&gt;</span>
+<span class="cp">#include &lt;map&gt;</span>
+
+<span class="k">class</span> <span class="nc">TextSearch</span> <span class="p">{</span>
+    <span class="nl">public:</span> 
+        <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;::</span><span class="n">size_type</span> <span class="n">line_no</span><span class="p">;</span> 
+        <span class="n">TextSearch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="p">);</span>
+        <span class="o">~</span><span class="n">TextSearch</span><span class="p">();</span>
+
+        <span class="c1">//friend void Printf(const std::map&lt; std::string, std::set&lt;line_no&gt; &gt;::value_type &amp;);</span>
+
+        <span class="kt">void</span> <span class="nf">FindWordLine</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">word</span><span class="p">);</span> 
+
+    <span class="k">private</span><span class="o">:</span> 
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">txt_</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename_</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">lines_of_text_</span><span class="p">;</span> 
+        <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">word_map_</span><span class="p">;</span> 
+        <span class="kt">void</span> <span class="nf">StoreFile</span><span class="p">();</span> <span class="c1">// store input file </span>
+        <span class="kt">void</span> <span class="nf">BuildMap</span><span class="p">();</span> <span class="c1">// associated each word with a set of line </span>
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>text_search.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cm">/*************************************************************************</span>
+<span class="cm">   &gt; File Name: text_search.cpp</span>
+<span class="cm">   &gt; Author: liuwenyu</span>
+<span class="cm">   &gt; Mail:liuwenyu21@gmail.com </span>
+<span class="cm">   &gt; Created Time: Thu 17 Apr 2014 08:06:18 PM CST</span>
+<span class="cm"> ************************************************************************/</span>
+
+<span class="cp">#include &quot;text_search.h&quot;</span>
+
+<span class="cm">/*</span>
+<span class="cm">    void Printf(const std::map&lt; std::string, std::set&lt;TextSearch::line_no&gt; &gt;::value_type &amp;line_num) {</span>
+<span class="cm">    std::set&lt;TextSearch::line_no&gt;::iterator iter_line = line_num.second.begin();</span>
+
+<span class="cm">    while (iter_line != line_num.second.end()) {</span>
+<span class="cm">    std::cout &lt;&lt; &quot;line: &quot; &lt;&lt; *iter_line &lt;&lt; &quot; &quot; &lt;&lt; (TextSearch::lines_of_text_)[*iter_line] &lt;&lt; std::endl;</span>
+<span class="cm">    ++iter_line;</span>
+<span class="cm">    }</span>
+<span class="cm">    }</span>
+<span class="cm">    */</span>
+
+<span class="n">TextSearch</span><span class="o">::</span><span class="n">TextSearch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">filename</span><span class="p">)</span><span class="o">:</span> <span class="n">filename_</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">lines_of_text_</span><span class="p">(),</span> <span class="n">word_map_</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">StoreFile</span><span class="p">();</span> 
+    <span class="n">BuildMap</span><span class="p">();</span> 
+<span class="p">}</span>
+
+<span class="n">TextSearch</span><span class="o">::~</span><span class="n">TextSearch</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+
+
+<span class="c1">//give a word ,and there will show all line number of this file</span>
+<span class="kt">void</span> <span class="n">TextSearch</span><span class="o">::</span><span class="n">FindWordLine</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span> <span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter_string</span> <span class="o">=</span> <span class="n">word_map_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iter_string</span> <span class="o">!=</span> <span class="n">word_map_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">//std::for_each(lines_of_text_.begin(), lines_of_text_.end(), Printf);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">TextSearch</span><span class="o">::</span><span class="n">line_no</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter_line</span> <span class="o">=</span> <span class="n">iter_string</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">iter_line</span> <span class="o">!=</span> <span class="n">iter_string</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;line: &quot;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">iter_line</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">lines_of_text_</span><span class="p">[</span><span class="o">*</span><span class="n">iter_line</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="o">++</span><span class="n">iter_line</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;can&#39;t find this word&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c1">//store input file</span>
+<span class="c1">//every line stored into vector</span>
+<span class="kt">void</span> <span class="n">TextSearch</span><span class="o">::</span><span class="n">StoreFile</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">ifs</span><span class="p">;</span>
+    <span class="n">ifs</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename_</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ifs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;unable to open file &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">filename_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">sline</span><span class="p">;</span>
+    <span class="n">lines_of_text_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">filename_</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">ifs</span><span class="p">,</span> <span class="n">sline</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+        <span class="c1">//remove punctuation</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">remove_copy_if</span><span class="p">(</span><span class="n">sline</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sline</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="c1">//Store output</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">ptr_fun</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">std</span><span class="o">::</span><span class="n">ispunct</span><span class="p">));</span> <span class="c1">//Convert function pointer to function object (function template)</span>
+        <span class="n">lines_of_text_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">sline</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">ifs</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="n">ifs</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//build word map</span>
+<span class="kt">void</span> <span class="n">TextSearch</span><span class="o">::</span><span class="n">BuildMap</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter_vec</span> <span class="o">=</span> <span class="n">lines_of_text_</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">read_str</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">line_num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">iter_vec</span> <span class="o">!=</span> <span class="n">lines_of_text_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span> <span class="n">set_line</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">istringstream</span> <span class="n">ist</span><span class="p">(</span><span class="o">*</span><span class="n">iter_vec</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ist</span> <span class="o">&gt;&gt;</span> <span class="n">read_str</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">word_map_</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">==</span> <span class="n">word_map_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">read_str</span><span class="p">))</span> <span class="p">{</span>
+                <span class="c1">//if not exist, make a new set for read_str, and add into map</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span> <span class="n">set_line</span><span class="p">;</span>
+                <span class="n">set_line</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">line_num</span><span class="p">);</span>
+                <span class="n">word_map_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">line_no</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">read_str</span><span class="p">,</span> <span class="n">set_line</span><span class="p">));</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">//if exist, add line_num into set</span>
+                <span class="n">word_map_</span><span class="p">[</span><span class="n">read_str</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">line_num</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="o">++</span><span class="n">iter_vec</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">line_num</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>main.cpp</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cm">/*************************************************************************</span>
+<span class="cm">   &gt; File Name: main.cpp</span>
+<span class="cm">   &gt; Author: liuwenyu</span>
+<span class="cm">   &gt; Mail:liuwenyu21@gmail.com </span>
+<span class="cm">   &gt; Created Time: Thu 17 Apr 2014 10:12:40 PM CST</span>
+<span class="cm"> ************************************************************************/</span>
+
+<span class="cp">#include &quot;text_search.h&quot;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">file_name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">file_name</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">TextSearch</span> <span class="n">t1</span><span class="p">(</span><span class="n">file_name</span><span class="p">);</span>
+        <span class="n">t1</span><span class="p">.</span><span class="n">FindWordLine</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>C) 单词排除</p>
+
+<blockquote>
+<ul>
+<li>之前的程序从 map 对象 word_count 中删除一个指定的单词。可将这个操作扩展为删除指定文件中所有的单词（即该文件记录的是排除集）。也即，我们的单词统计程序只对那些不在排除集中的单词进行统计。</li>
+</ul>
+</blockquote>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">void</span> <span class="n">restricted_wc</span><span class="p">(</span><span class="n">ifstream</span> <span class="o">&amp;</span><span class="n">remove_file</span><span class="p">,</span> 
+            <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">word_count</span><span class="p">)</span></code></pre></div>
+
+<h1>总结</h1>
+
+<h2>关于算法STL中的for_each的问题</h2>
+
+<blockquote>
+<ul>
+<li>for_each 中的第三个参数函数，这个函数中的参数类型必须是const类型的引用</li>
+<li>该函数中的参数类型就是相应容器的中的数据类型</li>
+</ul>
+</blockquote>
+
+<h2>关于友元函数</h2>
+
+<blockquote>
+<ul>
+<li>当在友元函数内部使用类的静态成员（static）时，需要添加作用域符号（Class::）</li>
+<li>当友元函数使用类的数据成员时，必须传入该类的一个对象，才能使用该类的数据成员</li>
+</ul>
+</blockquote>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>

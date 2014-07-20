@@ -224,13 +224,12 @@ int main(int argc, char **argv) {
 
 ##关联容器  
 
-------
 
 ##map容器/pair容器（其承载元素是pair类型）,insert（）函数,erase()函数  
 
 ##map.cpp  
 
-{% endhighlight %}c+
+{% highlight c++ %}
 #include "test_include.h"
 #include <stack>
 #include <queue>
