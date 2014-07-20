@@ -26,21 +26,27 @@ keywords: linux
 using namespace std;
 
 int main(int argc, char **argv) {
-    vector<int> vec;
-    cout << vec.size() << " " << vec.capacity() << endl;  // 0   0
-    cout << "--------------------" << endl;
-    for (size_t ix = 0; ix != 24; ++ix) {
-        vec.push_back(ix);
+        vector<int> vec;
+
+        cout << vec.size() << " " << vec.capacity() << endl;  // 0   0
+
+        cout << "--------------------" << endl;
+
+        for (size_t ix = 0; ix != 24; ++ix) {
+                vec.push_back(ix);
         }
+
         cout << vec.size() << " " << vec.capacity() << endl;  // 24 32
+
         vec.reserve(50);
         cout << vec.size() << " " << vec.capacity() << endl; // 24 50
+
         while (vec.size() != vec.capacity()) {
-            vec.push_back(0);
-            }
-            cout << vec.size() << " " << vec.capacity() << endl;  //50 50
-            vec.push_back(42);
-            cout << vec.size() << " " << vec.capacity() << endl;  //51 100
+                vec.push_back(0);
+        }
+        cout << vec.size() << " " << vec.capacity() << endl;  //50 50
+        vec.push_back(42);
+        cout << vec.size() << " " << vec.capacity() << endl;  //51 100
 }
 {% endhighlight %}
 
@@ -52,25 +58,29 @@ int main(int argc, char **argv) {
 using namespace std;
 
 int main(int argc, char **argv) {
-    vector<int> vec;
-    cout << vec.size() << " " << vec.capacity() << endl;  // 0   0
-    vec.push_back(1);
-    cout << vec.size() << " " << vec.capacity() << endl;  // 1   1
-    vec.push_back(1);
-    cout << vec.size() << " " << vec.capacity() << endl;  // 2   2
-    vec.push_back(1);
-    cout << vec.size() << " " << vec.capacity() << endl;  // 3   4
-    vec.push_back(4);    //size 4  capacity 4
-    vec.push_back(99);
-    cout << vec.size() << " " << vec.capacity() << endl;  // 5   8
-    vec.reserve(199);
-    while(vec.size() != vec.capacity())
-    {
-        vec.push_back(234);
-    }
-    cout << vec.size() << " " << vec.capacity() << endl;  // 199 199
-    vec.push_back(199);
-    cout << vec.size() << " " << vec.capacity() << endl;  // 200 398
+
+        vector<int> vec;
+
+        cout << vec.size() << " " << vec.capacity() << endl;  // 0   0
+
+        vec.push_back(1);
+        cout << vec.size() << " " << vec.capacity() << endl;  // 1   1
+        vec.push_back(1);
+        cout << vec.size() << " " << vec.capacity() << endl;  // 2   2
+        vec.push_back(1);
+        cout << vec.size() << " " << vec.capacity() << endl;  // 3   4
+        vec.push_back(4);    //size 4  capacity 4
+        vec.push_back(99);
+        cout << vec.size() << " " << vec.capacity() << endl;  // 5   8
+
+        vec.reserve(199);
+        while(vec.size() != vec.capacity())
+        {
+                vec.push_back(234);
+        }
+        cout << vec.size() << " " << vec.capacity() << endl;  // 199 199
+        vec.push_back(199);
+        cout << vec.size() << " " << vec.capacity() << endl;  // 200 398
 }
 {% endhighlight %}
 
@@ -93,24 +103,37 @@ string1.cpp
 #include "test_include.h"
 using namespace std;
 int main() {
-    string s = "helloworld";
-    cout << s.substr(5, 3) << endl;  // pos n
-    s.append("hello");
-    cout << s << endl;
-    s.append("hello", 3); //hel
-    cout << s << endl;
-    s.append(string("world"));
-    cout << s << endl;
-    s.append(string("foobar"), 3, 3);  // bar
-    cout << s << endl;
-    s.append(8, 's');  // 8 s
-    cout << s << endl;
-    string tmp = "zhangsan";
-    string::iterator it1 = find(tmp.begin(), tmp.end(), 'h'),
-    it2 = find(tmp.begin(), tmp.end(), 'g');
-    s.append(it1, it2);   //han
-    cout << s << endl;
-    return 0;
+        string s = "helloworld";
+
+        cout << s.substr(5, 3) << endl;  // pos n
+
+        s.append("hello");
+
+        cout << s << endl;
+
+        s.append("hello", 3); //hel
+
+        cout << s << endl;
+
+        s.append(string("world"));
+        cout << s << endl;
+
+        s.append(string("foobar"), 3, 3);  // bar
+
+        cout << s << endl;
+
+        s.append(8, 's');  // 8 s
+        cout << s << endl;
+
+        string tmp = "zhangsan";
+        string::iterator it1 = find(tmp.begin(), tmp.end(), 'h'),
+                        it2 = find(tmp.begin(), tmp.end(), 'g');
+
+
+        s.append(it1, it2);   //han
+
+        cout << s << endl;
+        return 0;
 }
 {% endhighlight %}
 
@@ -120,17 +143,21 @@ int main() {
 #include "test_include.h"
 using namespace std;
 int main() {
-    string s = "helloworld";
-    // char pos
-    // char*  pos
-    // string pos
-    // char* pos n // not use
-    string::size_type pos1 = s.find(string("test"), 2); //
-    if (pos1 != string::npos) {
-        cout << pos1 << endl;
+        string s = "helloworld";
+
+        // char pos
+        // char*  pos
+        // string pos
+        // char* pos n // not use
+
+        string::size_type pos1 = s.find(string("test"), 2); //
+
+        if (pos1 != string::npos) {
+                cout << pos1 << endl;
         } else {
-            cout << "not found" << endl;
-            }
+                cout << "not found" << endl;
+        }
+
 }
 
 {% endhighlight %}
@@ -141,12 +168,18 @@ int main() {
 #include "test_include.h"
 using namespace std;
 int main() {
-    string s = "helloworld";
-    s.replace(4, 3, "test");  // owo -> test
-    cout << s << endl;  //helltestrld
-    s.replace(4, 3, string("foobar"), 3, 3);   // tes -> bar
-    cout << s << endl;  // hellbartrld
-    return 0;
+        string s = "helloworld";
+
+
+        s.replace(4, 3, "test");  // owo -> test
+
+        cout << s << endl;  //helltestrld
+
+
+        s.replace(4, 3, string("foobar"), 3, 3);   // tes -> bar
+
+        cout << s << endl;  // hellbartrld
+        return 0;
 }
 {% endhighlight %}
 
@@ -157,26 +190,35 @@ int main() {
 using namespace std;
 
 int main(int argc, char **argv) {
-    string s = "helloworld";
-    s.insert(2, 5, 's');   // pos n  value
-    cout << s << endl;
-    s = "helloworld";
-    s.insert(4, "test");   // pos  C-style string
-    cout << s << endl;
-    s = "helloworld";
-    s.insert(2, "test", 3);  // pos char* len (0 -len-1)
-    cout << s << endl;
-    s = "helloworld";
-    string _tmp = "foobar";
-    s.insert(5, _tmp, 3, 2); //pos string pos2 len
-    cout << s << endl;  // hellobaworld
-    s = "helloworld";
-    string _tmp2 = "foobar";
-    s.insert(0, _tmp2);   // pos  string
-    cout << s << endl;   // foobarhelloworld
-    string s2 = "helloworld";
-    s2.erase(4, 5);   //pos n
-    cout << s2 << endl;  //helld
+        string s = "helloworld";
+
+        s.insert(2, 5, 's');   // pos n  value
+        cout << s << endl;
+
+        s = "helloworld";
+
+        s.insert(4, "test");   // pos  C-style string
+        cout << s << endl;
+
+        s = "helloworld";
+        s.insert(2, "test", 3);  // pos char* len (0 -len-1)
+        cout << s << endl;
+
+        s = "helloworld";
+        string _tmp = "foobar";
+        s.insert(5, _tmp, 3, 2); //pos string pos2 len
+        cout << s << endl;  // hellobaworld
+
+        s = "helloworld";
+        string _tmp2 = "foobar";
+        s.insert(0, _tmp2);   // pos  string
+        cout << s << endl;   // foobarhelloworld
+
+        string s2 = "helloworld";
+
+        s2.erase(4, 5);   //pos n
+
+        cout << s2 << endl;  //helld
 }
 {% endhighlight %}
 
@@ -198,33 +240,46 @@ using namespace std;
 //void print(const map<string, int>::value_type &p)
 void print(const pair<string, int> &p)
 {
-    cout << p.first << " " << p.second << endl;
+        cout << p.first << " " << p.second << endl;
 }
 
 int main(int argc, char **argv) {
-    map<string, int> people;
-    people["shenzhen"] = 1000;
-    people["beijing"] = 3000;
-    people["shanghai"] = 2000;
-    // v[1] = 5;  v[1]
-    cout << people["beijing"] << endl;
-    people["beijing"] = 8000;  // OK
-    map<string, int>::iterator iter = people.begin();
-    while (iter != people.end()) {
-        // (*iter)   pair
-        cout << iter->first << " " << iter->second << endl;
-        ++iter;
+        map<string, int> people;
+
+        people["shenzhen"] = 1000;
+        people["beijing"] = 3000;
+        people["shanghai"] = 2000;
+
+        // v[1] = 5;  v[1]
+
+        cout << people["beijing"] << endl;
+
+        people["beijing"] = 8000;  // OK
+
+        map<string, int>::iterator iter = people.begin();
+        while (iter != people.end()) {
+                // (*iter)   pair
+                cout << iter->first << " " << iter->second << endl;
+
+                ++iter;
         }
+
         cout << "----------" << endl;
+
         for_each(people.begin(), people.end(), print);
+
         map<string, int>::key_type k1 = "hello";
         map<string, int>::mapped_type k2 = 11;
         map<string, int>::value_type k3;  // pair<string, int>
+
         cout << typeid(k3).name() << endl;
+
         pair<string, int> p1;
         cout << typeid(p1).name() << endl;
-        //        k3.first = "test";
-        //        k3.second = 123;
+
+
+//        k3.first = "test";
+//        k3.second = 123;
 }
 {% endhighlight %}
 
@@ -244,45 +299,45 @@ int main(int argc, char **argv) {
 using namespace std;
 
 void print(const map<string, int>::value_type &p) {
-            cout << p.first << " occurs : " << p.second << " times" << endl;
+        cout << p.first << " occurs : " << p.second << " times" << endl;
 }
 
 int main(int argc, char **argv) {
-            map<string, int> word_count;
-                    string word;
-                            word_count["test"] = 10;
-                                    word_count["foo"] = 5;
-                                            word_count["bar"] = 12;
+        map<string, int> word_count;
+        string word;
+        word_count["test"] = 10;
+        word_count["foo"] = 5;
+        word_count["bar"] = 12;
 
-                                                    cout << word_count.count("test") << endl;   //count 0 or 1
+        cout << word_count.count("test") << endl;   //count 0 or 1
 
-                                                            cout << word_count.count("hello") << endl;
+        cout << word_count.count("hello") << endl;
 
-                                                                    map<string, int>::iterator iter = word_count.find("test");
-                                                                            if (iter == word_count.end()) {
-                                                                                                cout << "not found" << endl;
-                                                                                                        } else {
-                                                                                                                            cout << iter->first << " " << iter->second << endl;
-                                                                                                                                    }
+        map<string, int>::iterator iter = word_count.find("test");
+        if (iter == word_count.end()) {
+                cout << "not found" << endl;
+        } else {
+                cout << iter->first << " " << iter->second << endl;
+        }
 
-                                                                                                                                            for_each(word_count.begin(), word_count.end(), print);
-                                                                                                                                                    cout << "----------" << endl;
-                                                                                                                                                    //        word_count.erase(iter);
-                                                                                                                                                            word_count.erase("test");
-                                                                                                                                                                    for_each(word_count.begin(), word_count.end(), print);
+        for_each(word_count.begin(), word_count.end(), print);
+        cout << "----------" << endl;
+//        word_count.erase(iter);
+        word_count.erase("test");
+        for_each(word_count.begin(), word_count.end(), print);
 
 }
 {% endhighlight %}
 
 #笔记
 1.vector的内存分配策略：
-a)  没有满之前不会重新分配内存
-b)  填满之后再添加时，容量翻一倍。
-c)  不一定是2的次幂
+a)	没有满之前不会重新分配内存
+b)	填满之后再添加时，容量翻一倍。
+c)	不一定是2的次幂
 
 2.迭代器思维和下标思维在指定元素范围上的区别：
-a)  迭代器通常使用左闭右开区间表示范围
-b)  下标通常指定一个初始位置和后续的长度
+a)	迭代器通常使用左闭右开区间表示范围
+b)	下标通常指定一个初始位置和后续的长度
 
 3.map的key必须支持<比较操作
 4.Map实质是一个pair容器，如果存在一个map<string, int>那么对应的pair元素类型为pair<string, int>
@@ -296,60 +351,60 @@ a)
 word_count[word]++;
 {% endhighlight %}
 b)
-{% highlight c++ %} 
+{% highlight c++ %}	
 std::pair<std::map<std::string, int>::iterator, bool> ret =
-                word_count.insert(
-                                        std::map<std::string, int>::value_type(word, 1));
-                        if(!ret.second)
-                                    {
-                                                    ++ret.first->second;
-                                                            }
-                                                            {% endhighlight %}
+				word_count.insert(
+						std::map<std::string, int>::value_type(word, 1));
+		if(!ret.second)
+		{
+			++ret.first->second;
+		}
+{% endhighlight %}
 
-                                                            >* ret: 返回值 pair<map<string, int>::iterator, bool>
-                                                            >* ret.first  map<string, int>::iterator 迭代器
-                                                            >* ret.second 布尔值  bool
-                                                            >* (*ret.first) pair类型： pair<string, int>
-                                                            >* ret.first->first string类型  
-                                                            >* ret.first->second int 次数 
+>* ret: 返回值 pair<map<string, int>::iterator, bool>
+>* ret.first  map<string, int>::iterator 迭代器
+>* ret.second 布尔值  bool
+>* (*ret.first) pair类型： pair<string, int>
+>* ret.first->first string类型  
+>* ret.first->second int 次数 
 
-                                                            10. 集合三性质
-                                                            确定性、无序性、唯一性
+10. 集合三性质
+确定性、无序性、唯一性
 
-                                                            11.练习：
-                                                            a)  课件的单词转换练习
-                                                            >* 给出一个 string 对象，把它转换为另一个 string 对象。
-                                                            >* 本程序的输入是两个文件。第一个文件包括了若干单词对，每对的第一个单词将出现在输入的字符串中，而第二个单词则是用于输出。
-                                                            >* 本质上，这个文件提供的是单词转换的集合——在遇到第一个单词时，应该将之替换为第二个单词。第二个文件则提供了需要转换的文本。
+11.练习：
+a)	课件的单词转换练习
+>* 给出一个 string 对象，把它转换为另一个 string 对象。
+>* 本程序的输入是两个文件。第一个文件包括了若干单词对，每对的第一个单词将出现在输入的字符串中，而第二个单词则是用于输出。
+>* 本质上，这个文件提供的是单词转换的集合——在遇到第一个单词时，应该将之替换为第二个单词。第二个文件则提供了需要转换的文本。
 
-                                                            单词转换文件
-                                                            'em  them 
-                                                            cuz  because 
-                                                            gratz  grateful
-                                                            i  I 
-                                                            nah  no 
-                                                            483
-                                                            pos  supposed
-                                                            sez  said 
-                                                            tanx  thanks 
-                                                            wuz  was 
-                                                            >* 而要转换的文本是： 
-                                                            nah i sez tanx cuz i wuz pos to 
-                                                            not cuz i wuz gratz 
-                                                            >* 则程序将产生如下输出结果： 
-                                                            no I said thanks because I was supposed to 
-                                                            not because I was grateful 
+单词转换文件
+'em  them 
+cuz  because 
+gratz  grateful
+i  I 
+nah  no 
+483
+pos  supposed
+sez  said 
+tanx  thanks 
+wuz  was 
+>* 而要转换的文本是： 
+nah i sez tanx cuz i wuz pos to 
+not cuz i wuz gratz 
+>* 则程序将产生如下输出结果： 
+no I said thanks because I was supposed to 
+not because I was grateful 
 
 ##我的代码（存在几个问题）  
 
 >* 没有封装成函数，比如打开文件，转换，读取
 {% highlight c++ %}
 /*************************************************************************
-    > File Name: transfer_string.cpp
-        > Author: liuwenyu
-            > Mail:liuwenyu21@gmail.com 
-                > Created Time: Thu 17 Apr 2014 07:13:17 PM CST
-                 ************************************************************************/
+	> File Name: transfer_string.cpp
+	> Author: liuwenyu
+	> Mail:liuwenyu21@gmail.com 
+	> Created Time: Thu 17 Apr 2014 07:13:17 PM CST
+ ************************************************************************/
 
 #include <iostream>
 #include <fstream>
@@ -369,52 +424,52 @@ using std::map;
 using std::ifstream;
 
 int main() {
-        map<string, string> trans_map;
-            string sline;
-                std::ifstream input_file;
-                    std::ifstream trans_file;
+	map<string, string> trans_map;
+	string sline;
+	std::ifstream input_file;
+	std::ifstream trans_file;
 
-                        input_file.open("./input_file.txt", std::ifstream::in);
-                            trans_file.open("./trans_file.txt", std::ifstream::in);
+	input_file.open("./input_file.txt", std::ifstream::in);
+	trans_file.open("./trans_file.txt", std::ifstream::in);
 
-                                if (!input_file || !trans_file) {
-                                            std::cerr << "error: unable to open file" << endl;
-                                                }
+	if (!input_file || !trans_file) {
+		std::cerr << "error: unable to open file" << endl;
+	}
 
-                                                    //read from first file
-                                                        while (std::getline(input_file, sline)) {
-                                                                    std::istringstream ist(sline);
-                                                                            string first;
-                                                                                    string second;
-                                                                                            
-                                                                                                    while (ist >> first >> second) {
-                                                                                                                    pair<map<string, string>::iterator, bool> pair_temp = trans_map.insert(pair<string, string>(first, second));
-                                                                                                                                if (!pair_temp.second) {
-                                                                                                                                                    cout << "this word already existence" << endl;
-                                                                                                                                                                }
-                                                                                                                                                                        }
-                                                                                                                                                                                first.clear();
-                                                                                                                                                                                        second.clear();
-                                                                                                                                                                                                sline.clear();
-                                                                                                                                                                                                    }
-                                                                                                                                                                                                        input_file.close();
-                                                                                                                                                                                                            input_file.clear();
+	//read from first file
+	while (std::getline(input_file, sline)) {
+		std::istringstream ist(sline);
+		string first;
+		string second;
+		
+		while (ist >> first >> second) {
+			pair<map<string, string>::iterator, bool> pair_temp = trans_map.insert(pair<string, string>(first, second));
+			if (!pair_temp.second) {
+				cout << "this word already existence" << endl;
+			}
+		}
+		first.clear();
+		second.clear();
+		sline.clear();
+	}
+	input_file.close();
+	input_file.clear();
 
-                                                                                                                                                                                                                //read from second file
-                                                                                                                                                                                                                    while (trans_file >> sline) {
-                                                                                                                                                                                                                                map<string, string>::iterator iter_trans = trans_map.find(sline);
-                                                                                                                                                                                                                                        if (trans_map.end() != iter_trans)
-                                                                                                                                                                                                                                                        cout << " " << trans_map[sline];
-                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                cout << endl;
-                                                                                                                                                                                                                                                                    trans_file.close();
-                                                                                                                                                                                                                                                                        trans_file.clear();
+	//read from second file
+	while (trans_file >> sline) {
+		map<string, string>::iterator iter_trans = trans_map.find(sline);
+		if (trans_map.end() != iter_trans)
+			cout << " " << trans_map[sline];
+	}
+	cout << endl;
+	trans_file.close();
+	trans_file.clear();
 
-                                                                                                                                                                                                                                                                            return 0;
+	return 0;
 }
 {% endhighlight %}
 
-b)  综合查询
+b)	综合查询
 >我们的程序将读取用户指定的任意文本文件，然后允许用户从该文件中查找单词。查询的结果是该单词出现的次数，并列出每次出现所在的行。如果某单词在同一行中多次出现，程序将只显示该行一次。行号按升序显示，即第 7 行应该在第 9 行之前输出，依此类推。
 例如，以本章的内容作为文件输入，然后查找单词“element”。输出的前
 几行应为： 
@@ -448,11 +503,11 @@ element occurs 125 times
 
 {% highlight c++ %}
 /*************************************************************************
-    > File Name: text_search.h
-        > Author: liuwenyu  
-            > Mail:liuwenyu21@gmail.com 
-                > Created Time: Thu 17 Apr 2014 08:08:12 PM CST
-                 ************************************************************************/
+	> File Name: text_search.h
+	> Author: liuwenyu	
+	> Mail:liuwenyu21@gmail.com 
+	> Created Time: Thu 17 Apr 2014 08:08:12 PM CST
+ ************************************************************************/
 
 #ifndef _TEXT_SEARCH_H_ 
 #define _TEXT_SEARCH_H_
@@ -467,22 +522,22 @@ element occurs 125 times
 #include <map>
 
 class TextSearch {
-        public: 
-                typedef std::vector<std::string>::size_type line_no; 
-                        TextSearch(std::string &);
-                                ~TextSearch();
+	public: 
+		typedef std::vector<std::string>::size_type line_no; 
+		TextSearch(std::string &);
+		~TextSearch();
 
-                                        //friend void Printf(const std::map< std::string, std::set<line_no> >::value_type &);
+		//friend void Printf(const std::map< std::string, std::set<line_no> >::value_type &);
 
-                                                void FindWordLine(std::string &word); 
+		void FindWordLine(std::string &word); 
 
-                                                    private: 
-                                                            std::string txt_;
-                                                                    std::string filename_;
-                                                                            std::vector<std::string> lines_of_text_; 
-                                                                                    std::map< std::string, std::set<line_no> > word_map_; 
-                                                                                            void StoreFile(); // store input file 
-                                                                                                    void BuildMap(); // associated each word with a set of line 
+	private: 
+		std::string txt_;
+		std::string filename_;
+		std::vector<std::string> lines_of_text_; 
+		std::map< std::string, std::set<line_no> > word_map_; 
+		void StoreFile(); // store input file 
+		void BuildMap(); // associated each word with a set of line 
 };
 #endif
 {% endhighlight %}
@@ -491,128 +546,128 @@ class TextSearch {
 
 {% highlight c++ %}
 /*************************************************************************
-    > File Name: text_search.cpp
-        > Author: liuwenyu
-            > Mail:liuwenyu21@gmail.com 
-                > Created Time: Thu 17 Apr 2014 08:06:18 PM CST
-                 ************************************************************************/
+	> File Name: text_search.cpp
+	> Author: liuwenyu
+	> Mail:liuwenyu21@gmail.com 
+	> Created Time: Thu 17 Apr 2014 08:06:18 PM CST
+ ************************************************************************/
 
 #include "text_search.h"
 
 /*
-     void Printf(const std::map< std::string, std::set<TextSearch::line_no> >::value_type &line_num) {
-             std::set<TextSearch::line_no>::iterator iter_line = line_num.second.begin();
+	 void Printf(const std::map< std::string, std::set<TextSearch::line_no> >::value_type &line_num) {
+	 std::set<TextSearch::line_no>::iterator iter_line = line_num.second.begin();
 
-                 while (iter_line != line_num.second.end()) {
-                         std::cout << "line: " << *iter_line << " " << (TextSearch::lines_of_text_)[*iter_line] << std::endl;
-                             ++iter_line;
-                                 }
-                                     }
-                                         */
+	 while (iter_line != line_num.second.end()) {
+	 std::cout << "line: " << *iter_line << " " << (TextSearch::lines_of_text_)[*iter_line] << std::endl;
+	 ++iter_line;
+	 }
+	 }
+	 */
 
-                                         TextSearch::TextSearch(std::string &filename): filename_(filename), lines_of_text_(), word_map_() {
-                                                StoreFile(); 
-                                                    BuildMap(); 
-                                         }
+TextSearch::TextSearch(std::string &filename): filename_(filename), lines_of_text_(), word_map_() {
+	StoreFile(); 
+	BuildMap(); 
+}
 
-                                         TextSearch::~TextSearch() {
-                                         }
+TextSearch::~TextSearch() {
+}
 
 
-                                         //give a word ,and there will show all line number of this file
-                                         void TextSearch::FindWordLine(std::string &word) {
-                                                std::map< std::string, std::set<line_no> >::iterator iter_string = word_map_.find(word);
-                                                    if (iter_string != word_map_.end()) {
-                                                                //std::for_each(lines_of_text_.begin(), lines_of_text_.end(), Printf);
-                                                                        std::set<TextSearch::line_no>::iterator iter_line = iter_string->second.begin();
+//give a word ,and there will show all line number of this file
+void TextSearch::FindWordLine(std::string &word) {
+	std::map< std::string, std::set<line_no> >::iterator iter_string = word_map_.find(word);
+	if (iter_string != word_map_.end()) {
+		//std::for_each(lines_of_text_.begin(), lines_of_text_.end(), Printf);
+		std::set<TextSearch::line_no>::iterator iter_line = iter_string->second.begin();
 
-                                                                                while (iter_line != iter_string->second.end()) {
-                                                                                                std::cout << "line: " << *iter_line << " " << lines_of_text_[*iter_line] << std::endl;
-                                                                                                            ++iter_line;
-                                                                                                                    }
-                                                                                                                        } else {
-                                                                                                                                    std::cout << "can't find this word" << std::endl;
-                                                                                                                                        }
+		while (iter_line != iter_string->second.end()) {
+			std::cout << "line: " << *iter_line << " " << lines_of_text_[*iter_line] << std::endl;
+			++iter_line;
+		}
+	} else {
+		std::cout << "can't find this word" << std::endl;
+	}
 
-                                         }
+}
 
-                                         //store input file
-                                         //every line stored into vector
-                                         void TextSearch::StoreFile() {
-                                                std::ifstream ifs;
-                                                    ifs.open(filename_.c_str());
-                                                        if (!ifs) {
-                                                                    std::cerr << "unable to open file " << filename_ << std::endl; 
-                                                                        }
-                                                                            std::string sline;
-                                                                                lines_of_text_.push_back(filename_);
-                                                                                    while (std::getline(ifs, sline)) {
-                                                                                                std::string result;
-                                                                                                        //remove punctuation
-                                                                                                                std::remove_copy_if(sline.begin(), sline.end(), std::back_inserter(result), //Store output
-                                                                                                                                std::ptr_fun<int, int>(&std::ispunct)); //Convert function pointer to function object (function template)
-                                                                                                                                        lines_of_text_.push_back(result);
-                                                                                                                                            }
-                                                                                                                                                sline.clear();
-                                                                                                                                                    ifs.close();
-                                                                                                                                                        ifs.clear();
-                                         }
+//store input file
+//every line stored into vector
+void TextSearch::StoreFile() {
+	std::ifstream ifs;
+	ifs.open(filename_.c_str());
+	if (!ifs) {
+		std::cerr << "unable to open file " << filename_ << std::endl; 
+	}
+	std::string sline;
+	lines_of_text_.push_back(filename_);
+	while (std::getline(ifs, sline)) {
+		std::string result;
+		//remove punctuation
+		std::remove_copy_if(sline.begin(), sline.end(), std::back_inserter(result), //Store output
+				std::ptr_fun<int, int>(&std::ispunct)); //Convert function pointer to function object (function template)
+		lines_of_text_.push_back(result);
+	}
+	sline.clear();
+	ifs.close();
+	ifs.clear();
+}
 
-                                         //build word map
-                                         void TextSearch::BuildMap() {
-                                                std::vector<std::string>::iterator iter_vec = lines_of_text_.begin() + 1;
-                                                    std::string read_str;
-                                                        int line_num = 1;
+//build word map
+void TextSearch::BuildMap() {
+	std::vector<std::string>::iterator iter_vec = lines_of_text_.begin() + 1;
+	std::string read_str;
+	int line_num = 1;
 
-                                                            while (iter_vec != lines_of_text_.end()) {
-                                                                        std::set<line_no> set_line;
-                                                                                std::istringstream ist(*iter_vec);
-                                                                                        while (ist >> read_str) {
-                                                                                                        if (word_map_.end() == word_map_.find(read_str)) {
-                                                                                                                            //if not exist, make a new set for read_str, and add into map
-                                                                                                                                            std::set<line_no> set_line;
-                                                                                                                                                            set_line.insert(line_num);
-                                                                                                                                                                            word_map_.insert(std::pair<std::string, std::set<line_no> >(read_str, set_line));
-                                                                                                                                                                                        } else {
-                                                                                                                                                                                                            //if exist, add line_num into set
-                                                                                                                                                                                                                            word_map_[read_str].insert(line_num);
-                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                        ++iter_vec;
-                                                                                                                                                                                                                                                                ++line_num;
-                                                                                                                                                                                                                                                                    }
-                                         }
-                                         {% endhighlight %}
+	while (iter_vec != lines_of_text_.end()) {
+		std::set<line_no> set_line;
+		std::istringstream ist(*iter_vec);
+		while (ist >> read_str) {
+			if (word_map_.end() == word_map_.find(read_str)) {
+				//if not exist, make a new set for read_str, and add into map
+				std::set<line_no> set_line;
+				set_line.insert(line_num);
+				word_map_.insert(std::pair<std::string, std::set<line_no> >(read_str, set_line));
+			} else {
+				//if exist, add line_num into set
+				word_map_[read_str].insert(line_num);
+			}
+		}
+		++iter_vec;
+		++line_num;
+	}
+}
+{% endhighlight %}
 
 ##main.cpp   
 
 {% highlight c++ %}
 /*************************************************************************
-    > File Name: main.cpp
-        > Author: liuwenyu
-            > Mail:liuwenyu21@gmail.com 
-                > Created Time: Thu 17 Apr 2014 10:12:40 PM CST
-                 ************************************************************************/
+	> File Name: main.cpp
+	> Author: liuwenyu
+	> Mail:liuwenyu21@gmail.com 
+	> Created Time: Thu 17 Apr 2014 10:12:40 PM CST
+ ************************************************************************/
 
 #include "text_search.h"
 
 int main() {
-        std::string file_name;
-            std::string word;
+	std::string file_name;
+	std::string word;
 
-                while (std::cin >> file_name >> word) {
-                            TextSearch t1(file_name);
-                                    t1.FindWordLine(word);
-                                        }
+	while (std::cin >> file_name >> word) {
+		TextSearch t1(file_name);
+		t1.FindWordLine(word);
+	}
 
-                                            return 0;
+	return 0;
 }
 {% endhighlight %}
 C) 单词排除
 >* 之前的程序从 map 对象 word_count 中删除一个指定的单词。可将这个操作扩展为删除指定文件中所有的单词（即该文件记录的是排除集）。也即，我们的单词统计程序只对那些不在排除集中的单词进行统计。
 {% highlight c++ %}
 void restricted_wc(ifstream &remove_file, 
-            map<string, int> &word_count)
+			map<string, int> &word_count)
 {% endhighlight %}
 #总结
 
