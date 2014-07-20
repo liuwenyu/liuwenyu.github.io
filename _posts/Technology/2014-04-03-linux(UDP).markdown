@@ -1,0 +1,195 @@
+---
+layout: post
+title:  基于UDP的多人群聊
+category: 学习
+tags: linux
+keywords: linux
+---
+
+{% highlight c %}
+/* server.c */
+
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+
+struct LinkNode            //链表，储存连接服务器的所有客户端地址信息
+{
+	struct sockaddr_in client_addr ;
+	struct LinkNode * next ;
+}LinkNode;
+typedef struct LinkNode* LinkList;
+
+void init_list(LinkList * L)        //初始化链表
+{
+	(*L)=(LinkList)malloc(sizeof(LinkNode));
+	memset(&((*L)->client_addr), 0, sizeof(struct sockaddr_in)) ;
+	(*L)->next = NULL;
+}
+void add_client(LinkList L, struct sockaddr_in new_client_addr)    //添加新地址
+{
+	LinkList p = L ;
+	LinkList tail ;
+	tail = (LinkList)malloc(sizeof(LinkNode)) ;
+	memset(tail, 0, sizeof(LinkNode)) ;
+	while(p->next != NULL)
+	{
+		p = p->next ;
+	}
+	tail->client_addr = new_client_addr ;    //可以结构体直接赋值
+	//tail->client_addr.sin_family = new_client_addr.sin_family ;
+	//tail->client_addr.sin_port =new_client_addr.sin_port ;
+	//tail->client_addr.sin_addr.s_addr = new_client_addr.sin_addr.s_addr ;
+	p->next = tail ;
+	tail->next = NULL ;
+}
+void del_client(LinkList L, struct sockaddr_in offline_client)    //删除下线客户端地址
+{
+	LinkList del, p = L ;
+	while(p->next != NULL)
+	{
+		if(offline_client.sin_addr.s_addr == p->next->client_addr.sin_addr.s_addr && offline_client.sin_port == p->next->client_addr.sin_port)
+			break ;
+		p = p->next ;
+	}
+	del = p->next ;
+	p->next = del->next ;
+	//free(del) ;
+}
+
+
+
+int main(int argc, char * argv[])  // ---> ./exe [port]
+{
+	int server_fd, iret ;
+	char recv_buf[128], send_buf[128], message[128];
+	struct sockaddr_in server_addr, cli_addr ;
+	LinkList L, p;
+	init_list(&L) ;
+	//socket
+	server_fd = socket(AF_INET, SOCK_DGRAM, 0) ;
+	if(server_fd == -1)
+	{
+		perror("socket");
+		exit(-1) ;
+	}
+	//bind
+	memset(&server_addr, 0, sizeof(server_addr)) ;
+	server_addr.sin_family = AF_INET ;
+	server_addr.sin_port = htons(atoi(argv[1])) ;
+	server_addr.sin_addr.s_addr = INADDR_ANY ;
+	iret = bind(server_fd, (const struct sockaddr *)&server_addr, sizeof(server_addr)) ;
+	if(iret == -1)
+	{
+		perror("bind") ;
+		exit(-1) ;
+	}
+	while(1)
+	{
+		//recvfrom
+		memset(&cli_addr, 0, sizeof(cli_addr)) ;
+		memset(recv_buf, 0, 128) ;
+		int len = sizeof(cli_addr) ;
+		recvfrom(server_fd, recv_buf, 128, 0, (struct sockaddr*)&cli_addr, &len) ;
+		//add_client
+		if(strcmp(recv_buf, "online\n") == 0)    //有客户端上线时新增地址到链表
+		{
+			add_client(L, cli_addr) ;
+			printf("online!!!\n") ;
+		}
+		//del_client
+		else if(strcmp(recv_buf, "offline\n") == 0)    //客户端下线时删除该地址
+		{
+			del_client(L, cli_addr) ;
+			printf("offline!!!\n") ;
+		}
+		//printf("receive from ip : %s, port : %d, message : %s\n", inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), recv_buf) ;    //测试服务器端是否收到消息
+		memset(message, 0, 128) ;
+		sprintf(message, "from ip : %s, port : %d\nmessage : %s\n",inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), recv_buf) ;    //给message添加发信客户端信息		
+		//sendto
+		p = L ;
+		while(p->next != NULL)    //向链表内存储的全部客户端地址发消息
+		{
+			p = p->next ;
+			strcpy(send_buf, message) ;
+			sendto(server_fd, send_buf, strlen(send_buf), 0, (struct sockaddr*)&(p->client_addr), sizeof(cli_addr)) ;
+		}
+	}
+	//close
+	close(server_fd) ;
+	return 0;
+}
+{% endhighlight %}
+
+{% highlight c %}
+/* client.c */        //可以有多个客户端同时通过服务器收发消息
+
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <pthread.h>
+void * thd_handle(void * arg)    //子线程，负责接收消息
+{
+	int client_fd = *(int*)arg ;
+	char recv_buf[128] ;
+	struct sockaddr_in server_addr ;
+	while(1)
+	{
+		//recvfrom
+		memset(&server_addr, 0, sizeof(server_addr)) ;
+		memset(recv_buf, 0, 128) ;
+		int len = sizeof(server_addr) ;
+		recvfrom(client_fd, recv_buf, 128, 0, (struct sockaddr*)&server_addr, &len) ;
+		printf("%s", recv_buf) ;
+	}
+}
+int main(int argc, char * argv[])  // ---> ./exe ip port
+{
+	int client_fd ;
+	pthread_t thd ;
+	char send_buf[128] ;
+	struct sockaddr_in server_addr;
+	//socket
+	client_fd = socket(AF_INET, SOCK_DGRAM, 0) ;
+	thd = pthread_create(&thd, NULL, thd_handle, (void*)&client_fd) ;    //创建收消息线程
+	if(client_fd == -1)
+	{
+		perror("socket") ;
+		exit(-1) ;
+	}
+	memset(&server_addr, 0, sizeof(server_addr)) ;
+	server_addr.sin_family = AF_INET ;
+	server_addr.sin_port = htons(atoi(argv[2])) ;
+	server_addr.sin_addr.s_addr = inet_addr(argv[1]) ;
+	//sendto (online)
+	memset(send_buf, 0, 128) ;
+	strcpy(send_buf, "online\n") ;
+	sendto(client_fd, send_buf, strlen(send_buf), 0, (struct sockaddr*)&server_addr, sizeof(server_addr)) ;    //连接服务器时发送上线信息
+	while(1)
+	{
+		//sendto
+		memset(send_buf, 0, 128) ;
+		fgets(send_buf, 128, stdin) ;
+		sendto(client_fd, send_buf, strlen(send_buf), 0, (struct sockaddr*)&server_addr, sizeof(server_addr)) ;
+		if(strcmp(send_buf, "offline\n") == 0)    //发送offline时下线退出
+		{
+			break ;
+		}
+	}
+	//close
+	close(client_fd) ;
+	return 0 ;
+}
+{% endhighlight %}
+
+

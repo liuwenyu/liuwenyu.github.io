@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>大端小端 ip转换 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket%20TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux(socket%20UDP).html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux(%20big%20endian-little%20endian%20-ip%20conversion).html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">8</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket%20TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux(socket%20UDP).html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux(%20big%20endian-little%20endian%20-ip%20conversion).html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">大端小端 ip转换</h2>
+    2014年04月01日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>套接字(套接口)</h2>
+
+<blockquote>
+<p>它是网络进程的ID。网络通信就是（不同计算机）进程间的通信。<br />
+套接字是网络地址（IP）和端口号（PORT）的组合可以唯一确定整个网络中的一个网络进程。<br />
+TCP/IP协议中端口号范围0～65535。应用程序固定的端口0～1023，用户自定义的通常大于1024 。</p>
+</blockquote>
+
+<h2>socket</h2>
+
+<blockquote>
+<p>socket是一种特殊的I/O接口，它是一种文件描述符。</p>
+
+<blockquote>
+<p>1.流式socket，用于TCP通信
+2.数据报socket，用于UDP通信
+3.原始socket，功能强大但使用较不便，主要用于一些协议的开发</p>
+</blockquote>
+</blockquote>
+
+<div class="highlight"><pre><code class="c"><span class="c1">//socket信息数据结构</span>
+<span class="k">struct</span> <span class="n">sockaddr</span> 
+<span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">sa_family</span><span class="p">;</span>     <span class="cm">/*地址族*/</span>
+        <span class="kt">char</span> <span class="n">sa_data</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>  <span class="cm">/*14字节的协议地址，包含该socket的IP地址和端口号。*/</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="n">sockaddr_in</span> 
+<span class="p">{</span>
+        <span class="kt">short</span> <span class="kt">int</span> <span class="n">sa_family</span><span class="p">;</span>      <span class="cm">/*地址族*/</span>
+        <span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">sin_port</span><span class="p">;</span>  <span class="cm">/*端口号*/</span>
+        <span class="k">struct</span> <span class="n">in_addr</span> <span class="n">sin_addr</span><span class="p">;</span>        <span class="cm">/*IP地址*/</span>
+        <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sin_zero</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>     <span class="cm">/*填充0 以保持与struct sockaddr同样大小*/</span>
+<span class="p">};</span>
+<span class="k">struct</span> <span class="n">in_addr</span>
+<span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span>  <span class="n">s_addr</span><span class="p">;</span>    <span class="cm">/* 32位IPv4地址，网络字节序 */</span>
+<span class="p">};</span></code></pre></div>
+
+<h2>大端小端: 数据存储优先顺序的替换</h2>
+
+<p>计算机数据存储有两种字节优先顺序：高位字节优先（称为大端模式）和低位字节优先（称为小端模式）。</p>
+
+<div class="highlight"><pre><code class="c"><span class="err">向计算机内存中存放数据</span> <span class="o">---&gt;</span> <span class="mi">0</span><span class="n">x</span> <span class="mi">12</span> <span class="mi">34</span> <span class="mi">56</span> <span class="mi">78</span>
+                        <span class="err">数据低位</span> <span class="o">---&gt;</span> <span class="err">高位</span>
+
+<span class="err">小端存储：</span><span class="mi">0</span><span class="n">x</span> <span class="mi">78</span> <span class="mi">56</span> <span class="mi">34</span> <span class="mi">12</span>
+        <span class="err">低地址</span> <span class="o">---&gt;</span> <span class="err">高地址（相反）</span>
+
+<span class="err">大端存储：</span><span class="mi">0</span><span class="n">x</span> <span class="mi">12</span> <span class="mi">34</span> <span class="mi">56</span> <span class="mi">78</span>
+        <span class="err">低地址</span> <span class="o">---&gt;</span> <span class="err">高地址（相同）</span>
+
+<span class="err">网络中传输的数据字节序都是大端模式的</span>
+
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="n">htons</span><span class="p">()</span>    <span class="c1">//传入主机字节序的16位数值，返回网络字节序</span>
+<span class="n">ntohs</span><span class="p">()</span>    <span class="c1">//传入网络字节序的16位数值，返回主机字节序</span>
+<span class="n">htonl</span><span class="p">()</span>    <span class="c1">//传入主机字节序的32位数值，返回网络字节序</span>
+<span class="n">ntohl</span><span class="p">()</span>    <span class="c1">//传入网络字节序的32位数值，返回主机字节序</span>
+<span class="nl">h:</span> <span class="n">host</span>    <span class="n">n</span><span class="o">:</span> <span class="n">network</span>    <span class="n">s</span><span class="o">:</span> <span class="kt">short</span>    <span class="n">l</span><span class="o">:</span> <span class="kt">long</span>
+<span class="err">通常</span><span class="mi">16</span><span class="err">位的端口号用</span><span class="kt">short</span><span class="err">表示，</span><span class="mi">32</span><span class="err">位的</span><span class="n">IP</span><span class="err">地址用</span><span class="kt">long</span><span class="err">表示。</span></code></pre></div>
+
+<div class="highlight"><pre><code class="c"><span class="cm">/* test.c(测试本机是大端还是小端) */</span>
+
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mh">0x12345678</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span> <span class="n">p</span> <span class="p">;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span> <span class="p">;</span>
+    <span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x78</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;your computer is small-endian</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="p">;</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x12</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;your computer is big-endian</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span> <span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>地址格式的转换</h2>
+
+<div class="highlight"><pre><code class="c"><span class="c1">// ipv4</span>
+<span class="cp">#include &lt;sys/socket.h&gt;</span>
+<span class="cp">#include &lt;netinet/in.h&gt;</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<span class="kt">int</span> <span class="nf">inet_aton</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">straddr</span><span class="p">,</span> <span class="k">struct</span> <span class="n">in_addr</span> <span class="o">*</span><span class="n">addrptr</span><span class="p">);</span>
+    <span class="cm">/*将点分十进制数的IP地址转换成为网络字节序的32位二进制数值。返回值：成功，则返回1，不成功返回0 。*/</span>
+    <span class="cm">/*参数straddr：存放输入的点分十进制数IP地址字符串。*/</span>
+    <span class="cm">/*参数addrptr：传出参数，保存网络字节序的32位二进制数值。*/</span>
+
+<span class="kt">char</span> <span class="o">*</span> <span class="nf">inet_ntoa</span><span class="p">(</span><span class="k">struct</span> <span class="n">in_addr</span> <span class="n">inaddr</span><span class="p">);</span>
+    <span class="cm">/*将网络字节序的32位二进制数值转换为点分十进制的IP地址。*/</span>
+
+<span class="kt">in_addr_t</span> <span class="nf">inet_addr</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">straddr</span><span class="p">);</span>
+    <span class="cm">/*功能同inet_aton()，返回值不同。inet_addr()若成功则返回32位二进制的网络字节序地址。*/</span></code></pre></div>
+
+<div class="highlight"><pre><code class="c"><span class="c1">// ipv4 || ipv6</span>
+<span class="cp">#include &lt;arpa/inet.h&gt;</span>
+<span class="kt">int</span> <span class="nf">inet_pton</span><span class="p">(</span><span class="kt">int</span> <span class="n">family</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">dst</span><span class="p">);</span>
+    <span class="cm">/*同inet_aton()，</span>
+<span class="cm">    family = AF_INET表示是IPv4</span>
+<span class="cm">    family = AF_INET6，表示IPv6协议*/</span>
+
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">inet_ntop</span><span class="p">(</span><span class="kt">int</span> <span class="n">family</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="n">len</span><span class="p">);</span>
+    <span class="cm">/*同inet_ntoa()</span>
+<span class="cm">    family同上</span>
+<span class="cm">   其中len表示表示转换之后的长度（字符串的长度）。 */</span></code></pre></div>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>

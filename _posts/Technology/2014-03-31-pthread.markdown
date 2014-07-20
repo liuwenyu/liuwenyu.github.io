@@ -1,0 +1,115 @@
+---
+layout: post
+title: pthread
+category: 学习
+tags: linux
+keywords: pthread
+---
+
+##讲线程同步与互斥  
+
+
+##线程内幕 1  
+
+在解释如何确定在何处使用互斥对象之前，先来深入了解一下线程的内部工作机制。请看第一个例子：
+假设主线程将创建三个新线程：线程 a、线程 b 和线程 c。假定首先创建线程 a，然后是线程 b，最后创建线程 c.
+{% highlight c %}
+pthread_create( &thread_a, NULL, thread_function, NULL);
+pthread_create( &thread_b, NULL, thread_function, NULL);
+pthread_create( &thread_c, NULL, thread_function, NULL);
+{% endhighlight %}
+
+在第一个 pthread_create() 调用完成后，可以假定线程 a 不是已存在就是已结束并停止。第二个 pthread_create() 调用后，主线程和线程 b 都可以假定线程 a 存在（或已停止）。然而，就在第二个 create() 调用返回后，主线程无法假定是哪一个线程（a 或 b）会首先开始运行。虽然两个线程都已存在，线程 CPU 时间片的分配取决于内核和线程库。至于谁将首先运行，并没有严格的规则。尽管线程 a 更有可能在线程 b 之前开始执行，但这并无保证。对于多处理器系统，情况更是如此。如果编写的代码假定在线程 b 开始执行之前实际上执行线程 a 的代码，那么，程序最终正确运行的概率是 99%。或者更糟糕，程序在您的机器上 100% 地正确运行，而在您客户的四处理器服务器上正确运行的概率却是零。
+
+
+从这个例子还可以得知，线程库保留了每个单独线程的代码执行顺序。换句话说，实际上那三个 pthread_create()调用将按它们出现的顺序执行。从主线程上来看，所有代码都是依次执行的。有时，可以利用这一点来优化部分线程程序。例如，在上例中，线程 c 就可以假定线程 a 和线程 b 不是正在运行就是已经终止。它不必担心存在还没有创建线程 a 和线程 b 的可能性。可以使用这一逻辑来优化线程程序。
+
+###相关资料：  
+
+>* [POSIX线程详解](http://www.ibm.com/developerworks/cn/linux/thread/posix_thread1/index.html)
+>* [通用线程：posix线程详解，第二部分](http://www.ibm.com/developerworks/cn/linux/thread/posix_thread2/)
+>* [通用线程：posix线程详解，第三部分](http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/#1)
+>* [POSIX Threads Programming](https://computing.llnl.gov/tutorials/pthreads/#CreatingThreads)
+
+##关于条件变量（详细过程）(重要！！重要！！)  
+
+>* [资料地址](http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/#1)
+
+###条件变量详解  
+
+在上一篇文章结束时，我描述了一个比较特殊的难题：如果线程正在等待某个特定条件发生，它应该如何处理这种情况？它可以重复对互斥对象锁定和解锁，每次都会检查共享数据结构，以查找某个值。但这是在浪费时间和资源，而且这种繁忙查询的效率非常低。解决这个问题的最佳方法是使用
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+调用来等待特殊条件发生。了解
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+的作用非常重要 -- 它是 POSIX 线程信号发送系统的核心，也是最难以理解的部分。
+        首先，让我们考虑以下情况：线程为查看已链接列表而锁定了互斥对象，然而该列表恰巧是空的。这一特定线程什么也干不了 -- 其设计意图是从列表中除去节点，但是现在却没有节点。因此，它只能：锁定互斥对象时，线程将调用 
+{% highlight c++ %}
+pthread_cond_wait(&mycond,&mymutex)。pthread_cond_wait()
+{% endhighlight %}
+调用相当复杂，因此我们每次只执行它的一个操作。
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+所做的第一件事就是同时对互斥对象解锁（于是其它线程可以修改已链接列表），并等待条件 mycond 发生（这样当
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+接收到另一个线程的“信号”时，它将苏醒）。现在互斥对象已被解锁，其它线程可以访问和修改已链接列表，可能还会添加项。此时，
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+调用还未返回。对互斥对象解锁会立即发生，但等待条件 mycond 通常是一个阻塞操作，这意味着线程将睡眠，在它苏醒之前不会消耗 CPU 周期。这正是我们期待发生的情况。线程将一直睡眠，直到特定条件发生，在这期间不会发生任何浪费 CPU 时间的繁忙查询。从线程的角度来看，它只是在等待 
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+调用返回。
+        现在继续说明，假设另一个线程（称作“2 号线程”）锁定了 mymutex 并对已链接列表添加了一项。在对互斥对象解锁之后，2 号线程会立即调用函数
+{% highlight c++ %}
+pthread_cond_broadcast(&mycond)
+{% endhighlight %}
+此操作之后，2 号线程将使所有等待 mycond 条件变量的线程立即苏醒。这意味着第一个线程（仍处于 
+{% highlight c++ %}
+pthread_cond_wait()
+{% endhighlight %}
+调用中）现在将苏醒。
+        现在，看一下第一个线程发生了什么。您可能会认为在 2 号线程调用 
+{% highlight c++ %}
+pthread_cond_broadcast(&mymutex)
+{% endhighlight %}
+之后，1 号线程的 
+{% highlight c++ %}
+pthread_cond_wait() 
+{% endhighlight %}
+会立即返回。不是那样！实际上，
+{% highlight c++ %}
+pthread_cond_wait() 
+{% endhighlight %}
+
+将执行最后一个操作：重新锁定 mymutex。一旦 
+{% highlight c++ %}
+pthread_cond_wait() 
+{% endhighlight %}
+锁定了互斥对象，那么它将返回并允许 1 号线程继续执行。那时，它可以马上检查列表，查看它所感兴趣的更改。停止并回顾！
+    
+那个过程非常复杂，因此让我们先来回顾一下。第一个线程首先调用：
+{% highlight c %}
+    pthread_mutex_lock(&mymutex);
+{% endhighlight %}
+然后，它检查了列表。没有找到感兴趣的东西，于是它调用：
+{% highlight c %}
+    pthread_cond_wait(&mycond, &mymutex);
+{% endhighlight %}
+然后，pthread_cond_wait() 调用在返回前执行许多操作：
+{% highlight c %}
+    pthread_mutex_unlock(&mymutex);
+{% endhighlight %}
+它对 mymutex 解锁，然后进入睡眠状态，等待 mycond 以接收 POSIX 线程“信号”。一旦接收到“信号”（加引号是因为我们并不是在讨论传统的 UNIX 信号，而是来自 pthread_cond_signal() 或 pthread_cond_broadcast() 调用的信号），它就会苏醒。但 pthread_cond_wait() 没有立即返回 -- 它还要做一件事：重新锁定 mutex：
+{% highlight c %}
+    pthread_mutex_lock(&mymutex);
+{% endhighlight %}
+pthread_cond_wait() 知道我们在查找 mymutex “背后”的变化，因此它继续操作，为我们锁定互斥对象，然后才返回。
+现在已回顾了 pthread_cond_wait() 调用，您应该了解了它的工作方式。应该能够叙述 pthread_cond_wait() 依次执行的所有操作。尝试一下。如果理解了 pthread_cond_wait()，其余部分就相当容易，因此请重新阅读以上部分，直到记住为止。好，读完之后，能否告诉我在调用 pthread_cond_wait() 之 前，互斥对象必须处于什么状态？pthread_cond_wait() 调用返回之后，互斥对象处于什么状态？这两个问题的答案都是“锁定”。既然已经完全理解了 pthread_cond_wait() 调用，现在来继续研究更简单的东西 -- 初始化和真正的发送信号和广播进程。到那时，我们将会对包含了多线程工作队列的 C 代码了如指掌。

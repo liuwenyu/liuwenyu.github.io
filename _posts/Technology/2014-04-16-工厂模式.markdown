@@ -1,0 +1,676 @@
+---
+layout: post
+title: 工厂模式
+category: 学习
+tags: linux
+keywords: linux
+---
+
+
+##封装昨天的生产者-消费者工厂模式代码  
+
+>* [资料地址](http://www.jellythink.com/archives/42)
+>* 资料文献：《设计模式：可复用面向对象软件的基础》（Design Patterns: Elements of Reusable Object-Oriented Software，ISBN 0-201-63361-2
+
+##工厂模式  
+
+* 在程序中，需要创建的对象很多，导致对象的new操作多且杂时，需要使用`简单工厂模式`；
+* 由于对象的创建过程是我们不需要去关心的，而我们注重的是对象的实际操作，所以，我们需要`分离对象的创建和操作两部分`，如此，方便后期的程序扩展和维护。
+
+##Factory.h  
+
+{% highlight c++ %}
+/*
+ * Factory.h
+ *
+ *  Created on: Apr 16, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef FACTORY_H_
+#define FACTORY_H_
+
+#include <vector>
+#include "ConsumerThread.h"
+#include "ProducerThread.h"
+#include "WorkingQueue.h"
+
+class Factory {
+public:
+        Factory(std::size_t num_producers, std::size_t num_consumers);
+        ~Factory();
+
+        void start();
+
+private:
+        WorkingQueue _queue;
+        std::size_t _num_producer;
+        std::size_t _num_consumer;
+        std::vector<ProducerThread> _producers;
+        std::vector<ConsumerThread> _consumers;
+};
+
+#endif /* FACTORY_H_ */
+{% endhighlight %}
+
+##Factory.cpp  
+
+{% highlight c++ %}
+/*
+ * Factory.cpp
+ *
+ *  Created on: Apr 16, 2014
+ *      Author: liuwenyu
+ */
+
+#include "Factory.h"
+
+Factory::Factory(std::size_t num_producers, std::size_t num_consumers) :
+                _queue(), _num_producer(num_producers), _num_consumer(num_consumers), _producers(
+                                _num_producer, ProducerThread(&_queue)), _consumers(
+                                _num_consumer, ConsumerThread(&_queue)) {
+
+}
+Factory::~Factory() {
+
+}
+
+void Factory::start() {
+        for (std::vector<ProducerThread>::iterator iter = _producers.begin();
+                        iter != _producers.end(); ++iter) {
+                iter->start();
+        }
+        for (std::vector<ConsumerThread>::iterator iter = _consumers.begin();
+                        iter != _consumers.end(); ++iter) {
+                iter->start();
+        }
+
+        for (std::vector<ProducerThread>::iterator iter = _producers.begin();
+                        iter != _producers.end(); ++iter) {
+                iter->join();
+        }
+        for (std::vector<ConsumerThread>::iterator iter = _consumers.begin();
+                        iter != _consumers.end(); ++iter) {
+                iter->join();
+        }
+}
+{% endhighlight %}
+
+##线程问题  
+
+##1. 线程安全：  
+
+>* 线程安全的问题是因为公共资源的访问所导致的，尤其是写操作。
+>* 解决方案是：加锁来保证互斥操作
+
+##线程安全示例代码  
+
+##第一个  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+#include <pthread.h>
+#include <vector>
+#include <unistd.h>
+
+using namespace std;
+
+int global = 0;
+pthread_mutex_t mutex;
+
+void *thread_func(void *arg) {
+        pthread_mutex_lock(&mutex);
+        int tmp = global;
+        pthread_t tid = pthread_self();
+        cout << "in thread " << tid << " the global is: " << global << endl;
+        tmp++;
+        sleep(1);
+        global = tmp;
+        cout << "After plusing in thread " << tid << " the global is: " << global
+                        << endl;
+        pthread_mutex_unlock(&mutex);
+        return NULL;
+}
+
+int main(int argc, char **argv) {
+        std::vector<pthread_t> tids(10);
+        pthread_mutex_init(&mutex, NULL);
+        for (std::vector<pthread_t>::iterator iter = tids.begin();
+                        iter != tids.end(); ++iter) {
+                pthread_create(&(*iter), NULL, thread_func, NULL);
+        }
+        for (std::vector<pthread_t>::iterator iter = tids.begin();
+                        iter != tids.end(); ++iter) {
+                pthread_join(*iter, NULL);
+        }
+        pthread_mutex_destroy(&mutex);
+        return 0;
+}
+{% endhighlight %}
+
+##第二个  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+#include <pthread.h>
+#include <vector>
+#include <unistd.h>
+
+using namespace std;
+
+void *thread_func(void *arg) {
+        int i = 13;
+        pthread_t tid = pthread_self();
+        cout << "in thread :" << tid << " before add the value of i : " << i << endl;
+        i++;
+        cout << "in thread :" << tid << " after add the value of i: " << i << endl;
+        return NULL;
+}
+
+int main(int argc, char **argv) {
+        std::vector<pthread_t> tids(10);
+        for (std::vector<pthread_t>::iterator iter = tids.begin();
+                        iter != tids.end(); ++iter) {
+                pthread_create(&(*iter), NULL, thread_func, NULL);
+        }
+        for (std::vector<pthread_t>::iterator iter = tids.begin();
+                        iter != tids.end(); ++iter) {
+                pthread_join(*iter, NULL);
+        }
+        return 0;
+}
+{% endhighlight %}
+
+##STL标准库~顺序容器~Vector~基本操作  
+
+##Vector2.cpp   
+
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        std::vector<std::string> vec;
+
+        vec.push_back("hello");
+        vec.push_back("zhangsan");
+        vec.push_back("john");
+
+        std::vector<std::string> vec2(5);   // ""   value: default
+        for (std::vector<std::string>::const_iterator iter = vec2.begin();
+                        iter != vec2.end(); ++iter) {
+                cout << *iter << endl;
+        }
+
+        std::vector<std::string> vec3(10, "test");  // (n, t)  n elements value t
+        for (std::vector<std::string>::const_iterator iter = vec3.begin();
+                        iter != vec3.end(); ++iter) {
+                cout << *iter << endl;
+        }
+}
+{% endhighlight %}
+
+##vector3.cpp  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Student {
+public:
+        Student(int id, const std::string &name) :
+                        _id(id), _name(name) {
+
+        }
+private:
+        int _id;
+        std::string _name;
+};
+
+int main(int argc, char **argv) {
+//        std::vector<Student> vec(10);   //call default construct
+
+        //error   no match  Student::Student()
+
+        std::vector<Student> vec(10, Student(0, "none"));
+
+}
+{% endhighlight %}
+
+##list容器  
+
+##list1.cpp  
+
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <list>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        std::vector<int> vec;   // value :  0 ---- 9
+        for(std::size_t ix = 0; ix != 10; ++ix)
+        {
+                vec.push_back(ix);
+        }
+
+        //error : no match function list::list(vector)
+//        std::list<int> lst1(vec);
+
+        //error: no match function call : vector<double>::vector(vector<int>)
+        std::vector<double> vec2(vec);
+
+}
+{% endhighlight %}
+##list2.cpp  
+
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <list>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        std::vector<std::string> vec;
+        vec.push_back("zhangsna");
+        vec.push_back("lisi");
+        vec.push_back("wangwu");
+
+//        vector<string> vec2(vec.begin(), vec.end());
+        std::list<std::string> lst(vec.begin(), vec.end());
+
+        for (std::list<std::string>::const_iterator iter = lst.begin();
+                        iter != lst.end(); ++iter) {
+                cout << *iter << endl;
+        }
+
+        cout << "-----------" << endl;
+        vector<int> vec_int;
+        for(std::size_t ix =0; ix != 55; ix ++)  // 0- 54
+        {
+                vec_int.push_back(ix);
+        }
+
+        list<double> lst_double(vec_int.begin(), vec_int.end());
+        for(list<double>::const_iterator iter = lst_double.begin(); iter != lst_double.end(); ++iter)
+        {
+                cout << *iter << endl;
+        }
+
+}
+{% endhighlight %}
+
+##list4.cpp~~find用法  
+
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <list>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+//        list<list<int>> lst;
+
+        vector<string> vec;
+        vec.push_back("aa");
+        vec.push_back("bb");
+        vec.push_back("cc");
+        vec.push_back("dd");
+        vec.push_back("ee");
+        vec.push_back("ff");
+
+        vector<string>::iterator first = std::find(vec.begin(), vec.end(), string("cc"));   // first -> cc
+        vector<string>::iterator last = std::find(vec.begin(), vec.end(), string("ee"));   //last ->  ee
+        while (first != last) {
+                cout << *first << endl;
+                ++first;
+        }
+
+
+        cout << "----------------" << endl;
+
+        for(vector<string>::reverse_iterator iter = vec.rbegin(); iter != vec.rend(); ++iter)
+        {
+                cout << *iter << endl;
+        }
+}
+{% endhighlight %}
+
+##insert函数  
+
+>* reference(Vector):http://www.cplusplus.com/reference/vector/vector/insert/
+>* reference(List):http://www.cplusplus.com/reference/list/list/insert/
+
+insert函数是从给定的位置开始插入的（相当于在插入当前位置的前面）
+关于迭代器的一个典型错误（当容器添加删除元素时，会是迭代器失效）
+
+
+##insert1.cpp  
+
+{% highlight c++ %}
+#include "test_include.h"
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        vector<string> vec;
+
+        vec.insert(vec.begin(), "hello");
+
+        std::vector<string>::iterator first = vec.begin();
+        while (first != vec.end()) {
+                cout << *first << endl;
+                ++first;
+        }
+
+        cout << "-------------" << endl;
+
+        list<int> lst;
+        for (std::size_t ix = 0; ix != 10; ++ix) {
+                lst.push_back(ix);
+        }
+
+        // 0 -9
+
+        lst.push_front(100);  // 100 0...9
+        for (list<int>::iterator iter = lst.begin(); iter != lst.end(); ++iter) {
+                cout << *iter << " ";
+        }
+        cout << endl;
+
+}
+{% endhighlight %}
+
+##insert2.cpp  
+
+{% highlight c++ %}
+#include "test_include.h"
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        vector<string> vec;
+        vec.push_back("aa");
+        vec.push_back("bb");
+        vec.push_back("cc");
+        vec.push_back("dd");
+        vec.push_back("ee");
+        vec.push_back("ff");
+
+        vector<string>::iterator it = std::find(vec.begin(), vec.end(),
+                        string("dd"));
+
+        vec.insert(it, "test");
+
+        for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end();
+                        ++iter) {
+                cout << *iter << " ";
+        }
+        cout << endl;
+
+//        ++it;
+
+        it = std::find(vec.begin(), vec.end(), string("test"));
+        vec.insert(it, 3, "hello");
+
+        for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end();
+                        ++iter) {
+                cout << *iter << " ";
+        }
+        cout << endl;
+
+        cout << "-----------------" << endl;
+
+        list<string> lst;
+        lst.push_back("zhangsan");
+        lst.push_back("lisi");
+        lst.push_back("wangwu");
+
+        it = std::find(vec.begin(), vec.end(), string("cc"));
+
+        vec.insert(it, lst.begin(), lst.end());
+
+        for (vector<string>::const_iterator iter = vec.begin(); iter != vec.end();
+                        ++iter) {
+                cout << *iter << " ";
+        }
+        cout << endl;
+}
+{% endhighlight %}
+
+##insert3.cpp  
+
+关于迭代器的一个典型错误（当容器添加删除元素时，会是迭代器失效）
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+        vector<string> vec;
+
+        vec.push_back("aa");
+        vec.push_back("bb");
+        vec.push_back("vv");
+        vec.push_back("cc");
+        vec.push_back("dd");
+
+        //vector<string>::iterator first = vec.begin();
+        vec.insert(vec.begin(), "hello");
+        vec.insert(vec.begin(), 3, "test");
+        //经过插入操作后，first已经指向其他地方了，而且无法得知具体为止
+        vector<string>::iterator first = vec.begin();
+        vector<string>::iterator last = vec.end();
+        while (first != last) {
+                cout << *first << endl; //这里会发生段错误
+                ++first;
+        }
+        cout << "---------------" << endl;
+        for (vector<string>::reverse_iterator iter = vec.rbegin(); iter != vec.rend(); ++iter)
+        cout << *iter << endl;
+
+        return 0;
+}
+{% endhighlight %}
+
+##insert4.cpp  一个典型错误，用GDB调试  
+
+{% highlight c++ %}
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iterator>
+
+using namespace std;
+
+int main()
+{
+        vector<string> vec;
+
+        vec.push_back("aa");
+        vec.push_back("bb");
+        vec.push_back("vv");
+        vec.push_back("cc");
+        vec.push_back("dd");
+
+        vector<string>::iterator first = vec.begin();
+        first = vec.insert(vec.begin(), "hello");
+//        first = vec.insert(vec.begin(), 3, "test");
+
+//        vector<string>::iterator first = vec.begin();
+        vector<string>::iterator last = vec.end();
+        while (first != last) {
+                cout << *first << endl;
+                ++first;
+        }
+        return 0;
+}
+{% endhighlight %}
+
+##insert5.cpp   
+
+{% highlight c++ %}
+#include "test_include.h"
+
+using namespace std;
+
+void print(const std::string &s)
+{
+        cout << s << " ";
+}
+
+int main(int argc, char **argv) {
+        list<string> lst;
+        std::string word;
+        list<string>::iterator it = lst.begin();
+
+        while(cin >> word)
+        {
+                it = lst.insert(it, word);
+        }
+
+        std::for_each(lst.begin(), lst.end(), print);
+        cout << endl;
+
+        return 0;
+}
+{% endhighlight %}
+
+##erase函数（注意隐含错误）  
+
+>* [reference(List)](http://www.cplusplus.com/reference/list/list/erase/)
+>* [reference(Vector)](http://www.cplusplus.com/reference/vector/vector/erase/)
+
+##erase.cpp   
+
+{% highlight c++ %}
+#include "test_include.h"
+#include <stdexcept>
+
+using namespace std;
+void print(const std::string &s) {
+        cout << s << " ";
+}
+
+int main(int argc, char **argv) {
+        vector<string> vec;
+        vec.push_back("hello");
+        vec.push_back("world");
+        vec.push_back("zhangsan");
+        vec.push_back("lisi");
+        vec.push_back("shenzhen");
+        vec.push_back("beijing");
+
+        vector<string>::iterator iter = std::find(vec.begin(), vec.end(), "lisi");
+
+        if (iter != vec.end())   // find
+                        {
+                vec.erase(iter);
+        }
+
+        for_each(vec.begin(), vec.end(), print);
+        cout << endl;
+
+        vector<string>::iterator first = find(vec.begin(), vec.end(), "world");
+
+        vector<string>::iterator last = find(vec.begin(), vec.end(), "beijing");
+
+        if (first != vec.end()) {
+                vec.erase(first, last);//这里是错误的，这里必须要返回迭代器
+        }
+
+        for_each(vec.begin(), vec.end(), print);
+        cout << endl;
+
+        vec.clear();
+        for_each(vec.begin(), vec.end(), print);
+        cout << endl;
+
+}
+{% endhighlight %}
+
+##erase2.cpp(注意隐含的错误)  
+
+{% highlight c++ %}
+#include "test_include.h"
+#include <stdexcept>
+
+using namespace std;
+void print(const std::string &s) {
+        cout << s << " ";
+}
+
+int main(int argc, char **argv) {
+        vector<string> vec;
+        vec.push_back("hello");
+        vec.push_back("world");
+        vec.push_back("zhangsan");
+        vec.push_back("lisi");
+        vec.push_back("shenzhen");
+        vec.push_back("beijing");
+
+        vector<string>::iterator it = vec.begin();
+        while(it != vec.end())
+        {
+                cout << *it << endl;
+                it = vec.erase(it);//这里一定要返回迭代器
+        }
+
+
+        //vec n
+
+
+        cout << vec.size() << endl;
+
+}
+{% endhighlight %}
+
+##笔记  
+
+1. 线程安全：
+>* 线程安全的问题是因为公共资源的访问所导致的，尤其是写操作。
+>* 解决方案是：加锁来保证互斥操作
+
+
+##任务： 
+
+>* 为生产者消费者增加处理频率（每隔几秒生产、消费一个数字）
+
+2.vector采用(n)的方式进行初始化操作的时候，必须保证具有默认构造函数
+3.用一个容器去初始化另一个容器，必须保证容器的类型和元素的类型完全一致。
+4.用迭代器去初始化另一个元素，容器的类型和数据类型都可以不同，只要保证数据类型相互兼容（指针可以当作迭代器来使用)
+5.list和vector的最大区别在于：
+>* Vector是顺序表，用数组实现。
+>* List是链表
+
+6.insert的三个重载版本，插入一个元素的版本返回一个迭代器（插入位置的迭代器），其他的返回void
+7.不要去存储end迭代器
+
+String  insert erase （下标操作）
+Substr append   find 系列 
+
+##总结  
+
+##vector  
+
+>* [C++Vector使用心得](https://software.intel.com/zh-cn/blogs/2011/08/10/c-vector)
+
+

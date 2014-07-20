@@ -1,0 +1,579 @@
+---
+layout: post
+title: UDP服务器 生产者
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##UDP服务器
+
+代码：
+##UDPServer.h  
+
+
+{% highlight c++ %}
+#ifndef UDPSERVER_H_
+#define UDPSERVER_H_
+
+#include <iostream>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <stdexcept>
+#include <string>
+#include <string.h>
+
+class UDPServer {
+public:
+        UDPServer(int port);    //create socket  &&  bind
+        virtual ~UDPServer();   //close socket
+
+        //recv
+        std::string receive();
+        //send
+        void send(const std::string&);
+
+private:
+        int _fd;
+        struct sockaddr_in _server_addr;
+        int _port;
+
+        void _bind();
+
+        //
+        struct sockaddr_in _client_addr;
+};
+
+#endif /* UDPSERVER_H_ */
+{% endhighlight %}
+
+##UDPServer.cpp  
+
+{% highlight c++ %}
+/*
+ * UDPServer.cpp
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#include "UDPServer.h"
+
+UDPServer::UDPServer(int port) :
+                _port(port) {
+
+        _fd = socket(AF_INET, SOCK_DGRAM, 0);
+
+        _bind();
+}
+
+void UDPServer::_bind() {
+        _server_addr.sin_family = AF_INET;
+        _server_addr.sin_port = htons(_port);
+        _server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+        if (bind(_fd, (struct sockaddr*) &_server_addr, sizeof(_server_addr)) == -1)
+                throw std::runtime_error("bind port fail!");
+}
+
+UDPServer::~UDPServer() {
+        close(_fd);
+}
+
+std::string UDPServer::receive() {
+        _client_addr.sin_family = AF_INET;
+        std::size_t len = sizeof(_client_addr);
+        const std::size_t SIZE = 1024;
+        char buf[SIZE];
+        int n_read = recvfrom(_fd, buf, SIZE, 0, (struct sockaddr*) &_client_addr,
+                        &len);
+        buf[n_read] = 0;
+
+        std::cout << buf << std::endl;
+        return std::string(buf);
+}
+
+void UDPServer::send(const std::string& s) {
+        std::size_t len = sizeof(_client_addr);
+        const std::size_t SIZE = 1024;
+        char buf[SIZE];
+        strcpy(buf, s.c_str());
+        int n_send = sendto(_fd, buf, strlen(buf), 0,
+                        (struct sockaddr*) &_client_addr, len);
+        if (n_send < 0)
+                throw std::runtime_error("send error!");
+}
+{% endhighlight %}
+
+##生产者消费者
+
+##C语言风格版  
+
+{% highlight c++ %}
+#include <iostream>
+#include <pthread.h>
+#include <string>
+#include <queue>
+
+using namespace std;
+
+std::queue<int>   Q;
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+
+void *producer_func(void *arg)
+{
+        // produce sth
+        pthread_mutex_lock(&mutex);
+        Q.push(1);
+        cout << "push a number";
+        pthread_cond_signal(&cond);
+        pthread_mutex_unlock(&mutex);
+
+        return NULL;
+}
+
+void *consumer_func(void *arg)
+{
+        // consume
+        pthread_mutex_lock(&mutex);
+
+        while(Q.empty())
+                pthread_cond_wait(&cond, &mutex);
+        int num = Q.front();
+        Q.pop();
+        cout << "get a num: " << num << endl;
+
+        pthread_mutex_unlock(&mutex);
+        return NULL;
+}
+
+int main(int argc, char **argv) {
+        pthread_mutex_init(&mutex, NULL);
+        pthread_cond_init(&cond, NULL);
+}
+{% endhighlight %}
+
+##利用面向对象思想重写生产者消费者问题  
+
+MutexLock.h
+
+{% highlight c++ %}
+/*
+ * MutexLock.h
+ *
+ *  Created on: Apr 14, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef MUTEXLOCK_H_
+#define MUTEXLOCK_H_
+
+#include <pthread.h>
+class Condition;
+/*
+ * init
+ * destroy
+ * lock
+ * unlock
+ */
+class MutexLock {
+	friend class Condition;
+public:
+	MutexLock();
+	virtual ~MutexLock();
+
+	void lock();
+	void unlock();
+private:
+	pthread_mutex_t _mutex;
+};
+#endif /* MUTEXLOCK_H_ */
+{% endhighlight %}
+
+MutexLock.cpp
+
+{% highlight c++ %}
+/*
+ * MutexLock.cpp
+ *
+ *  Created on: Apr 14, 2014
+ *      Author: liuwenyu
+ */
+
+#include "MutexLock.h"
+#include <stdexcept>
+#include "Condition.h"
+
+MutexLock::MutexLock() {
+	// TODO Auto-generated constructor stub
+	if(pthread_mutex_init(&_mutex, NULL) == -1)
+		throw std::runtime_error("Init lock fail!!");
+}
+
+MutexLock::~MutexLock() {
+	// TODO Auto-generated destructor stub
+	pthread_mutex_destroy(&_mutex);
+}
+
+
+void MutexLock::lock()
+{
+	pthread_mutex_lock(&_mutex);
+}
+
+void MutexLock::unlock()
+{
+	pthread_mutex_unlock(&_mutex);
+}
+{% endhighlight %}
+
+##Condition.h
+
+{% highlight c++ %}
+/*
+ * Condition.h
+ *
+ *  Created on: Apr 14, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef CONDITION_H_
+#define CONDITION_H_
+
+#include <pthread.h>
+#include "MutexLock.h"
+
+class Condition {
+public:
+	Condition(MutexLock *p_lock);
+	virtual ~Condition();
+
+	void wait();
+
+	void notify();    //signal
+	void notifyAll(); //broadcast
+
+private:
+	pthread_cond_t _cond;
+
+	//bind
+	MutexLock *_p_lock;
+
+};
+
+#endif /* CONDITION_H_ */
+{% endhighlight %}
+
+##Condition.cpp
+
+{% highlight c++ %}
+/*
+ * Condition.cpp
+ *
+ *  Created on: Apr 14, 2014
+ *      Author: liuwenyu
+ */
+
+#include "Condition.h"
+#include <stdexcept>
+
+Condition::Condition(MutexLock *p_lock) :
+		_p_lock(p_lock) {
+	// TODO Auto-generated constructor stub
+	if (pthread_cond_init(&_cond, NULL) == -1)
+		throw std::runtime_error("Init condition fail!");
+}
+
+Condition::~Condition() {
+	// TODO Auto-generated destructor stub
+	pthread_cond_destroy(&_cond);
+}
+
+void Condition::wait() {
+	pthread_cond_wait(&_cond, &(_p_lock->_mutex));
+}
+
+void Condition::notify() {
+	pthread_cond_signal(&_cond);
+}
+
+void Condition::notifyAll() {
+	pthread_cond_broadcast(&_cond);
+}
+{% endhighlight %}
+###WorkingQueue.h
+{% highlight c++ %}
+/*
+ * WorkingQueue.h
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef WORKINGQUEUE_H_
+#define WORKINGQUEUE_H_
+
+#include <queue>
+#include "MutexLock.h"
+#include "Condition.h"
+
+class WorkingQueue {
+public:
+	WorkingQueue();
+	virtual ~WorkingQueue();
+
+	int consume();
+	void product(int num);
+
+private:
+	std::queue<int> _queue;
+	MutexLock _lock;
+	Condition _cond;
+};
+
+#endif /* WORKINGQUEUE_H_ */
+{% endhighlight %}
+###WorkingQueue.cpp
+{% highlight c++ %}
+/*
+ * WorkingQueue.cpp
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+#include "WorkingQueue.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+WorkingQueue::WorkingQueue() :
+		_queue(), _lock(), _cond(&_lock) {
+	// TODO Auto-generated constructor stub
+	srand(10086);
+}
+
+WorkingQueue::~WorkingQueue() {
+	// TODO Auto-generated destructor stub
+}
+
+int WorkingQueue::consume() {
+	_lock.lock();
+	int ret;
+	while (_queue.empty()) {
+		_cond.wait();
+	}
+	ret = _queue.front();
+	_queue.pop();
+	_lock.unlock();
+	return ret;
+}
+
+void WorkingQueue::product(int num) {
+	_lock.lock();
+	_queue.push(num);
+	_cond.notify();
+	_lock.unlock();
+}
+{% endhighlight %}
+###ProducerThread.h
+{% highlight c++ %}
+/*
+ * ProducerThread.h
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef PRODUCERTHREAD_H_
+#define PRODUCERTHREAD_H_
+
+#include <pthread.h>
+#include "WorkingQueue.h"
+
+class ProducerThread {
+public:
+	ProducerThread(WorkingQueue* p_queue);
+	virtual ~ProducerThread();
+	void start();
+	static void *thread_func(void *arg);
+	void run();
+	void join();
+
+private:
+	pthread_t _tid;
+	WorkingQueue* _p_queue;
+};
+
+#endif /* PRODUCERTHREAD_H_ */
+{% endhighlight %}
+###ProducerThread.cpp
+{% highlight c++ %}
+/*
+ * ProducerThread.cpp
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#include "ProducerThread.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <iostream>
+
+ProducerThread::ProducerThread(WorkingQueue* p_queue) :
+		_tid(0), _p_queue(p_queue) {
+	// TODO Auto-generated constructor stub
+	srand(10010);
+}
+
+ProducerThread::~ProducerThread() {
+	// TODO Auto-generated destructor stub
+
+}
+
+void ProducerThread::start() {
+	pthread_create(&_tid, NULL, thread_func, this);
+}
+
+void *ProducerThread::thread_func(void *arg) {
+	ProducerThread* p_thread = static_cast<ProducerThread*>(arg);
+	p_thread->run();
+	return NULL;
+}
+
+void ProducerThread::run() {
+	while (true) {
+		int tmp = rand()%1024;
+		std::cout << "product a number: " << tmp << std::endl;
+		_p_queue->product(tmp);
+		sleep(2);
+	}
+}
+
+void ProducerThread::join() {
+	pthread_join(_tid, NULL);
+}
+{% endhighlight %}
+###ConsumerThread.h
+{% highlight c++ %}
+/*
+ * ConsumerThread.h
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#ifndef CONSUMERTHREAD_H_
+#define CONSUMERTHREAD_H_
+
+#include <pthread.h>
+#include "WorkingQueue.h"
+
+class ConsumerThread {
+public:
+	ConsumerThread(WorkingQueue* p_queue);
+	virtual ~ConsumerThread();
+	void start();
+	static void *thread_func(void *arg);
+	void run();
+	void join();
+
+private:
+	pthread_t _tid;
+	WorkingQueue* _p_queue;
+};
+
+#endif /* CONSUMERTHREAD_H_ */
+{% endhighlight %}
+###ConsumerThread.cpp
+{% highlight c++ %}
+/*
+ * ConsumerThread.cpp
+ *
+ *  Created on: Apr 15, 2014
+ *      Author: liuwenyu
+ */
+
+#include "ConsumerThread.h"
+#include <iostream>
+#include <unistd.h>
+#include <stdlib.h>
+
+
+ConsumerThread::ConsumerThread(WorkingQueue* p_queue) :
+		_tid(0), _p_queue(p_queue) {
+	// TODO Auto-generated constructor stub
+}
+
+ConsumerThread::~ConsumerThread() {
+	// TODO Auto-generated destructor stub
+}
+
+void ConsumerThread::start() {
+	pthread_create(&_tid, NULL, thread_func, this);
+}
+
+void *ConsumerThread::thread_func(void *arg) {
+	ConsumerThread* p_thread = static_cast<ConsumerThread*>(arg);
+	p_thread->run();
+	return NULL;
+}
+
+void ConsumerThread::run() {
+	while(true)
+	{
+		int ret = _p_queue->consume();
+		std::cout << "get a number: " << ret << std::endl;
+	}
+}
+
+void ConsumerThread::join() {
+	pthread_join(_tid, NULL);
+}
+{% endhighlight %}
+
+##1.pthread_cond_wait如果不阻塞，什么也不做，如果阻塞： 
+
+>* a)	释放锁
+>* b)	使得线程睡眠，等待被唤醒
+>* c)	重新抢占mutex
+
+##2. 等待代码要用while循环： 
+
+	while (Q.empty())
+			pthread_cond_wait(&cond, &mutex);
+	防止pthread_cond_broadcast的干扰
+##3. 线程安全的概念 
+
+
+##4. 生产者消费者改进空间：  
+
+>* 继承
+>* 考虑缓冲区溢出（队列满）
+>* 再次封装成车间类
+
+##任务：封装车间类  
+
+>* 把生产者、消费者和缓冲区队列组合成新的类
+>* 可以指定每种线程的个数
+>* 可以指定每种线程的频率（隔几秒种）
+
+##5. 类的设计原则：  
+
+>* 先去考察系统中几个对象
+>* 功能应该放在哪里
+>* 应该尽可能封装细节，外部的用户只知道接口即可。
+>* 模块之间的独立性
+>* 对象之间的关系（类的成员用指针还是对象）
+
+##总结 
+
+##关于面向对象设计的一点思路  
+
+>* 如果一段代码重复使用多次，最好封装成一个函数
+>* 对外部完全隐藏，所谓封装好
+>* 外部使用一个封装好的类时，不应该接触其内部细节。
+
+
+  [1](www.baidu.com)

@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>pthread | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="pthread">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket%20TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux(socket%20UDP).html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux(%20big%20endian-little%20endian%20-ip%20conversion).html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">8</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket%20TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux(socket%20UDP).html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux(%20big%20endian-little%20endian%20-ip%20conversion).html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">pthread</h2>
+    2014年03月31日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>讲线程同步与互斥</h2>
+
+<h2>线程内幕 1</h2>
+
+<p>在解释如何确定在何处使用互斥对象之前，先来深入了解一下线程的内部工作机制。请看第一个例子：
+假设主线程将创建三个新线程：线程 a、线程 b 和线程 c。假定首先创建线程 a，然后是线程 b，最后创建线程 c.</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">pthread_create</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">thread_a</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">pthread_create</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">thread_b</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">pthread_create</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">thread_c</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span></code></pre></div>
+
+<p>在第一个 pthread<em>create() 调用完成后，可以假定线程 a 不是已存在就是已结束并停止。第二个 pthread</em>create() 调用后，主线程和线程 b 都可以假定线程 a 存在（或已停止）。然而，就在第二个 create() 调用返回后，主线程无法假定是哪一个线程（a 或 b）会首先开始运行。虽然两个线程都已存在，线程 CPU 时间片的分配取决于内核和线程库。至于谁将首先运行，并没有严格的规则。尽管线程 a 更有可能在线程 b 之前开始执行，但这并无保证。对于多处理器系统，情况更是如此。如果编写的代码假定在线程 b 开始执行之前实际上执行线程 a 的代码，那么，程序最终正确运行的概率是 99%。或者更糟糕，程序在您的机器上 100% 地正确运行，而在您客户的四处理器服务器上正确运行的概率却是零。</p>
+
+<p>从这个例子还可以得知，线程库保留了每个单独线程的代码执行顺序。换句话说，实际上那三个 pthread_create()调用将按它们出现的顺序执行。从主线程上来看，所有代码都是依次执行的。有时，可以利用这一点来优化部分线程程序。例如，在上例中，线程 c 就可以假定线程 a 和线程 b 不是正在运行就是已经终止。它不必担心存在还没有创建线程 a 和线程 b 的可能性。可以使用这一逻辑来优化线程程序。</p>
+
+<h3>相关资料：</h3>
+
+<blockquote>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/thread/posix_thread1/index.html">POSIX线程详解</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/thread/posix_thread2/">通用线程：posix线程详解，第二部分</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/#1">通用线程：posix线程详解，第三部分</a></li>
+<li><a href="https://computing.llnl.gov/tutorials/pthreads/#CreatingThreads">POSIX Threads Programming</a></li>
+</ul>
+</blockquote>
+
+<h2>关于条件变量（详细过程）(重要！！重要！！)</h2>
+
+<blockquote>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/thread/posix_thread3/#1">资料地址</a></li>
+</ul>
+</blockquote>
+
+<h3>条件变量详解</h3>
+
+<p>在上一篇文章结束时，我描述了一个比较特殊的难题：如果线程正在等待某个特定条件发生，它应该如何处理这种情况？它可以重复对互斥对象锁定和解锁，每次都会检查共享数据结构，以查找某个值。但这是在浪费时间和资源，而且这种繁忙查询的效率非常低。解决这个问题的最佳方法是使用</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>调用来等待特殊条件发生。了解</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>的作用非常重要 -- 它是 POSIX 线程信号发送系统的核心，也是最难以理解的部分。
+        首先，让我们考虑以下情况：线程为查看已链接列表而锁定了互斥对象，然而该列表恰巧是空的。这一特定线程什么也干不了 -- 其设计意图是从列表中除去节点，但是现在却没有节点。因此，它只能：锁定互斥对象时，线程将调用 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mycond</span><span class="p">,</span><span class="o">&amp;</span><span class="n">mymutex</span><span class="p">)</span><span class="err">。</span><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>调用相当复杂，因此我们每次只执行它的一个操作。</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>所做的第一件事就是同时对互斥对象解锁（于是其它线程可以修改已链接列表），并等待条件 mycond 发生（这样当</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>接收到另一个线程的“信号”时，它将苏醒）。现在互斥对象已被解锁，其它线程可以访问和修改已链接列表，可能还会添加项。此时，</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>调用还未返回。对互斥对象解锁会立即发生，但等待条件 mycond 通常是一个阻塞操作，这意味着线程将睡眠，在它苏醒之前不会消耗 CPU 周期。这正是我们期待发生的情况。线程将一直睡眠，直到特定条件发生，在这期间不会发生任何浪费 CPU 时间的繁忙查询。从线程的角度来看，它只是在等待 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>调用返回。
+        现在继续说明，假设另一个线程（称作“2 号线程”）锁定了 mymutex 并对已链接列表添加了一项。在对互斥对象解锁之后，2 号线程会立即调用函数</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_broadcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mycond</span><span class="p">)</span></code></pre></div>
+
+<p>此操作之后，2 号线程将使所有等待 mycond 条件变量的线程立即苏醒。这意味着第一个线程（仍处于 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>调用中）现在将苏醒。
+        现在，看一下第一个线程发生了什么。您可能会认为在 2 号线程调用 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_broadcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mymutex</span><span class="p">)</span></code></pre></div>
+
+<p>之后，1 号线程的 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>会立即返回。不是那样！实际上，</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>将执行最后一个操作：重新锁定 mymutex。一旦 </p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">pthread_cond_wait</span><span class="p">()</span></code></pre></div>
+
+<p>锁定了互斥对象，那么它将返回并允许 1 号线程继续执行。那时，它可以马上检查列表，查看它所感兴趣的更改。停止并回顾！</p>
+
+<p>那个过程非常复杂，因此让我们先来回顾一下。第一个线程首先调用：</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mymutex</span><span class="p">);</span></code></pre></div>
+
+<p>然后，它检查了列表。没有找到感兴趣的东西，于是它调用：</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mycond</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mymutex</span><span class="p">);</span></code></pre></div>
+
+<p>然后，pthread<em>cond</em>wait() 调用在返回前执行许多操作：</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mymutex</span><span class="p">);</span></code></pre></div>
+
+<p>它对 mymutex 解锁，然后进入睡眠状态，等待 mycond 以接收 POSIX 线程“信号”。一旦接收到“信号”（加引号是因为我们并不是在讨论传统的 UNIX 信号，而是来自 pthread<em>cond</em>signal() 或 pthread<em>cond</em>broadcast() 调用的信号），它就会苏醒。但 pthread<em>cond</em>wait() 没有立即返回 -- 它还要做一件事：重新锁定 mutex：</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mymutex</span><span class="p">);</span></code></pre></div>
+
+<p>pthread<em>cond</em>wait() 知道我们在查找 mymutex “背后”的变化，因此它继续操作，为我们锁定互斥对象，然后才返回。
+现在已回顾了 pthread<em>cond</em>wait() 调用，您应该了解了它的工作方式。应该能够叙述 pthread<em>cond</em>wait() 依次执行的所有操作。尝试一下。如果理解了 pthread<em>cond</em>wait()，其余部分就相当容易，因此请重新阅读以上部分，直到记住为止。好，读完之后，能否告诉我在调用 pthread<em>cond</em>wait() 之 前，互斥对象必须处于什么状态？pthread<em>cond</em>wait() 调用返回之后，互斥对象处于什么状态？这两个问题的答案都是“锁定”。既然已经完全理解了 pthread<em>cond</em>wait() 调用，现在来继续研究更简单的东西 -- 初始化和真正的发送信号和广播进程。到那时，我们将会对包含了多线程工作队列的 C 代码了如指掌。</p>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>

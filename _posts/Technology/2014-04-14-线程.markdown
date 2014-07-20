@@ -1,0 +1,117 @@
+---
+layout: post
+title: 线程
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##线程的封装（采用面向对象的风格)
+1    建立线程类Thread，成员变量为tid，此时的问题是：线程如何创建？
+2    写一个成员函数，打算将其作为pthread_create的回调函数，但是，函数指针类型不匹配。
+3.将上面的成员函数改为static，此时线程成功运行。 但是：不能获取任何去对象有关的信息。
+
+4.Static带来的双重后果：
+>* 成功解决了函数参数的问题
+>* 使线程失去了与对象的关联
+
+5.我们将pthread_create的最后一个参数由NULL改为this，然后在上面的静态方法中将arg转化Thread*类型，然后就可以去读取对象的信息。
+6.增加了join函数
+7.将用户自定义操作封装成run方法，增加了独立性。
+8.如果用户直接使用run方法，将不创建线程。
+9.将run设为私有，同时把static函数设为私有
+
+##Thread.h  
+
+{% highlight c++ %}
+#ifndef THREAD_H_
+#define THREAD_H_
+#include <pthread.h>
+
+class Thread {
+public:
+
+        Thread(int num);
+        ~Thread();
+
+        void start();
+        void join();
+private:
+        pthread_t _tid;
+        int _num; //5
+
+        void run();
+        static void *thread_func(void *arg);
+};
+
+#endif /* THREAD_H_ */
+{% endhighlight %}
+
+##Thread.cpp  
+
+{% highlight c++ %}
+#include "Thread.h"
+#include <iostream>
+#include <unistd.h>
+using namespace std;
+
+Thread::Thread(int num) :
+                _tid(0), _num(num) {
+
+}
+
+Thread::~Thread() {
+
+}
+
+void *Thread::thread_func(void *arg) {
+
+        Thread *p_thread = static_cast<Thread*>(arg);
+        p_thread->run();
+        return NULL;
+}
+
+void Thread::run() {
+        for (std::size_t ix = 0; ix != _num; ++ix) {
+                sleep(1);
+                cout << "test ----" << endl;
+        }
+}
+
+void Thread::join() {
+        pthread_join(_tid, NULL);
+}
+
+void Thread::start() {
+        pthread_create(&_tid, NULL, thread_func, this);
+}
+{% endhighlight %}
+
+##main.cpp  
+
+{% highlight c++ %}
+#include <iostream>
+#include "Thread.h"
+#include <unistd.h>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+        Thread t(5);
+        t.start();
+
+//        t.run();
+
+        for(std::size_t ix = 0 ; ix != 10; ++ix)
+        {
+                sleep(1);
+                cout << "hello world" << endl;
+        }
+
+        t.join();
+}
+{% endhighlight %}
+
+
+
+

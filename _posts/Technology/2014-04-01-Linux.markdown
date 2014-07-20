@@ -1,0 +1,123 @@
+---
+layout: post
+title: 大端小端 ip转换
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##套接字(套接口)  
+
+
+>它是网络进程的ID。网络通信就是（不同计算机）进程间的通信。<br />
+>套接字是网络地址（IP）和端口号（PORT）的组合可以唯一确定整个网络中的一个网络进程。<br />
+>TCP/IP协议中端口号范围0～65535。应用程序固定的端口0～1023，用户自定义的通常大于1024 。
+
+##socket  
+
+
+>socket是一种特殊的I/O接口，它是一种文件描述符。
+> >1.流式socket，用于TCP通信
+2.数据报socket，用于UDP通信
+3.原始socket，功能强大但使用较不便，主要用于一些协议的开发
+
+{% highlight c %}
+//socket信息数据结构
+struct sockaddr 
+{
+    	unsigned short sa_family; 	/*地址族*/
+    	char sa_data[14]; 	/*14字节的协议地址，包含该socket的IP地址和端口号。*/
+};
+struct sockaddr_in 
+{
+    	short int sa_family; 		/*地址族*/
+    	unsigned short int sin_port; 	/*端口号*/
+    	struct in_addr sin_addr; 		/*IP地址*/
+    	unsigned char sin_zero[8]; 	/*填充0 以保持与struct sockaddr同样大小*/
+};
+struct in_addr
+{
+		unsigned long int  s_addr;	/* 32位IPv4地址，网络字节序 */
+};
+{% endhighlight %}
+
+
+##大端小端: 数据存储优先顺序的替换
+
+计算机数据存储有两种字节优先顺序：高位字节优先（称为大端模式）和低位字节优先（称为小端模式）。
+{% highlight c %}
+向计算机内存中存放数据 ---> 0x 12 34 56 78
+                        数据低位 ---> 高位
+
+小端存储：0x 78 56 34 12
+        低地址 ---> 高地址（相反）
+
+大端存储：0x 12 34 56 78
+        低地址 ---> 高地址（相同）
+
+网络中传输的数据字节序都是大端模式的
+
+#include <netinet/in.h>
+htons()    //传入主机字节序的16位数值，返回网络字节序
+ntohs()    //传入网络字节序的16位数值，返回主机字节序
+htonl()    //传入主机字节序的32位数值，返回网络字节序
+ntohl()    //传入网络字节序的32位数值，返回主机字节序
+h: host    n: network    s: short    l: long
+通常16位的端口号用short表示，32位的IP地址用long表示。
+{% endhighlight %}
+
+{% highlight c %}
+/* test.c(测试本机是大端还是小端) */
+
+#include <stdio.h>
+int main()
+{
+	int a = 0x12345678;
+	char * p ;
+	p = (char*)&a ;
+	if((*p) == 0x78)
+		printf("your computer is small-endian\n") ;
+	else if((*p) == 0x12)
+		printf("your computer is big-endian\n") ;
+	return 0 ;
+}
+{% endhighlight %}
+
+
+##地址格式的转换  
+
+{% highlight c %}
+// ipv4
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+int inet_aton(const char *straddr, struct in_addr *addrptr);
+    /*将点分十进制数的IP地址转换成为网络字节序的32位二进制数值。返回值：成功，则返回1，不成功返回0 。*/
+    /*参数straddr：存放输入的点分十进制数IP地址字符串。*/
+    /*参数addrptr：传出参数，保存网络字节序的32位二进制数值。*/
+
+char * inet_ntoa(struct in_addr inaddr);
+    /*将网络字节序的32位二进制数值转换为点分十进制的IP地址。*/
+
+in_addr_t inet_addr(const char *straddr);
+    /*功能同inet_aton()，返回值不同。inet_addr()若成功则返回32位二进制的网络字节序地址。*/
+{% endhighlight %}
+
+{% highlight c %}
+// ipv4 || ipv6
+#include <arpa/inet.h>
+int inet_pton(int family, const char *src, void *dst);
+    /*同inet_aton()，
+    family = AF_INET表示是IPv4
+    family = AF_INET6，表示IPv6协议*/
+
+const char *inet_ntop(int family, const void *src, char *dst, socklen_t len);
+    /*同inet_ntoa()
+    family同上
+   其中len表示表示转换之后的长度（字符串的长度）。 */
+{% endhighlight %}
+
+
+
+
+
