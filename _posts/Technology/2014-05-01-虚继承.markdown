@@ -88,4 +88,4 @@ class E: public B, public D {};
 
     同时class B 与 class D 共享继承基类class A子对象，
 
-  [1]: http://h.hiphotos.bdimg.com/album/s%3D1100%3Bq%3D90/sign=9bc6f2eccebf6c81f33728e98c0e8a44/a8ec8a13632762d0f047b23ba2ec08fa513dc63c.jpg
+  [1]: /public/img/虚函数.jpg
