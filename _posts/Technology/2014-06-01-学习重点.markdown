@@ -1,0 +1,47 @@
+---
+layout: post
+title: 学习方向与重点
+category: 技术学习
+tags: linux
+keywords: linux
+---
+
+
+##大数据与数据挖掘
+
+1.  Python(熟悉)
+
+2.  Java(熟悉)
+
+3.  Hadoop（分布式开源框架,熟悉）
+    >* http://en.wikipedia.org/wiki/Apache_Hadoop
+    >* [WordCount Example(示例)][1]
+    >* [用 Hadoop 进行分布式并行编程, 第 1 部分][2]
+    >* [用 Hadoop 进行分布式并行编程, 第 2 部分][3]
+    >* [用 Hadoop 进行分布式并行编程, 第 3 部分][4]
+
+4.  数据库操作（MySql）
+
+5.  机器学习
+
+6.  Lucene
+    >* [Lucene教程详解][5]
+    >* [终于稿定SOLR和LUCENE了][6]
+    >* [实战 Lucene，第 1 部分: 初识 Lucene][7]
+
+7.  Nutch(开源web搜索引擎)
+    >* [Nutch 实战][8]
+
+
+##游戏
+1.  cocos2d(开源游戏引擎)
+
+
+  [1]: http://wiki.apache.org/hadoop/WordCount
+  [2]: http://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop1/
+  [3]: http://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop2/
+  [4]: http://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop3/
+  [5]: http://blog.csdn.net/csh624366188/article/details/6823209
+  [6]: http://hi.baidu.com/qgsxbj/item/5532cb0a9ebcb6dc72e67669
+  [7]: http://www.ibm.com/developerworks/cn/java/j-lo-lucene1/
+  [8]: http://www.ibm.com/developerworks/cn/opensource/os-cn-nutchintro/

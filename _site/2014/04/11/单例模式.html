@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>首页 | 落枫的博客</title>
+<title>设计模式 单例模式 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -340,72 +342,74 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">首页</h2>
+    <h2 id="#identifier">设计模式 单例模式</h2>
+    2014年04月11日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <br>
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">最新文章</div>
-      
-        <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink clearfix">
-          内存 线程池
-          <span class="badge">2014年04月25日</span>
-        </a>
-      
-        <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink clearfix">
-          c++
-          <span class="badge">2014年04月24日</span>
-        </a>
-      
-        <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink clearfix">
-          内存 复制控制
-          <span class="badge">2014年04月23日</span>
-        </a>
-      
-        <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink clearfix">
-          继承 函数重载覆盖隐藏
-          <span class="badge">2014年04月22日</span>
-        </a>
-      
-        <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink clearfix">
-          重载运算符-智能指针-String
-          <span class="badge">2014年04月21日</span>
-        </a>
-      
-        <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink clearfix">
-          复制控制
-          <span class="badge">2014年04月18日</span>
-        </a>
-      
-        <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink clearfix">
-          Linux网络编程 map
-          <span class="badge">2014年04月17日</span>
-        </a>
-      
-        <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink clearfix">
-          工厂模式
-          <span class="badge">2014年04月16日</span>
-        </a>
-      
-        <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink clearfix">
-          UDP服务器 生产者
-          <span class="badge">2014年04月15日</span>
-        </a>
-      
-        <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink clearfix">
-          线程
-          <span class="badge">2014年04月14日</span>
-        </a>
-      
-    </div>
-  </div>
-  
-</div>
- 
+    <hr>
+    <div id="content">
+      <h1>单例模式的编写：</h1>
 
+<blockquote>
+<ul>
+<li>1.把构造函数设为私有： 无法构造对象</li>
+<li>2.定义一个成员函数，返回一个动态分配的对象：无穷的递归</li>
+<li>3.把上面的函数变为static： 达到了在类的外部可以生成对象的目的</li>
+<li>4.声明一个静态空指针，仅当它为NULL时才new新对象： 单线程下正确无误，多线程时直接崩溃</li>
+<li>5.定义一个静态Lock，保护对<em>p</em>instance是否为空的判断：Singleton编写成功，但是lock的开销过大</li>
+<li>6.加入双重判断p是否为空。 DCLP双重锁模式</li>
+</ul>
+</blockquote>
+
+<h2>Singleton.h</h2>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="cp">#ifndef SINGLETON_H_</span>
+<span class="cp">#define SINGLETON_H_</span>
+
+<span class="cp">#include &quot;Lock.h&quot;</span>
+
+<span class="k">class</span> <span class="nc">Singleton</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">static</span> <span class="n">Singleton</span> <span class="o">*</span><span class="n">get_instance</span><span class="p">();</span>
+
+<span class="nl">private:</span>
+    <span class="n">Singleton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+    <span class="k">static</span> <span class="n">Singleton</span> <span class="o">*</span><span class="n">_p_intance</span><span class="p">;</span>
+    <span class="k">static</span> <span class="n">Lock</span> <span class="n">_lock</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="cm">/* SINGLETON_H_ */</span><span class="cp"></span>
+</code></pre></div>
+<h2>Singleton.cpp</h2>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="cp">#include &quot;Singleton.h&quot;</span>
+<span class="cp">#include &lt;cstddef&gt;</span>
+<span class="cp">#include &lt;unistd.h&gt;</span>
+
+<span class="n">Singleton</span> <span class="o">*</span><span class="n">Singleton</span><span class="o">::</span><span class="n">_p_intance</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Lock</span> <span class="n">Singleton</span><span class="o">::</span><span class="n">_lock</span><span class="p">;</span>
+
+<span class="n">Singleton</span> <span class="o">*</span><span class="n">Singleton</span><span class="o">::</span><span class="n">get_instance</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="c1">//  _lock.lock();</span>
+<span class="c1">//  if(_p_intance == NULL)</span>
+<span class="c1">//  {</span>
+<span class="c1">//      sleep(1);</span>
+<span class="c1">//      _p_intance = new Singleton;</span>
+<span class="c1">//  }</span>
+<span class="c1">//  _lock.unlock();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">_p_intance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_lock</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_p_intance</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_p_intance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">_lock</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">_p_intance</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
     </div>
     <hr>
     <div id="disqus_thread">
@@ -413,7 +417,14 @@
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

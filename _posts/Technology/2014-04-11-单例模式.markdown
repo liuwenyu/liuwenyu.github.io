@@ -1,0 +1,74 @@
+---
+layout: post
+title: 设计模式 单例模式
+category: 学习
+tags: linux
+keywords: linux
+---
+
+
+#单例模式的编写：
+>* 1.把构造函数设为私有： 无法构造对象
+>* 2.定义一个成员函数，返回一个动态分配的对象：无穷的递归
+>* 3.把上面的函数变为static： 达到了在类的外部可以生成对象的目的
+>* 4.声明一个静态空指针，仅当它为NULL时才new新对象： 单线程下正确无误，多线程时直接崩溃
+>* 5.定义一个静态Lock，保护对_p_instance是否为空的判断：Singleton编写成功，但是lock的开销过大
+>* 6.加入双重判断p是否为空。 DCLP双重锁模式
+
+##Singleton.h
+
+```c++
+
+#ifndef SINGLETON_H_
+#define SINGLETON_H_
+
+#include "Lock.h"
+
+class Singleton {
+public:
+	static Singleton *get_instance();
+
+private:
+	Singleton() {
+	}
+	static Singleton *_p_intance;
+	static Lock _lock;
+
+};
+
+#endif /* SINGLETON_H_ */
+```
+
+##Singleton.cpp
+
+```c++
+
+
+#include "Singleton.h"
+#include <cstddef>
+#include <unistd.h>
+
+Singleton *Singleton::_p_intance = NULL;
+Lock Singleton::_lock;
+
+Singleton *Singleton::get_instance() {
+
+//	_lock.lock();
+//	if(_p_intance == NULL)
+//	{
+//		sleep(1);
+//		_p_intance = new Singleton;
+//	}
+//	_lock.unlock();
+
+	if (_p_intance == NULL) {
+		_lock.lock();
+		if (_p_intance == NULL) {
+			_p_intance = new Singleton;
+		}
+		_lock.unlock();
+	}
+
+	return _p_intance;
+}
+```
