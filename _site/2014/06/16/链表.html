@@ -1,0 +1,496 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>二叉树 链表 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+          <li><a href="#技术学习" data-toggle="tab">技术学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/06/16/%E9%93%BE%E8%A1%A8.html" class="list-group-item pjaxlink">二叉树 链表</a>
+                
+                  <a href="/2014/06/15/fork.html" class="list-group-item pjaxlink">多进程 fork</a>
+                
+                  <a href="/2014/06/14/sql.html" class="list-group-item pjaxlink">MySql</a>
+                
+                  <a href="/2014/06/13/%E6%8E%92%E5%BA%8F.html" class="list-group-item pjaxlink">排序 查找 键树 结构体</a>
+                
+                  <a href="/2014/06/10/%E9%87%8D%E8%BD%BD.html" class="list-group-item pjaxlink">重载 虚函数 动态绑定</a>
+                
+                  <a href="/2014/06/07/%E9%80%92%E5%BD%92.html" class="list-group-item pjaxlink">递归 宏定义 内联函数</a>
+                
+                  <a href="/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html" class="list-group-item pjaxlink">联合体 大端小端 位域 指针引用</a>
+                
+                  <a href="/2014/06/02/volatile.html" class="list-group-item pjaxlink">全局变量 volatile</a>
+                
+                  <a href="/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html" class="list-group-item pjaxlink">const与指针 函数返回值 声明</a>
+                
+                  <a href="/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html" class="list-group-item pjaxlink">UDP服务器 僵尸进程</a>
+                
+                  <a href="/2014/05/02/%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">学习总结</a>
+                
+                  <a href="/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">约瑟夫问题 虚继承</a>
+                
+                  <a href="/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html" class="list-group-item pjaxlink">构造函数</a>
+                
+                  <a href="/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html" class="list-group-item pjaxlink">内存 线程池</a>
+                
+                  <a href="/2014/04/24/c++.html" class="list-group-item pjaxlink">c++</a>
+                
+                  <a href="/2014/04/23/%E5%86%85%E5%AD%98.html" class="list-group-item pjaxlink">内存 复制控制</a>
+                
+                  <a href="/2014/04/22/%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">继承 函数重载覆盖隐藏</a>
+                
+                  <a href="/2014/04/21/string.html" class="list-group-item pjaxlink">重载运算符-智能指针-String</a>
+                
+                  <a href="/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html" class="list-group-item pjaxlink">复制控制</a>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="技术学习">
+              <div class="list-group">
+                <h2 class="center">技术学习</h2>
+                
+                  <a href="/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html" class="list-group-item pjaxlink">epoll</a>
+                
+                  <a href="/2014/05/02/mini%E6%90%9C%E7%B4%A2.html" class="list-group-item pjaxlink">mini搜索</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">29</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/16/%E9%93%BE%E8%A1%A8.html' class="list-group-item pjaxlink">
+                        二叉树 链表
+                      </a>
+                    
+                      <a  href='/2014/06/15/fork.html' class="list-group-item pjaxlink">
+                        多进程 fork
+                      </a>
+                    
+                      <a  href='/2014/06/13/%E6%8E%92%E5%BA%8F.html' class="list-group-item pjaxlink">
+                        排序 查找 键树 结构体
+                      </a>
+                    
+                      <a  href='/2014/06/10/%E9%87%8D%E8%BD%BD.html' class="list-group-item pjaxlink">
+                        重载 虚函数 动态绑定
+                      </a>
+                    
+                      <a  href='/2014/06/07/%E9%80%92%E5%BD%92.html' class="list-group-item pjaxlink">
+                        递归 宏定义 内联函数
+                      </a>
+                    
+                      <a  href='/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html' class="list-group-item pjaxlink">
+                        联合体 大端小端 位域 指针引用
+                      </a>
+                    
+                      <a  href='/2014/06/02/volatile.html' class="list-group-item pjaxlink">
+                        全局变量 volatile
+                      </a>
+                    
+                      <a  href='/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html' class="list-group-item pjaxlink">
+                        const与指针 函数返回值 声明
+                      </a>
+                    
+                      <a  href='/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html' class="list-group-item pjaxlink">
+                        epoll
+                      </a>
+                    
+                      <a  href='/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        UDP服务器 僵尸进程
+                      </a>
+                    
+                      <a  href='/2014/05/02/%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        学习总结
+                      </a>
+                    
+                      <a  href='/2014/05/02/mini%E6%90%9C%E7%B4%A2.html' class="list-group-item pjaxlink">
+                        mini搜索
+                      </a>
+                    
+                      <a  href='/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        约瑟夫问题 虚继承
+                      </a>
+                    
+                      <a  href='/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html' class="list-group-item pjaxlink">
+                        构造函数
+                      </a>
+                    
+                      <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink">
+                        内存 线程池
+                      </a>
+                    
+                      <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink">
+                        c++
+                      </a>
+                    
+                      <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink">
+                        内存 复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        继承 函数重载覆盖隐藏
+                      </a>
+                    
+                      <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink">
+                        重载运算符-智能指针-String
+                      </a>
+                    
+                      <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink">
+                        复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySql">MySql</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="MySql" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/14/sql.html' class="list-group-item pjaxlink">
+                        MySql
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">二叉树 链表</h2>
+    2014年06月16日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>二叉树的遍历</h2>
+
+<ol>
+<li> 前序非递归算法
+<strong>我的版本</strong>：</li>
+</ol>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">BinaryTreeNode</span><span class="o">::</span><span class="n">PreOrder</span><span class="p">(</span><span class="n">BinaryTreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">stack</span><span class="o">&lt;</span><span class="n">BinaryTreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">traversal_stack</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">||</span> <span class="o">!</span><span class="n">traversal_stack</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">!=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="n">Visit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>参考版本</strong>：</p>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">preOrder2</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>     <span class="c1">//非递归前序遍历 </span>
+<span class="p">{</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BinTree</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li> 中序非递归算法</li>
+</ol>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">BinaryTreeNode</span><span class="o">::</span><span class="n">InOrder</span><span class="p">(</span><span class="n">BinaryTreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">stack</span><span class="o">&lt;</span><span class="n">BinaryTreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">traversal_stack</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">||</span> <span class="o">!</span><span class="n">traversal_stack</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">!=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Visit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">traversal_stack</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+                <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>参考版本：</p>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">inOrder2</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>      <span class="c1">//非递归中序遍历</span>
+<span class="p">{</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BinTree</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>    
+<span class="p">}</span> 
+</code></pre></div>
+<ol>
+<li> 后序非递归算法
+我的版本：</li>
+</ol>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++">
+</code></pre></div>
+<p>参考版本：</p>
+<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">postOrder</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>    <span class="c1">//非递归后序遍历</span>
+<span class="p">{</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BTNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
+    <span class="n">BTNode</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>              <span class="c1">//沿左子树一直往下搜索，直至出现没有左子树的结点 </span>
+        <span class="p">{</span>
+            <span class="n">BTNode</span> <span class="o">*</span><span class="n">btn</span><span class="o">=</span><span class="p">(</span><span class="n">BTNode</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">BTNode</span><span class="p">));</span>
+            <span class="n">btn</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
+            <span class="n">btn</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">temp</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">==</span><span class="nb">true</span><span class="p">)</span>     <span class="c1">//表示是第一次出现在栈顶 </span>
+             <span class="p">{</span>
+                <span class="n">temp</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+                <span class="n">p</span><span class="o">=</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>    
+            <span class="p">}</span>
+            <span class="k">else</span>                        <span class="c1">//第二次出现在栈顶 </span>
+             <span class="p">{</span>
+                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+                <span class="n">p</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>    
+<span class="p">}</span> 
+</code></pre></div>
+<h2>复习情况</h2>
+
+<ol>
+<li> 链表（page 197）</li>
+<li> 栈与队列（page 209）</li>
+<li> <strong>二叉树的应用</strong>（page 220）</li>
+<li> <strong>二叉排序树</strong>（page 225）</li>
+<li> <strong>平衡二叉树</strong>（page 226）</li>
+<li> 哈夫曼树（page 229）</li>
+<li> 并查集（page 230）</li>
+</ol>
+
+<h2>复习重点问题</h2>
+
+<ol>
+<li> 链表的基本操作（增删改查）</li>
+<li> 快慢指针 （page 200）
+&gt;* 寻找循环链表的入口（page 201）
+&gt;* <strong>例1</strong>（同步指针）
+&gt;* <strong>例2</strong></li>
+<li> 双链表（双向链表）（page 204）</li>
+<li> 栈与队列（注重这两个数据结构的应用）</li>
+<li> 二叉树的遍历
+&gt;* <strong>前序中序后序</strong> （三个遍历的递归实现与非递归实现，这里相当重要，经常考察）</li>
+<li> 由遍历序列构造二叉树（page 223）</li>
+</ol>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#技术学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>

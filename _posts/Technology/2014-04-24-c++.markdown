@@ -1,0 +1,72 @@
+---
+layout: post
+title: c++
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##C++
+
+##1. 设计一个complex类
+ex. 3 + 4i
+{% highlight c++ %}
+class MyComplex
+{
+...
+};
+testcase:
+MyComplex complex_obj1 ;
+MyComPlex complex_obj2(3,4)
+MyComplex complex_obj3 , complex_obj4 ;
+cin >> complex_obj3 >> complex_obj4 ;
+cout << complex_obj2 + complex_obj3 << endl ;
+cout << complex_obj2 - complex_obj3 << endl ;
+cout << complex_obj2 * complex_obj4 << endl ;
+cout << (complex_obj2 == complex_obj3) << endl ;
+MyComplex  complex_obj5(complex_obj2) ;
+cout << complex_obj5  ;
+MyComplex  complex_obj6 ;
+complex_obj6 = complex_obj2 ;
+cout << complex_obj6 << endl ;
+{% endhighlight %}
+>2 设计一个简单的int型 的vector
+{% highlight c++ %}
+class MyVector
+{
+	...
+};
+testcase:
+
+int a[10] = {1,2,3,4,5,6,7,8,9,10}
+MyVector vector_obj1;//初始化一个空的
+MyVector vector_obj2(5)//初始化一个含有5个元素的vector，每个元素为0
+MyVector vector_obj3(a, a + 10)//用一个整形数组初始化一个vector
+int num ;
+cin >> num ;
+for(int  i = 0 ; i < num ; i ++)
+vector_obj3.push_back(i);
+.
+.
+.
+cout << vector_obj3.size() ;
+cout << vector_obj3.capacity();
+cout << vector_obj3[3] ;
+vector.insert(5, 50) //在第5个位置上插入50
+MyVector vector_obj4(vector_obj3);
+MyVector vector_obj4 ;
+vector_obj5 = vector_obj3 ;
+{% endhighlight %}
+##3 写一个单例模式。
+{% highlight c++ %}
+class MySiglton
+{
+...
+};
+{% endhighlight %}
+##4.threadpool
+3 + 5
+
+
+
+

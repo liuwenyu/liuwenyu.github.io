@@ -1,0 +1,25 @@
+---
+layout: post
+title: UDP服务器 僵尸进程 
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##select() and detection of closed socket
+如何检测客户端失去响应，比如客户机网络断开，客户机忽然关闭，客户机由于其他原因程序异常退出。
+##这个问题有好几个解决方案：
+>* select_tut(2) man page seems to imply that to check if a socket is closed
+>* 在Server端使用Select进行检查，同时设定TimeOut，如10分钟；
+在Client端开一个线程，定一个时间，如1分钟就向Server发送一个信号，当Server端如果10分钟还收不到Client端发来的信号，就关闭该Client的服务。
+>* http://forums.justlinux.com/showthread.php?131419-select()-and-detection-of-closed-socket
+>* http://stackoverflow.com/questions/12602134/socket-blocking-and-timeout-on-select
+
+##如何避免僵尸进程
+>* 在主线程中是用wait（）和wait_pid()系统调用
+>* 使用两次fork（）系统调用避免僵尸进程
+>* 使用信号
+
+##Reference:
+>*[资料]( http://stackoverflow.com/questions/17015830/how-can-i-prevent-zombie-child-processes)
+

@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>UDP服务器 僵尸进程 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,43 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">UDP服务器 僵尸进程</h2>
+    2014年05月03日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>select() and detection of closed socket</h2>
 
+<p>如何检测客户端失去响应，比如客户机网络断开，客户机忽然关闭，客户机由于其他原因程序异常退出。</p>
+
+<h2>这个问题有好几个解决方案：</h2>
+
+<blockquote>
+<ul>
+<li>select_tut(2) man page seems to imply that to check if a socket is closed</li>
+<li>在Server端使用Select进行检查，同时设定TimeOut，如10分钟；
+在Client端开一个线程，定一个时间，如1分钟就向Server发送一个信号，当Server端如果10分钟还收不到Client端发来的信号，就关闭该Client的服务。</li>
+<li>http://forums.justlinux.com/showthread.php?131419-select()-and-detection-of-closed-socket</li>
+<li>http://stackoverflow.com/questions/12602134/socket-blocking-and-timeout-on-select</li>
+</ul>
+</blockquote>
+
+<h2>如何避免僵尸进程</h2>
+
+<blockquote>
+<ul>
+<li>在主线程中是用wait（）和wait_pid()系统调用</li>
+<li>使用两次fork（）系统调用避免僵尸进程</li>
+<li>使用信号</li>
+</ul>
+</blockquote>
+
+<h2>Reference:</h2>
+
+<blockquote>
+<p>*<a href="http://stackoverflow.com/questions/17015830/how-can-i-prevent-zombie-child-processes">资料</a></p>
+</blockquote>
 
     </div>
     <hr>
@@ -316,7 +333,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

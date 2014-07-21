@@ -1,0 +1,175 @@
+---
+layout: post
+title: 二叉树 链表
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##二叉树的遍历
+1.  前序非递归算法
+**我的版本**：
+
+```c++
+void BinaryTreeNode::PreOrder(BinaryTreeNode *root, std::stack<BinaryTreeNode*> &traversal_stack) {
+	while (NULL != root || !traversal_stack.empty()) {
+		if (NULL != root && root != traversal_stack.top()) {
+			traversal_stack.push(root);
+			Visit(root);
+		}
+
+		if (NULL != root->left_child) {
+			traversal_stack.push(root->left_child);
+			root = root->left_child;
+		} else if (NULL != root->right_child) {
+			traversal_stack.push(root->right_child);
+			root = root->right_child;
+		} else {
+			root = traversal_stack.top();
+			traversal_stack.pop();
+		}
+	}
+}
+```
+
+**参考版本**：
+
+```c++
+void preOrder2(BinTree *root)     //非递归前序遍历 
+{
+    stack<BinTree*> s;
+    BinTree *p=root;
+    while(p!=NULL||!s.empty())
+    {
+        while(p!=NULL)
+        {
+            cout<<p->data<<" ";
+            s.push(p);
+            p=p->lchild;
+        }
+        if(!s.empty())
+        {
+            p=s.top();
+            s.pop();
+            p=p->rchild;
+        }
+    }
+}
+```
+
+2.  中序非递归算法
+
+```c++
+void BinaryTreeNode::InOrder(BinaryTreeNode *root, std::stack<BinaryTreeNode*> &traversal_stack) {
+	while (NULL != root || !traversal_stack.empty()) {
+		if (NULL != root->left_child && root != traversal_stack.top()) {
+			traversal_stack.push(root);
+			root = root->left_child;
+		} else if (NULL != root) {
+			Visit(root);
+			if (root == traversal_stack.top()) {
+				traversal_stack.pop();
+			}
+
+			if (NULL != root->right_child) {
+				traversal_stack.push(root);
+				root = root->right_child;
+			}
+		} else {
+			root = traversal_stack.top();
+		}
+	}
+}
+```
+
+参考版本：
+
+```c++
+void inOrder2(BinTree *root)      //非递归中序遍历
+{
+    stack<BinTree*> s;
+    BinTree *p=root;
+    while(p!=NULL||!s.empty())
+    {
+        while(p!=NULL)
+        {
+            s.push(p);
+            p=p->lchild;
+        }
+        if(!s.empty())
+        {
+            p=s.top();
+            cout<<p->data<<" ";
+            s.pop();
+            p=p->rchild;
+        }
+    }    
+} 
+```
+
+3.  后序非递归算法
+我的版本：
+
+```c++
+
+```
+
+参考版本：
+
+```c++
+void postOrder(BinTree *root)    //非递归后序遍历
+{
+    stack<BTNode*> s;
+    BinTree *p=root;
+    BTNode *temp;
+    while(p!=NULL||!s.empty())
+    {
+        while(p!=NULL)              //沿左子树一直往下搜索，直至出现没有左子树的结点 
+        {
+            BTNode *btn=(BTNode *)malloc(sizeof(BTNode));
+            btn->btnode=p;
+            btn->isFirst=true;
+            s.push(btn);
+            p=p->lchild;
+        }
+        if(!s.empty())
+        {
+            temp=s.top();
+            s.pop();
+            if(temp->isFirst==true)     //表示是第一次出现在栈顶 
+             {
+                temp->isFirst=false;
+                s.push(temp);
+                p=temp->btnode->rchild;    
+            }
+            else                        //第二次出现在栈顶 
+             {
+                cout<<temp->btnode->data<<" ";
+                p=NULL;
+            }
+        }
+    }    
+} 
+```
+
+##复习情况
+1.  链表（page 197）
+2.  栈与队列（page 209）
+3.  **二叉树的应用**（page 220）
+4.  **二叉排序树**（page 225）
+5.  **平衡二叉树**（page 226）
+6.  哈夫曼树（page 229）
+7.  并查集（page 230）
+
+
+##复习重点问题
+1.  链表的基本操作（增删改查）
+2.  快慢指针 （page 200）
+    >* 寻找循环链表的入口（page 201）
+    >* **例1**（同步指针）
+    >* **例2**
+3.  双链表（双向链表）（page 204）
+4.  栈与队列（注重这两个数据结构的应用）
+5.  二叉树的遍历
+    >* **前序中序后序** （三个遍历的递归实现与非递归实现，这里相当重要，经常考察）
+6.  由遍历序列构造二叉树（page 223）

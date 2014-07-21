@@ -1,0 +1,574 @@
+---
+layout: post
+title: 复制控制
+category: 学习
+tags: linux
+keywords: linux
+---
+##单词转化程序(代码)
+{% highlight c++ %}
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <map>
+#include <stdexcept>
+#include <utility>
+#include <algorithm>
+
+using namespace std;
+
+void print_map(const map<string, string>::value_type &p) {
+        cout << p.first << " : " << p.second << endl;
+}
+
+std::ifstream &open_file(std::ifstream &is, const std::string &filename) {
+        is.close();
+        is.clear();
+        is.open(filename.c_str());
+        return is;
+}
+
+void build_map(std::ifstream &is, map<string, string> &trans_map) {
+        string word1, word2;
+        while (is >> word1 >> word2) {
+                trans_map.insert(make_pair(word1, word2));
+        }
+}
+
+void translate(ifstream &is, const map<string, string> &trans_map) {
+        string word;
+        while (is >> word) {
+                // if word in map
+                map<string, string>::const_iterator iter = trans_map.find(word);
+                if (iter != trans_map.end()) {
+                        cout << iter->second << " ";
+                } else {
+                        cout << word << " ";
+                }
+        }
+        cout << endl;
+}
+
+int main(int argc, char **argv) {
+
+        // 1. read map.txt -> map
+        ifstream map_file;
+        string map_name = "map.txt";
+        map<string, string> trans_map;
+        if (!open_file(map_file, map_name)) {
+                throw std::runtime_error("open map file error!");
+        }
+        build_map(map_file, trans_map);
+        for_each(trans_map.begin(), trans_map.end(), print_map);
+
+        // 2. open in.txt
+        ifstream in_file;
+        string in_name = "in.txt";
+        if (!open_file(in_file, in_name)) {
+                throw std::runtime_error("open input file error!");
+        }
+
+        // read  && translate
+        translate(in_file, trans_map);
+
+        map_file.close();
+        map_file.clear();
+        in_file.close();
+        in_file.clear();
+}
+{% endhighlight %}
+##复制控制
+
+
+##复制构造函数
+
+copy_constructor.c
+{% highlight c %}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Student {
+public:
+        Student() :
+                        _id(0), _name("none"), _score(0) {
+        }
+        Student(int id, const string &name, int score) :
+                        _id(id), _name(name), _score(score) {
+        }
+
+//        Student(Student &s) {
+//                _id = s._id;
+//                _name = s._name;
+//                _score = s._score;
+//        }
+
+        Student(const Student &s) :
+                        _id(s._id), _name(s._name), _score(s._score) {
+        }
+
+        void debug() {
+                cout << _id << " " << _name << " " << _score << endl;
+        }
+
+private:
+        int _id;
+        string _name;
+        int _score;
+
+};
+
+int main(int argc, char **argv) {
+        Student s; //  default none-parameter;
+
+        Student s1(12, "zhangsan", 66);  // three params
+        s1.debug();
+
+        Student s2(s1);    // Student(Student &s)
+        s2.debug();
+}
+{% endhighlight %}
+
+##封装一个String类（测试复制指针）  
+
+
+{% highlight c++ %}
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+
+using namespace std;
+
+class String {
+public:
+        String() {
+                _str = new char;
+                _str[0] = 0;
+        }
+        String(const char *s) {
+                _str = new char[strlen(s) + 1];
+                strcpy(_str, s);
+        }
+
+        String(const String &other){
+                _str = new char[strlen(other._str)+1];
+                strcpy(_str, other._str);
+        }
+
+        void debug() {
+                cout << _str << endl;
+                printf("%p", _str);
+        }
+
+        ~String()
+        {
+                delete[] _str;
+        }
+
+private:
+        char *_str;
+};
+
+int main(int argc, char **argv) {
+        String s1("hello");
+
+        s1.debug();
+//        String s2;   // ""
+//        s2.debug();
+
+        String s3(s1);
+        s3.debug();
+
+}
+{% endhighlight %}
+
+##封装array类  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Array {
+public:
+        Array() {
+                _p = new int;
+        }
+
+        ~Array(){
+                delete _p;
+        }
+
+
+
+        void debug() {
+                cout << _p << endl;
+        }
+
+private:
+        int *_p;
+};
+
+int main(int argc, char **argv) {
+
+        Array a;
+        a.debug();
+        Array a2(a);    //copy construct
+        a2.debug();
+
+}
+{% endhighlight %}
+
+##赋值运算符的使用（对象的赋值）  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Student {
+public:
+        Student() :
+                        _id(0), _name("none"), _score(0) {
+        }
+        Student(int id, const string &name, int score) :
+                        _id(id), _name(name), _score(score) {
+        }
+
+
+        void debug() {
+                cout << _id << " " << _name << " " << _score << endl;
+        }
+
+        Student &operator=(const Student &rhs) {
+                _id = rhs._id;
+                _name = rhs._name;
+                _score = rhs._score;
+                return *this;
+        }
+
+private:
+        int _id;
+        string _name;
+        int _score;
+
+};
+
+int main(int argc, char **argv) {
+        Student s1(23, "test", 77);
+        Student s2;
+        s1.debug();
+        s2.debug();
+
+        s2 = s1;   // =
+
+        s2.debug();
+
+}
+{% endhighlight %}
+
+##封装string类  
+
+string.h
+{% highlight c++ %}
+
+
+#ifndef STRING_H_
+#define STRING_H_
+
+#include <iostream>
+#include <string.h>
+
+namespace __str {
+
+class string {
+public:
+        string();
+        string(const char *);
+        string(const string &);
+        void debug();
+        std::size_t size() const;
+        ~string();
+        string &operator=(const string&);
+
+private:
+        char *_str;
+
+};
+
+} /* namespace __str */
+
+#endif /* STRING_H_ */
+{% endhighlight %}
+string.cpp
+{% highlight c++ %}
+
+
+#include "_string.h"
+
+namespace __str {
+
+string::string() {
+        _str = new char;
+        _str[0] = 0;
+}
+string::string(const char *s) {
+        _str = new char[strlen(s) + 1];
+        strcpy(_str, s);
+}
+
+string::string(const string &s) {
+        _str = new char[s.size() + 1];
+        strcpy(_str, s._str);
+}
+
+std::size_t string::size() const {
+        return strlen(_str);
+}
+
+void string::debug() {
+        std::cout << _str << std::endl;
+}
+
+string::~string() {
+        delete[] _str;
+}
+
+string &string::operator =(const string &s) {
+        delete[] _str;
+        _str = new char[s.size() + 1];
+        strcpy(_str, s._str);
+        return *this;
+}
+
+} /* namespace __str */
+{% endhighlight %}
+
+##重载赋值运算符  
+
+{% highlight c++ %}
+#include <iostream>
+using namespace std;
+
+class Test
+{
+private:
+        void operator=(const Test &);
+};
+
+int main(int argc, char **argv) {
+
+        Test t1;
+        Test t2;
+        t1 = t2;
+
+}
+{% endhighlight %}
+
+##综合查询(代码)  
+
+textquery.h
+{% highlight c++ %}
+
+
+#ifndef TEXTQUERY_H_
+#define TEXTQUERY_H_
+
+#include <vector>
+#include <map>
+#include <string>
+#include <set>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+class TextQuery {
+public:
+        typedef std::vector<std::string>::size_type __line_no;
+        typedef std::string __line;   //line
+        typedef std::string __word;   //word
+
+        typedef std::string __filename;
+        typedef std::map<__word, std::set<__line_no> >::iterator __map_iterator;
+        typedef std::set<TextQuery::__line_no>::iterator __set_iterator;
+
+        void read_file(const __filename &);
+        void build_map();
+
+        void debug();
+
+        std::set<__line_no> get_lines(const __word &word);
+        __line get_line(__line_no pos);
+
+        void query_word(const __word &word);
+
+private:
+        std::vector<__line> _lines;   // line
+        std::map<__word, std::set<__line_no> > _word_map;
+
+};
+
+#endif /* TEXTQUERY_H_ */
+{% endhighlight %}
+textquery.cpp
+{% highlight c++ %}
+
+
+#include "TextQuery.h"
+
+#include <stdexcept>
+#include <iterator>
+#include <algorithm>
+
+static void print(
+                const std::map<TextQuery::__word, std::set<TextQuery::__line_no> >::value_type &p) {
+        std::cout << p.first << std::endl;
+}
+
+void TextQuery::debug() {
+        for_each(_word_map.begin(), _word_map.end(), print);
+}
+
+static std::ifstream &open_file(std::ifstream &is,
+                const std::string &filename) {
+        is.close();
+        is.clear();
+        is.open(filename.c_str());
+        return is;
+}
+
+void TextQuery::read_file(const __filename &filename) {
+        std::ifstream infile;
+        if (!open_file(infile, filename)) {
+                throw std::runtime_error("open file failed!");
+        }
+
+        std::string line;
+        while (std::getline(infile, line)) {
+                _lines.push_back(line);
+        }
+
+        infile.close();
+        infile.clear();
+}
+
+void TextQuery::build_map() {
+        std::istringstream sstream;
+
+        for (__line_no ix = 0; ix != _lines.size(); ++ix) {
+                sstream.str(_lines[ix]);
+                __word word;
+                while (sstream >> word) {
+                        // add line to map
+                        // word  set
+                        _word_map[word].insert(ix);
+
+                }
+                sstream.clear();
+        }
+
+}
+
+std::set<TextQuery::__line_no> TextQuery::get_lines(const __word &word) {
+
+        __map_iterator iter = _word_map.find(word);
+        if (iter != _word_map.end()) {
+                return iter->second;
+        } else {
+                return std::set<TextQuery::__line_no>();
+        }
+}
+TextQuery::__line TextQuery::get_line(__line_no pos) {
+        if (pos < 0 || pos > _lines.size())
+                throw std::out_of_range("range error");
+        return _lines[pos];
+}
+
+void TextQuery::query_word(const __word &word) {
+        std::set<TextQuery::__line_no> line_set = get_lines(word);
+        std::cout << word << " occurs " << line_set.size() << " times" << std::endl;
+        for (__set_iterator iter = line_set.begin(); iter != line_set.end();
+                        ++iter) {
+//                std::cout << "line: " << *iter << " " << get_line(*iter) << std::endl;
+                std::cout << "line: " << *iter << std::endl;
+        }
+}
+
+{% endhighlight %}
+
+##笔记
+1.何时调用对象的拷贝构造函数？复制时。
+2.对象复制的时机有哪些？
+a)	用一个对象去初始化另一个对象
+b)	用对象做形参
+c)	用对象做返回值
+3.区分对象的初始化和赋值
+a)	String tmp = “hello”;
+b)	String s1 = tmp; //用tmp的值初始化s1
+c)	s1= tmp; 把tmp的值赋给s1
+
+4.当我们没有采取任何措施的时候，编译器为我们自动生成一个默认的拷贝构造函数，而且这个函数工作正常，当我们自定义了拷贝构造函数时，系统不会为我们提供。
+
+5.当我们定义了拷贝构造函数时，系统不会为我们提供默认构造函数。如果我们自定义了拷贝构造函数，那么我们必须自定义其他的构造函数。
+
+6.针对成员变量中有指针的情况：
+a)	浅拷贝：复制对象时，仅仅去复制成员指针的值。
+复制完毕后，两个对象的指针指向同一块内存区域。系统默认的模式是浅拷贝。
+b) 深拷贝：复制对象时，并不是简单的去copy指针的值，而是为指针开辟内存区域，将原对象指针指向的内容拷贝过来。复制完毕后，两个对象没有任何关联
+
+7.将拷贝构造函数设为私有而且不去实现它，就可以禁止对象的复制
+将赋值运算符设为私有，不去实现，可以禁止对象间赋值 
+##8.拷贝构造函数必须使用引用 Student(Student s)这种方式是错误的。
+
+9.比较拷贝构造函数和赋值运算符重载的区别：
+a)	后者需要先释放资源，避免内存泄漏
+
+10.赋值运算符的结果可以作为左值
+
+11.只有对象过期或者delete对象或数组时才会调用析构函数
+
+12.三法则：
+>* 拷贝构造函数、
+>* 赋值运算符、
+>* 析构函数
+
+要么全部自定义实现，否则全部不去实现。
+
+##Git使用：
+1. Git init  初始化一个仓库
+2. 编写源文件  此时的文件没有被暂存，与git无关联
+3. Git add Filename 此时文件被暂存在stage区域 ，这个操作类似与购物时把商品放入购物车
+4. 此时可以重复2-3的过程
+5. Git commit -m “message” 把改动提交到Git仓库
+6. 辅助性命令:  git status 查看状态
+Git log 查看提交历史
+
+7.将代码提交到网络仓库github bitbucket
+首先需要建立一个仓库，然后获取该仓库的ssh/https地址，使用git remote add XXX  xxx@.xxxx.git
+这里可以采用git remote -v查看远程仓库
+Git push  XXX  master 将代码提交
+
+8.注意的问题：
+>* a)本地仓库必须是在remote仓库的基础上修改。
+Git pull XXX  master将远程代码更新至本地
+>* b) 推荐使用ssh，pession deny权限问题
+
+解决方案： 本地生成KEY，rsa加密算法，然后将其保存到github账户相关设置的SSH Keys部分 
+##解决办法：
+[解决办法](https://help.github.com/articles/generating-ssh-keys)
+##参考资料：
+[参考资料地址](http://git-scm.com/book/zh)
+
+
+##学习任务：
+>* 预习运算符重载部分，
+>* 为string类增加+ += << >> == !=  []
+>* 生产者消费者，思考队列满的情况，增加一个condition，思考生产者和消费者流程的控制 
+>* 将个人代码推送至github/bitbucket/gitCafe(中文)
+
+##总结
+
+

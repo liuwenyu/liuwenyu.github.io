@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>mini搜索 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,30 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">mini搜索</h2>
+    2014年05月02日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>Mini项目</h2>
 
+<h2>第一阶段 搭建框架</h2>
+
+<h3>主程序结构</h3>
+
+<blockquote>
+<ul>
+<li>守护进程 UDPServer 监听用户请求(main函数把程序弄成守护进程)</li>
+<li>线程池 ThreadPool 把线程池注册到UDPServer中去</li>
+<li>工作线程 WorkThread (处理)编辑距离计算，把结果返回给客户端(send),当收到请求，随机分配任务给工作线程</li>
+</ul>
+</blockquote>
+
+<h2>英文文档结构</h2>
+
+<p>词（第一列） Tab() 查询词频（第二列）
+优先级： 先找寻编辑距离最小的，然后仅在编辑距离相等时，才是查询词频最大的</p>
 
     </div>
     <hr>
@@ -316,7 +320,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

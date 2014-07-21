@@ -1,0 +1,19 @@
+---
+layout: post
+title: mini搜索
+category: 技术学习
+tags: linux
+keywords: linux
+---
+
+##Mini项目
+
+##第一阶段 搭建框架
+###主程序结构
+>* 守护进程 UDPServer 监听用户请求(main函数把程序弄成守护进程)
+>* 线程池 ThreadPool 把线程池注册到UDPServer中去
+>* 工作线程 WorkThread (处理)编辑距离计算，把结果返回给客户端(send),当收到请求，随机分配任务给工作线程
+
+##英文文档结构
+词（第一列） Tab() 查询词频（第二列）
+优先级： 先找寻编辑距离最小的，然后仅在编辑距离相等时，才是查询词频最大的

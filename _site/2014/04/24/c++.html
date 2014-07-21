@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>c++ | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,76 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">c++</h2>
+    2014年04月24日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>C++</h2>
 
+<h2>1. 设计一个complex类</h2>
+
+<p>ex. 3 + 4i</p>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">MyComplex</span>
+<span class="p">{</span>
+<span class="p">...</span>
+<span class="p">};</span>
+<span class="nl">testcase:</span>
+<span class="n">MyComplex</span> <span class="n">complex_obj1</span> <span class="p">;</span>
+<span class="n">MyComPlex</span> <span class="n">complex_obj2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">MyComplex</span> <span class="n">complex_obj3</span> <span class="p">,</span> <span class="n">complex_obj4</span> <span class="p">;</span>
+<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">complex_obj3</span> <span class="o">&gt;&gt;</span> <span class="n">complex_obj4</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">complex_obj2</span> <span class="o">+</span> <span class="n">complex_obj3</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">complex_obj2</span> <span class="o">-</span> <span class="n">complex_obj3</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">complex_obj2</span> <span class="o">*</span> <span class="n">complex_obj4</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">complex_obj2</span> <span class="o">==</span> <span class="n">complex_obj3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+<span class="n">MyComplex</span>  <span class="nf">complex_obj5</span><span class="p">(</span><span class="n">complex_obj2</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">complex_obj5</span>  <span class="p">;</span>
+<span class="n">MyComplex</span>  <span class="n">complex_obj6</span> <span class="p">;</span>
+<span class="n">complex_obj6</span> <span class="o">=</span> <span class="n">complex_obj2</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">complex_obj6</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span></code></pre></div>
+
+<blockquote>
+<p>2 设计一个简单的int型 的vector</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">MyVector</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">};</span>
+<span class="nl">testcase:</span>
+
+<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">}</span>
+<span class="n">MyVector</span> <span class="n">vector_obj1</span><span class="p">;</span><span class="c1">//初始化一个空的</span>
+<span class="n">MyVector</span> <span class="n">vector_obj2</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="c1">//初始化一个含有5个元素的vector，每个元素为0</span>
+<span class="n">MyVector</span> <span class="n">vector_obj3</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span><span class="c1">//用一个整形数组初始化一个vector</span>
+<span class="kt">int</span> <span class="n">num</span> <span class="p">;</span>
+<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">num</span> <span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span>  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span> <span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span>
+<span class="n">vector_obj3</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="p">.</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vector_obj3</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vector_obj3</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vector_obj3</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">;</span>
+<span class="n">vector</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1">//在第5个位置上插入50</span>
+<span class="n">MyVector</span> <span class="n">vector_obj4</span><span class="p">(</span><span class="n">vector_obj3</span><span class="p">);</span>
+<span class="n">MyVector</span> <span class="n">vector_obj4</span> <span class="p">;</span>
+<span class="n">vector_obj5</span> <span class="o">=</span> <span class="n">vector_obj3</span> <span class="p">;</span></code></pre></div>
+
+<h2>3 写一个单例模式。</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">MySiglton</span>
+<span class="p">{</span>
+<span class="p">...</span>
+<span class="p">};</span></code></pre></div>
+
+<h2>4.threadpool</h2>
+
+<p>3 + 5</p>
 
     </div>
     <hr>
@@ -316,7 +366,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

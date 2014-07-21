@@ -1,0 +1,100 @@
+---
+layout: post
+title: const与指针 函数返回值 声明
+category: 学习
+tags: linux
+keywords: linux
+---
+##指针
+>* 指针只能与常量相加减，不能与变量相加减
+
+##关于声明
+
+{% highlight c %}
+char *ptr1, ptr2
+{% endhighlight %}
+
+中，第一个声明`*ptr1`中，其声明符中带有`*`号，所以这表明`ptr1`是一个指向`char`类型的指针，而在第二个声明符中，只包含有`ptr2`，所以`ptr2`本声明成了普通的char型变量,另外`*是声明符的一部分`.
+
+同理可看下面
+>* const double *cptr
+>* double const *cptr
+
+##Const
+##指针与Const修饰符（page 95）
+注意：
+在C语言中，声明的语法和解释并非
+
+    类型    标识符
+而是
+
+    基本类型    生成基本类型的东西（声明符,这个要区别于标识符）
+
+在
+
+{% highlight c %} 
+double *cptr
+{% endhighlight %}
+
+中，`double`是基本类型，`*cptr`是生成的的基本类型的声明符，所以`cptr`是指向double类型的指针
+
+##函数参数与Const修饰符（page 98）
+1.  当函数参数为普通类型时：
+{% highlight c++ %}
+void fun(int i);
+{% endhighlight %}
+函数只能接受非const参数
+2.  当参数有const修饰时：
+
+{% highlight c++ %}
+void fun(const int i);
+{% endhighlight %}
+
+函数能接受const参数与非const参数
+3.  当函数参数为引用时，函数接受一个常量或者一个函数的返回值时，编译器会为函数分配一`个临时存储单元`，同时将其初始化为相应的常量值（或者函数返回值），存储的是一个常量，其`实参`为相应的const类型，而形参是非const引用，会发生编译错误
+
+##const在类中的应用
+>* const 也是函数重载的一中类型
+>* const适用于成员函数的目的在于：确保该成员函数能够作用于const对象上，const对象，const对象的指针或引用只能调用其const成员函数，
+>* const成员变量不能再类定义外初始化，只能通过构造函数的初始化列表进行，并且必须有构造函数。
+
+
+##函数返回值————指针
+指针作为函数返回值时，该指针不能返回存在于内存栈中的局部变量，因为栈中的局部变量在函数调用结束后会被自动清理掉，但是可以返回<静态存储区的变量><和<堆存储分配的变量>
+
+##32位与64位机，int数据类型
+    常用数据类型对应字节数
+      可用如sizeof（char),sizeof(char*)等得出
+     32位编译器：
+          char ：1个字节
+          char*（即指针变量）: 4个字节（32位的寻址空间是2^32, 即32个bit，也就是4个字节。同理64位编译器）
+          short int : 2个字节
+          int：  4个字节
+          unsigned int : 4个字节
+          float:  4个字节
+          double:   8个字节
+          long:   4个字节
+          long long:  8个字节
+          unsigned long:  4个字节
+      64位编译器：
+          char ：1个字节
+          char*(即指针变量): 8个字节
+          short int : 2个字节
+          int：  4个字节
+          unsigned int : 4个字节
+          float:  4个字节
+          double:   8个字节
+          long:   8个字节
+          long long:  8个字节
+          unsigned long:  8个字节
+          
+
+
+##复习重点
+>* 指针运算
+>* 指针数组与数组指针
+>* 二维数组
+>* 数组与指针的区别与联系
+
+
+

@@ -1,0 +1,672 @@
+---
+layout: post
+title: 重载运算符-智能指针-String
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##重载运算符（以重写String为演示例子）  
+
+##基本演示  
+
+##String.h  
+
+{% highlight c++ %}
+
+#ifndef STRING_H_
+#define STRING_H_
+
+#include <string.h>
+#include <cstddef>
+
+class String {
+public:
+        String();
+        String(const char *);
+        String(const String&);
+        ~String();
+        String &operator=(const String &);
+        std::size_t size() const;
+        const char* c_str() const;
+        void debug();
+
+        String operator+(const String &other) const;
+
+private:
+        char *_str;
+};
+#endif /* STRING_H_ */
+{% endhighlight %}
+
+##String.cpp  
+
+{% highlight c++ %}
+
+
+#include <iostream>
+#include "String.h"
+
+String::String() :
+                _str(new char[1])     //""
+{
+        *_str = '\0';  // ""
+}
+String::String(const char *s) {
+        _str = new char[strlen(s) + 1];
+        strcpy(_str, s);
+}
+String::String(const String &s) {
+        _str = new char[s.size() + 1];
+        strcpy(_str, s.c_str());
+}
+String::~String() {
+        delete[] _str;
+}
+String &String::operator=(const String &s) {
+        delete[] _str;
+        _str = new char[s.size() + 1];
+        strcpy(_str, s.c_str());
+}
+std::size_t String::size() const {
+        return strlen(_str);
+}
+const char* String::c_str() const {
+        return _str;
+}
+void String::debug() {
+        std::cout << _str << std::endl;
+}
+
+// "hello" + "world"
+String String::operator+(const String &other) const {
+        String tmp;
+        tmp._str = new char[size() + other.size() + 1]; // "     "
+        strcpy(tmp._str, this->_str);
+        strcat(tmp._str, other._str);
+        return tmp;
+}
+{% endhighlight %}
+
+##string.h(重载多个+，==，！=号)  
+
+{% highlight c++ %}
+
+#ifndef STRING_H_
+#define STRING_H_
+
+#include <string.h>
+#include <cstddef>
+
+class String {
+public:
+        String();
+        String(const char *);
+        String(const String&);
+        ~String();
+        String &operator=(const String &);
+        String &operator=(const char *);
+        std::size_t size() const;
+        const char* c_str() const;
+        void debug();
+
+        friend String operator+(const String &, const String &);
+        friend String operator+(const String &, const char *);
+        friend String operator+(const char *, const String &);
+
+        friend bool operator==(const String &, const String &);
+        friend bool operator!=(const String &, const String &);
+
+private:
+        char *_str;
+};
+
+inline String operator+(const String &lhs, const String &rhs) {
+        String tmp;
+        tmp._str = new char[lhs.size() + rhs.size() + 1];
+        strcpy(tmp._str, lhs._str);
+        strcat(tmp._str, rhs._str);
+        return tmp;
+}
+
+inline String operator+(const String &lhs, const char *s) {
+        return lhs + String(s);
+}
+
+inline String operator+(const char *s, const String &rhs) {
+        return String(s) + rhs;
+}
+inline bool operator==(const String &lhs, const String &rhs) {
+        return strcmp(lhs._str, rhs._str) == 0;
+}
+inline bool operator!=(const String &lhs, const String &rhs) {
+        return !(lhs == rhs);
+}
+
+#endif /* STRING_H_ */
+{% endhighlight %}
+
+##String.cpp  
+
+{% highlight c++ %}
+
+#include <iostream>
+#include "String.h"
+
+String::String() :
+                _str(new char[1])     //""
+{
+        *_str = '\0';  // ""
+}
+String::String(const char *s) {
+        _str = new char[strlen(s) + 1];
+        strcpy(_str, s);
+}
+String::String(const String &s) {
+        _str = new char[s.size() + 1];
+        strcpy(_str, s.c_str());
+}
+String::~String() {
+        delete[] _str;
+        _str = NULL;
+}
+String &String::operator=(const String &s) {
+
+        if (s != *this) {
+                delete[] _str;
+                _str = NULL;
+                _str = new char[s.size() + 1];
+                strcpy(_str, s.c_str());
+        }
+        return *this;
+}
+
+String &String::operator=(const char *str) {
+        delete[] _str;
+        _str = NULL;
+        _str = new char[strlen(str) + 1];
+        strcpy(_str, str);
+        return *this;
+}
+std::size_t String::size() const {
+        return strlen(_str);
+}
+const char* String::c_str() const {
+        return _str;
+}
+void String::debug() {
+        std::cout << _str << std::endl;
+}
+
+//// "hello" + "world"
+//// String + String    char * + String
+//// sTring + char *
+//String String::operator+(const String &other) const {
+//        String tmp;
+//        tmp._str = new char[size() + other.size() + 1]; // "     "
+//        strcpy(tmp._str, this->_str);
+//        strcat(tmp._str, other._str);
+//        return tmp;
+//}
+{% endhighlight %}
+
+##string.h(重载其他运算符)  
+
+{% highlight c++ %}
+
+
+#ifndef STRING_H_
+#define STRING_H_
+
+#include <string.h>
+#include <cstddef>
+
+class String {
+public:
+        String();
+        String(const char *);
+        String(const String&);
+        ~String();
+        String &operator=(const String &);
+        String &operator=(const char *);
+        std::size_t size() const;
+        const char* c_str() const;
+        void debug();
+
+        friend String operator+(const String &, const String &);
+        friend String operator+(const String &, const char *);
+        friend String operator+(const char *, const String &);
+
+        friend bool operator==(const String &, const String &);
+        friend bool operator!=(const String &, const String &);
+
+        friend bool operator<(const String &, const String &);
+        friend bool operator>(const String &, const String &);
+        friend bool operator<=(const String &, const String &);
+        friend bool operator>=(const String &, const String &);
+
+private:
+        char *_str;
+};
+
+inline String operator+(const String &lhs, const String &rhs) {
+        String tmp;
+        tmp._str = new char[lhs.size() + rhs.size() + 1];
+        strcpy(tmp._str, lhs._str);
+        strcat(tmp._str, rhs._str);
+        return tmp;
+}
+
+inline String operator+(const String &lhs, const char *s) {
+        return lhs + String(s);
+}
+
+inline String operator+(const char *s, const String &rhs) {
+        return String(s) + rhs;
+}
+inline bool operator==(const String &lhs, const String &rhs) {
+        return strcmp(lhs._str, rhs._str) == 0;
+}
+inline bool operator!=(const String &lhs, const String &rhs) {
+        return !(lhs == rhs);
+}
+
+inline bool operator<(const String &lhs, const String &rhs) {
+        return strcmp(lhs._str, rhs._str) < 0;
+}
+inline bool operator>(const String &lhs, const String &rhs) {
+        return strcmp(lhs._str, rhs._str) > 0;
+}
+inline bool operator<=(const String &lhs, const String &rhs) {
+        return !(lhs > rhs);
+}
+inline bool operator>=(const String &lhs, const String &rhs) {
+        return !(lhs < rhs);
+}
+
+#endif /* STRING_H_ */
+{% endhighlight %} 
+
+##String.cpp 
+
+{% highlight c++ %}
+
+
+#include <iostream>
+#include "String.h"
+
+String::String() :
+                _str(new char[1])     //""
+{
+        *_str = '\0';  // ""
+}
+String::String(const char *s) {
+        _str = new char[strlen(s) + 1];
+        strcpy(_str, s);
+}
+String::String(const String &s) {
+        _str = new char[s.size() + 1];
+        strcpy(_str, s.c_str());
+}
+String::~String() {
+        delete[] _str;
+        _str = NULL;
+}
+String &String::operator=(const String &s) {
+
+        if (&s != *this) {//这里一定要比较地址，如果地址相同，则他们就是一个对象
+                delete[] _str;
+                _str = NULL;
+                _str = new char[s.size() + 1];
+                strcpy(_str, s.c_str());
+        }
+        return *this;
+}
+
+String &String::operator=(const char *str) {
+        delete[] _str;
+        _str = NULL;
+        _str = new char[strlen(str) + 1];
+        strcpy(_str, str);
+        return *this;
+}
+std::size_t String::size() const {
+        return strlen(_str);
+}
+const char* String::c_str() const {
+        return _str;
+}
+void String::debug() {
+        std::cout << _str << std::endl;
+}
+
+//// "hello" + "world"
+//// String + String    char * + String
+//// sTring + char *
+//String String::operator+(const String &other) const {
+//        String tmp;
+//        tmp._str = new char[size() + other.size() + 1]; // "     "
+//        strcpy(tmp._str, this->_str);
+//        strcat(tmp._str, other._str);
+//        return tmp;
+//}
+{% endhighlight %}
+
+##重载输入输出操作符（>>与<<操作符）,+=号，下表符[] 重载+=号 
+
+{% highlight c++ %}
+String &String::operator+=(const String &s) {
+
+        char *tmp = new char[size() + s.size() + 1];
+        strcpy(tmp, _str);
+        strcat(tmp, s._str);
+
+        delete[] _str;
+        _str = NULL;
+
+        _str = tmp;
+        return *this;
+}
+String &String::operator+=(const char *s) {
+        *this += String(s);
+        return *this;
+}
+{% endhighlight %}
+
+##重载<<与>>符号  
+
+{% highlight c++ %}
+inline std::ostream &operator<<(std::ostream &os, const String &s) {
+        os << s._str;
+        return os;
+}
+
+inline std::istream &operator>>(std::istream &is, String &s) {
+        char buf[1024];
+        is >> buf;
+        if (is) {
+                s = buf;
+        }
+        return is;
+}
+{% endhighlight %}
+##重载下标符[]  
+
+{% highlight c++ %}
+//definiton
+char &operator[] (std::size_t index);
+const char &operator[] (std::size_t index) const;
+
+//.cpp
+char &String::operator[] (std::size_t index) {
+        return _str[index];
+}
+const char &String::operator[] (std::size_t index) const {
+        return _str[index];
+}
+{% endhighlight %}
+
+##test.cpp  
+
+{% highlight c++ %}
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class Foo
+{
+public:
+        int &operator[](std::size_t index)
+        {
+                return _data[index];
+        }
+        const int &operator[](std::size_t index) const
+        {
+                return _data[index];
+        }
+
+        void init()
+        {
+                for(size_t ix = 0; ix != 100; ++ix)
+                {
+                        _data.push_back(ix);
+                }
+        }
+
+
+private:
+        vector<int> _data;
+};
+
+int main(int argc, char **argv) {
+
+        Foo foo;
+        foo.init();
+
+        cout << foo[23] << endl;
+}
+{% endhighlight %}
+
+##智能指针  
+
+smart_ptr.h
+{% highlight c++ %}
+#ifndef SMARTPTR_H_
+#define SMARTPTR_H_
+
+#include <string>
+#include <iostream>
+
+class Student {
+public:
+        Student(int id, const std::string &name) :
+                        _id(id), _name(name) {
+                std::cout << "Create Student" << std::endl;
+        }
+        ~Student() {
+                std::cout << "Destroy Student" << std::endl;
+        }
+
+        void print() {
+                std::cout << _id << " : " << _name << std::endl;
+        }
+
+private:
+        int _id;
+        std::string _name;
+};
+
+class SmartPtr {
+public:
+        SmartPtr();
+        SmartPtr(Student *ptr);
+        ~SmartPtr();
+
+        void reset_ptr(Student *ptr);
+        const Student *get_ptr() const;
+
+        Student *operator->();
+        const Student *operator->() const;
+
+        Student &operator*();
+        const Student &operator*() const;
+
+private:
+        Student *_ptr;
+
+private:
+        //prevent copy
+        SmartPtr(const SmartPtr &);
+        SmartPtr &operator=(const SmartPtr &);
+};
+
+#endif /* SMARTPTR_H_ */
+{% endhighlight %}
+##SmartPtr.cpp  
+
+{% highlight c++ %}
+
+#include "SmartPtr.h"
+
+SmartPtr::SmartPtr() :
+                _ptr(NULL) {
+
+}
+SmartPtr::SmartPtr(Student *ptr) :
+                _ptr(ptr) {
+
+}
+SmartPtr::~SmartPtr() {
+        delete _ptr;
+}
+
+void SmartPtr::reset_ptr(Student *ptr) {
+        if (ptr != _ptr) {
+                delete _ptr;
+                _ptr = ptr;
+        }
+}
+const Student *SmartPtr::get_ptr() const {
+        return _ptr;
+}
+
+Student *SmartPtr::operator->() {
+        return _ptr;
+}
+const Student *SmartPtr::operator->() const {
+        return _ptr;
+}
+
+Student &SmartPtr::operator*() {
+        return *_ptr;
+}
+const Student &SmartPtr::operator*() const {
+        return *_ptr;
+}
+{% endhighlight %}
+
+##test.cpp  
+
+{% highlight c++ %}
+#include "SmartPtr.h"
+#include <stdexcept>
+
+using namespace std;
+
+int main(int argc, char **argv) {
+//        try {
+//                SmartPtr ptr(new Student(23, "test"));
+//
+//                throw std::exception();
+//
+////                Student *ptr = new Student(23, "hello");
+////
+////                throw std::runtime_error("error");
+////
+////                delete ptr;
+//
+//
+//        } catch (std::exception &e) {
+//        }
+
+
+        SmartPtr ptr(new Student(23, "test"));
+//        (ptr._ptr)->print();
+//        (*(ptr._ptr)).print();
+        ptr->print();
+
+        (*ptr).print();
+
+}
+{% endhighlight %} 
+
+##重载自增符号（++）
+>* 注意区分前缀与后缀的定义声明
+###Integer.h
+{% highlight c++ %}
+
+
+#ifndef INTEGER_H_
+#define INTEGER_H_
+
+#include <iostream>
+
+class Integer {
+public:
+	Integer(int num);
+	~Integer();
+
+	friend std::ostream &operator<<(std::ostream &os, const Integer &obj);
+	Integer &operator++();
+	Integer operator++(int);
+
+private:
+	int _num;
+};
+
+inline std::ostream &operator<<(std::ostream &os, const Integer &obj) {
+	os << obj._num;
+	return os;
+}
+
+#endif /* INTEGER_H_ */
+{% endhighlight %}
+##Integer.cpp  
+
+{% highlight c++ %}
+
+
+#include "Integer.h"
+
+Integer::Integer(int num) :
+		_num(num) {
+
+}
+Integer::~Integer() {
+
+}
+
+Integer &Integer::operator++() {
+	++_num;
+	return *this;
+}
+
+Integer Integer::operator++(int) {//这里的参数略微特殊，int仅仅作为一种标示，仅仅只是告诉编译器这是后缀式
+	Integer ret(*this);
+	++(*this);
+	return ret;
+}
+{% endhighlight %}
+
+##笔记  
+
+##1.不可以这样重载：
+a)	friend String operator+(const char *, const char *);
+##2.通过实现String类总结运算符重载的原则：
+a)	= += 必须写成成员函数，而且返回值必须为自身引用
+b)	[]运算符必须为成员函数，而且有const和非const两个版本，分别可作为右值和左值
+c)	+ == !=  < <= > >=这些算术和关系运算符，最好定义为friend的形式
+d)	>> <<必须为friend形式，而且输入操作要处理错误的情况
+e)	有些操作要配合使用，例如重载了+，就最好重载+=，重载了==，就去重载!=
+f)	重载运算符应尽可能使用其他运算符的操作。比如!=使用==，+使用了+=的操作
+##学习任务：  
+
+ String的 +和+=
+##1. 实现 +，然后 +=去使用它，  
+##2. 实现 +=， +去使用 +=
+>* 比较二者的优劣。
+##3.为什么要用智能指针？
+a)	考虑发生异常的情况。
+##4.智能指针的特点：
+a)	内部封装了一个真实的指针
+b)	通过重载*和->运算符，使得它本身的行为表现的像一个指针！
+##5.i++和++i的区别：
+a)	++i返回的是左值i++返回的是右值
+b)	++i返回的是i的最新值，i++返回的是旧值
+##预习：
+了解继承、虚函数
+回顾生产者线程和消费者线程的写法
+#总结
+
+

@@ -1,0 +1,141 @@
+---
+layout: post
+title: 全局变量 volatile
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##全局变量
+1.  page 88 `如果用引用头文件的方式...`
+2.  当一个局部变量屏蔽了全局变量时，又想要使用全局变量时，有两种方法：
+>* 使用作用域操作符`::`
+>* 使用`extern`
+
+##关键字volatile
+一个定义为`volatile`的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。下面是`volatile`变量的几个例子：
+
+1.  并行设备的硬件寄存器（如：状态寄存器）
+2.  一个中断服务子程序中会访问到的非自动变量(`Non-automatic variables`)
+3.  多线程应用中被几个任务共享的变量
+回答不出这个问题的人是不会被雇佣的。我认为这是区分C程序员和嵌入式系统程序员的最基本的问题。嵌入式系统程序员经常同硬件、中断、RTOS等等打交道，所用这些都要求`volatile`变量。不懂得`volatile`内容将会带来灾难。
+
+假设被面试者正确地回答了这是问题（嗯，怀疑这否会是这样），我将稍微深究一下，看一下这家伙是不是直正懂得`volatile`完全的重要性。
+1.  一个参数既可以是`const`还可以是`volatile`吗？解释为什么。
+2.  一个指针可以是`volatile`吗？解释为什么。
+3.  下面的函数有什么错误：
+
+{% highlight c %}
+int square(volatile int *ptr) {
+    return *ptr * *ptr;
+}
+{% endhighlight %}
+
+下面是答案：
+1.  是的。一个例子是只读的状态寄存器。它是`volatile`因为它可能被意想不到地改变。它是`const`因为程序不应该试图去修改它。
+2.  是的。尽管这并不很常见。一个例子是当一个中服务子程序修该一个指向一个buffer的指针时。
+3.  这段代码的有个恶作剧。这段代码的目的是用来返指针*ptr指向值的平方，但是，由于*ptr指向一个`volatile`型参数，编译器将产生类似下面的代码：
+
+{% highlight c %}
+int square(volatile int *ptr) {
+    int a,b;
+    a = *ptr;
+    b = *ptr;
+    return a * b;
+}
+{% endhighlight %}
+
+由于*ptr的值可能被意想不到地该变，因此a和b可能是不同的。结果，这段代码可能返不是你所期望的平方值！正确的代码如下：
+
+{% highlight c %}
+long square(volatile int *ptr) {
+    int a;
+    a = *ptr;
+    return a * a;
+}
+{% endhighlight %}
+
+##volitate 
+
+1 、在嵌入式系统中，`volitate`的作用是什么？并给出三个不同的例子。
+答：一个定义为`volatile`的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。
+下面是`volatile`变量的几个例子：
+1.  并行设备的硬件寄存器（如：状态寄存器）
+2.  一个中断服务子程序中会访问到的非自动变量(Non-automatic variables)
+3.  多线程应用中被几个任务共享的变量
+
+##维基百科的解释
+C和C++中的`volatile`
+在C，以及C++中，`volatile`关键字的作用：
+>* 允许访问内存映射设备
+>* 允许在setjmp和longjmp之间使用变量
+>* 允许在信号处理函数中使用`sig_atomic_t`变量
+
+根据相关的标准（C,C++,POSIX,WIN32)和目前绝大多数实现，对`volatile`变量的操作并不是原子的，也不能用来为线程建立严格的happens-before关系。`volatile`关键字就像便携式线程构建一样基本没什么用处
+
+
+##复习疑难点
+1.  page 102 `关于堆内存的分配与释放，以及其生存周期`.
+2.  page 103 `删除const对象`
+3.  page 91 `static只能进行一次初始化且具有“记忆性”`
+4.  page 89 `例3`
+Test Code：
+
+{% highlight c %}
+#include<stdio.h>
+
+int count = 3;
+
+int main() {
+	int i, sum, count = 2;
+
+	for (i = 0, sum = 0; i < count; i += 2, count++ ) {
+		static int count = 4;
+		printf("static int %d\n", count);
+		count++;
+		printf("after ++ static int %d\n", count);
+
+		if (0 == i % 2) {
+			extern int count;
+			printf("if extern int %d\n", count);
+			count++;
+			printf("after ++ if extern int %d\n", count);
+			sum += count;
+			printf("after ++ if extern int sum : %d\n", sum);
+		}
+
+		printf("endle of loop for count:  %d\n", count);
+		printf("endle of loop for sum:  %d\n", sum);
+		sum +=count;
+		printf("after sum +=count endle of loop for sum:  %d\n", sum);
+	}
+
+	printf("%d %d\n", count, sum);
+	return 0;
+}
+{% endhighlight %}
+result:
+{% highlight c %}
+static int 4
+after ++ static int 5
+if extern int 3
+after ++ if extern int 4
+after ++ if extern int sum : 4
+endle of loop for count:  5
+endle of loop for sum:  4
+after sum +=count endle of loop for sum:  9
+static int 5
+after ++ static int 6
+if extern int 4
+after ++ if extern int 5
+after ++ if extern int sum : 14
+endle of loop for count:  6
+endle of loop for sum:  14
+after sum +=count endle of loop for sum:  20
+4 20
+{% endhighlight %}
+
+
+
+
+

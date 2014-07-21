@@ -1,0 +1,78 @@
+---
+layout: post
+title:  联合体 大端小端 位域 指针引用
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##位域
+>* C语言程序设计现代方法， page 367
+>* [资料地址1](http://baike.baidu.com/view/1256879.html)
+>* [资料地址2](http://see.xidian.edu.cn/cpp/html/102.html)
+
+##大小端与位域
+![比特域的大段小端区别][1]
+
+
+##共同体（联合体）
+##关于联合体的小问题
+联合体的存放顺序时所有成员都从低地址开始存放，该特性经常与`大小端存储格式`一起考察.
+
+##联合体与结构体的区别（重要！）
+事实上结构体与联合体只有一处地方不同：结构体的成员在`不同`的内存地址中,二联合体的成员存储在`同一`内存中。
+如下图所示：
+![结构体与联合体的区别][2]
+
+##联合体的应用
+>* 用联合体来节省空间（page 282）
+>* 用联合体来构造混合的数据结构 (page 284)
+参考资料：
+>* page 281 (C语言程序设计：现代方法)
+
+##联合体遇到的问题解决方案
+联合体所面临的问题：`不容易确定联合最后改变的成员`
+
+    解决方案：page 284（为联合体添加“标记字段”）
+
+
+##printf函数
+{% highlight c++ %}
+#include "stdio.h"//。
+int Add1(int *p){
+	return(*p+=1);
+}
+void main(void){
+	int a=1;
+	printf("[%d] [%d]\n",Add1(&a),a);
+}
+{% endhighlight %}
+
+    这段代码的运行结果是[2] [3]，说明并没有先执行函数Add1()。而如果把printf("[%d] [%d]\n",Add1(&a),a)改为printf("[%d] [%d]\n",a,Add1(&a))则结果是[2] [2]。这个结果也说明printf()函数确实是从参数列表的右端开始执行的。
+        那么造成题目中的现象是什么原因呢？这是由C/C++对数组的处理机制造成的。printf()函数在处理数组时只把数组首地址压入栈而并不压入数组下标变量的所有内容(因为没有必要，有首地址就可以输出了)。当printf()函数从参数列表的右端开始一项一项运算压栈到最左端的一个参数后，又从左端的控制符开始按控制符指令一项一项对应弹出。对于其他变量来说，压入的是值，原来计算的结果是什么，弹出的就是什么；而题目中的字符串则不然了，先压入首地址p时，尽管p指向的内容是大小写并存的，但接着被strupr(p)变成全大写了，但压入的首地址还是由strupr(p)返回的同一个地址，弹出来输出时这个地址开始的字串已全是大写字母了……
+
+##关于printf函数入栈的问题
+printf函数默认从右边入栈，昨天出栈（C++的cout函数也是如此）
+[参考资料](http://www.cnblogs.com/Robotke1/archive/2013/05/15/3079057.html)
+
+
+##复习情况
+>* 联合体 （page 41）
+>* 指针与引用 （page 128）
+
+
+##复习重点问题
+>* 大小端存储格式（page 42）
+>* 关于函数指针的内容（page 129）
+>* 引用与指针的区别（page 133）
+>* 指针与引用习题 4，（page 135）
+>* 野指针（page 136 以及 浏览器收藏夹）
+>* bit 位域大小端转换问题 (
+[参考资料1](http://www.cnblogs.com/chencheng/archive/2012/06/19/2554081.html)
+[参考资料2](http://blog.csdn.net/ztz0223/article/details/3599016)
+)
+
+
+  [1]: http://f.hiphotos.bdimg.com/album/s=1600;q=90/sign=3e0693cd9113b07eb9bd540e3ce7aa52/9f510fb30f2442a71cc7e949d343ad4bd0130214.jpg
+  [2]: http://d.hiphotos.bdimg.com/album/s=900;q=90/sign=937d96fb2ff5e0feea1885016c5b4595/dbb44aed2e738bd4d07e2bd3a38b87d6267ff9f1.jpg
+  [3]: http://d.hiphotos.bdimg.com/album/s=900;q=90/sign=937d96fb2ff5e0feea1885016c5b4595/dbb44aed2e738bd4d07e2bd3a38b87d6267ff9f1.jpg

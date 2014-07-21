@@ -1,0 +1,262 @@
+---
+layout: post
+title: 继承 函数重载覆盖隐藏
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##继承
+##inherited test（继承示例）
+派生类继承了基类的public成员与protected成员，派生类继承来的数据成员属于自己。
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+#include <time.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class A {
+private:
+        int _num;
+
+protected:
+        int _a;
+
+public:
+        std::string _name;
+
+        void test() {
+                srand(1024);
+                _num = rand()%10;
+                cout << "in Class A " << _num << _a <<  endl;
+        }
+};
+
+class B: public A {
+public:
+        void test2()
+        {
+                _a = 23;
+                _num = 0;
+                _name = "hello";
+                cout << " in Class B " << _a << endl;
+        }
+
+
+};
+
+int main(int argc, char **argv) {
+        B b;
+        b.test2();
+}
+{% endhighlight %}
+
+
+##关于基类与派生类  
+
+>* 基类与派生类中同名函数的问题
+>* 派生类对象赋给基类引用的情况(包括函数与成员变量)
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+public:
+        void print() {
+                cout << "id: " << _id << " name: " << _name << " age: " << _age << endl;
+        }
+
+        void set_info(int id, const string &name, size_t age) {
+                _id = id;
+                _name = name;
+                _age = age;
+        }
+
+private:
+        int _id;
+        std::string _name;
+        size_t _age;
+};
+
+class Student: public Person {
+public:
+        void print() {
+                cout << "school: " << _school << endl;
+        }
+        void set_school(const string &school) {
+                _school = school;
+        }
+
+private:
+        string _school;
+public:
+        int _a;
+};
+
+class Worker: public Person {
+public:
+        void print() {
+                cout << "factory: " << _factory << endl;
+        }
+
+        void set_factory(const string &factory) {
+                _factory = factory;
+        }
+private:
+        string _factory;
+};
+
+int main(int argc, char **argv) {
+//        Person a;
+//        a.set_info(12, "zhangsan", 34);
+//        a.print();
+        Student s;
+        s.set_info(23, "lisi", 22);
+        s.set_school("test");
+//        s.print();
+//        s.Person::print();
+//
+        Worker w;
+        w.set_info(45, "zhangsna", 44);
+        w.set_factory("Foxconn");
+//        w.print();   // Foxconn
+//        w.Person::print();
+
+        Person *p_a;
+        p_a = &s;
+
+//        p_a->set_school("test2");
+        p_a->set_info(34, "lucy", 23);
+        p_a->print();   // Person
+//        p_a->_a = 10;
+
+        Person &ref = w;
+        ref.set_info(44, "jack", 56);
+        ref.print();    //
+//        ref.set_factory("Danei");
+
+
+}
+{% endhighlight %}
+
+##函数的重载，覆盖，隐藏(其中特别注意函数的覆盖与隐藏的区别)
+
+##派生类的构造函数，析构函数  
+
+{% highlight c++ %}
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+class Base{
+public:
+	Base()
+	{
+		cout << "Create Base" << endl;
+	}
+	virtual ~Base()
+	{
+		cout << "Destroy Base" << endl;
+	}
+};
+
+class Derived : public Base{
+public:
+	Derived(){
+		cout << "Create Derived" << endl;
+	}
+	~Derived(){
+		cout << "Destroy Derived" << endl;
+	}
+};
+
+
+int main(int argc, char **argv) {
+
+	Base *p = new Derived;
+	// create base Derived
+	// destroy Derived base
+
+	delete p;   // p->destroy
+}
+{% endhighlight %}
+
+##笔记
+
+##1.String类应该先去实现+=操作，然后在+的重载中去使用+=  
+
+##2.通过继承，基类里面的成员变量和函数在派生类中也存在  
+
+##3.基类的private变量在派生类中无法被访问  
+
+##4.有base类和derived类（public继承）：  
+
+a)	Private成员作用域仅限于base内部
+b)	Public成员作用域在所有位置
+c)	Protected成员作用在base和derived内部
+
+##5.Public继承的特点：  
+
+a)	Private为个人日记，在派生类中无法被访问
+b)	Protected为家族秘籍，在派生类家族体系中可以访问
+c)	Public为完全公开的东西，在派生类中可以随意的访问
+d)	Private在派生类的内部不可见，但是通过基类本身的函数可以间接访问
+
+##6.基类和派生类具有同名函数的时候，  
+
+使用派生类的对象去访问这个函数，调用的是派生类的版本，如果需要调用基类的版本，可以通过指定基类的类名来调用
+
+##7.基类的指针或者引用可以指向派生类的对象。   
+
+当基类和派生类中有同名函数的时候，通过基类指针或引用调用的是base中的版本。此时的指针或者引用是把他们指向的对象当作base来处理，所以这种情况下无法去调用派生类自己添加的成员（包括函数和变量）。
+
+##8.静态绑定（static binding）：  
+
+编译期间，编译器根据函数的名字、形参表、const属性（函数的签名）来确定调用哪一个函数，这是一种静态行为。
+
+##9.动态绑定：（dynamic binding）：  
+
+程序在编译期间并不去确定哪个函数调用，而是把绑定的时机推迟到程序的运行期间
+
+##10.触发动态绑定的条件为：  
+
+a)	使用base的指针或引用来操纵派生类的对象
+b)	调用的是virtual函数
+
+##11.运行期间确定虚函数的调用，编译期间确定非虚函数的调用  
+
+##12.当用base指针或引用操纵派生类对象时，  
+
+如果调用的是虚函数，那么在运行期间根据指针指向的对象的实际类型来确定调用哪一个函数。如果不是虚函数，在编译期间，根据指针或引用的类型就可以确定调用哪一个函数。
+
+##13.多态只有一种：动态绑定！  
+
+##14.无论是静态绑定还是动态绑定，  
+
+基类指针可以操控的必须是base中已经定义的部分
+
+##15.Virtual函数具有继承性质，只需在base中声明为virtual即可，而且函数的形参不变  
+
+##16.函数的覆盖：  
+
+子类的虚函数覆盖了base的虚函数（这是触发动态绑定的情况)，其他的情况均成为函数的隐藏：子类的函数隐藏了父类的函数
+
+##17.派生类的内存布局：  
+
+在派生类对象的开头是一个无名的基类对象，所以当用base指针指向派生类对象的时候，base指针就默认指向的是base对象，这就解释了为什么它无法调用派生类自己添加的成员。
+
+##18.一定要把base的析构函数设为virtual  
+
+19.声明抽象类的办法：
+a)	类里面添加一个纯虚函数 virtual void test() = 0;
+#总结
+
+
+
+

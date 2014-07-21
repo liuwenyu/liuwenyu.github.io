@@ -1,0 +1,583 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>重载 虚函数 动态绑定 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+          <li><a href="#技术学习" data-toggle="tab">技术学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/06/16/%E9%93%BE%E8%A1%A8.html" class="list-group-item pjaxlink">二叉树 链表</a>
+                
+                  <a href="/2014/06/15/fork.html" class="list-group-item pjaxlink">多进程 fork</a>
+                
+                  <a href="/2014/06/14/sql.html" class="list-group-item pjaxlink">MySql</a>
+                
+                  <a href="/2014/06/13/%E6%8E%92%E5%BA%8F.html" class="list-group-item pjaxlink">排序 查找 键树 结构体</a>
+                
+                  <a href="/2014/06/10/%E9%87%8D%E8%BD%BD.html" class="list-group-item pjaxlink">重载 虚函数 动态绑定</a>
+                
+                  <a href="/2014/06/07/%E9%80%92%E5%BD%92.html" class="list-group-item pjaxlink">递归 宏定义 内联函数</a>
+                
+                  <a href="/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html" class="list-group-item pjaxlink">联合体 大端小端 位域 指针引用</a>
+                
+                  <a href="/2014/06/02/volatile.html" class="list-group-item pjaxlink">全局变量 volatile</a>
+                
+                  <a href="/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html" class="list-group-item pjaxlink">const与指针 函数返回值 声明</a>
+                
+                  <a href="/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html" class="list-group-item pjaxlink">UDP服务器 僵尸进程</a>
+                
+                  <a href="/2014/05/02/%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">学习总结</a>
+                
+                  <a href="/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">约瑟夫问题 虚继承</a>
+                
+                  <a href="/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html" class="list-group-item pjaxlink">构造函数</a>
+                
+                  <a href="/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html" class="list-group-item pjaxlink">内存 线程池</a>
+                
+                  <a href="/2014/04/24/c++.html" class="list-group-item pjaxlink">c++</a>
+                
+                  <a href="/2014/04/23/%E5%86%85%E5%AD%98.html" class="list-group-item pjaxlink">内存 复制控制</a>
+                
+                  <a href="/2014/04/22/%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">继承 函数重载覆盖隐藏</a>
+                
+                  <a href="/2014/04/21/string.html" class="list-group-item pjaxlink">重载运算符-智能指针-String</a>
+                
+                  <a href="/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html" class="list-group-item pjaxlink">复制控制</a>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="技术学习">
+              <div class="list-group">
+                <h2 class="center">技术学习</h2>
+                
+                  <a href="/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html" class="list-group-item pjaxlink">epoll</a>
+                
+                  <a href="/2014/05/02/mini%E6%90%9C%E7%B4%A2.html" class="list-group-item pjaxlink">mini搜索</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">29</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/16/%E9%93%BE%E8%A1%A8.html' class="list-group-item pjaxlink">
+                        二叉树 链表
+                      </a>
+                    
+                      <a  href='/2014/06/15/fork.html' class="list-group-item pjaxlink">
+                        多进程 fork
+                      </a>
+                    
+                      <a  href='/2014/06/13/%E6%8E%92%E5%BA%8F.html' class="list-group-item pjaxlink">
+                        排序 查找 键树 结构体
+                      </a>
+                    
+                      <a  href='/2014/06/10/%E9%87%8D%E8%BD%BD.html' class="list-group-item pjaxlink">
+                        重载 虚函数 动态绑定
+                      </a>
+                    
+                      <a  href='/2014/06/07/%E9%80%92%E5%BD%92.html' class="list-group-item pjaxlink">
+                        递归 宏定义 内联函数
+                      </a>
+                    
+                      <a  href='/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html' class="list-group-item pjaxlink">
+                        联合体 大端小端 位域 指针引用
+                      </a>
+                    
+                      <a  href='/2014/06/02/volatile.html' class="list-group-item pjaxlink">
+                        全局变量 volatile
+                      </a>
+                    
+                      <a  href='/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html' class="list-group-item pjaxlink">
+                        const与指针 函数返回值 声明
+                      </a>
+                    
+                      <a  href='/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html' class="list-group-item pjaxlink">
+                        epoll
+                      </a>
+                    
+                      <a  href='/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        UDP服务器 僵尸进程
+                      </a>
+                    
+                      <a  href='/2014/05/02/%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        学习总结
+                      </a>
+                    
+                      <a  href='/2014/05/02/mini%E6%90%9C%E7%B4%A2.html' class="list-group-item pjaxlink">
+                        mini搜索
+                      </a>
+                    
+                      <a  href='/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        约瑟夫问题 虚继承
+                      </a>
+                    
+                      <a  href='/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html' class="list-group-item pjaxlink">
+                        构造函数
+                      </a>
+                    
+                      <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink">
+                        内存 线程池
+                      </a>
+                    
+                      <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink">
+                        c++
+                      </a>
+                    
+                      <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink">
+                        内存 复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        继承 函数重载覆盖隐藏
+                      </a>
+                    
+                      <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink">
+                        重载运算符-智能指针-String
+                      </a>
+                    
+                      <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink">
+                        复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySql">MySql</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="MySql" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/14/sql.html' class="list-group-item pjaxlink">
+                        MySql
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">重载 虚函数 动态绑定</h2>
+    2014年06月10日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>静态绑定与动态绑定（page 163）</h2>
+
+<p>结合书本与下面的资料统一复习</p>
+
+<blockquote>
+<ul>
+<li><a href="http://huoxingmowang.blog.163.com/blog/static/18146610320118365449881/">参考资料</a></li>
+</ul>
+</blockquote>
+
+<h2>为什么要将一个父类的析构函数写成一个虚函数,和内存泄漏有关，怎么理解？</h2>
+
+<p>如果在子类的构造函数中对某个成员函数在堆空间中分配了空间，而之类没有被调用，是不是会造成<strong>内存泄漏</strong>呢？答案是肯定的，那有什么办法可以解决这种情况下出现的内存泄漏呢?那就是把父类的析构函数写为虚函数,在写父类的时候，<strong>最好将其析构函数写为虚函数</strong>。这样可以防止比较隐蔽的内存泄漏.</p>
+
+<h2>参考资料：</h2>
+
+<blockquote>
+<ul>
+<li>(重点看)：<a href="http://blog.csdn.net/bravekingzhang/article/details/6436366">为什么要将一个父类的析构函数写成一个虚函数,和内存泄漏有关，怎么理解？</a></li>
+<li><a href="http://hi.baidu.com/taozpwater/item/07eea3c8980c45dd9744525d">为什么析构函数常常是虚函数</a></li>
+</ul>
+</blockquote>
+
+<h2>operator new与new operator 的区别</h2>
+
+<h2>C++Primer (page 637)</h2>
+
+<h2>Stackoverflow</h2>
+
+<p>I usually try to phrase things differently to differentiate between the two a bit better, but it&#39;s a good question in any case.</p>
+
+<p>Operator new is a function that allocates raw memory -- at least conceptually, it&#39;s not much different from <code>malloc()</code>. Though it&#39;s fairly unusual unless you&#39;re writing something like your own container, you can call operator new directly, like:</p>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">char</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span> <span class="o">*&gt;</span><span class="p">(</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span></code></pre></div>
+
+<p>It&#39;s also possible to overload operator new either globally, or for a specific class. IIRC, the signature is:</p>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">void</span> <span class="o">*</span><span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="kt">size_t</span><span class="p">);</span></code></pre></div>
+
+<p>Of course, if you overload an operator new (either global or for a class), you&#39;ll also want/need to overload the matching operator delete as well. For what it&#39;s worth, there&#39;s also a separate operator <code>new[]</code> that&#39;s used to allocate memory for arrays -- but you&#39;re almost certainly better off ignoring that whole mess completely.</p>
+
+<p>The new operator is what you normally use to create an object from the free store:</p>
+
+<div class="highlight"><pre><code class="c--"><span class="n">my_class</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="n">my_class</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span></code></pre></div>
+
+<p>The difference between the two is that operator new just allocates raw memory, nothing else. The new operator starts by using operator new to allocate memory, but then it invokes the constructor for the right type of object, so the result is a real live object created in that memory. If that object contains any other objects (either embedded or as base classes) those constructors as invoked as well.</p>
+
+<blockquote>
+<ul>
+<li><a href="http://stackoverflow.com/questions/1885849/difference-between-new-operator-and-operator-new">资料出处</a></li>
+<li><a href="http://en.cppreference.com/w/cpp/memory/new/operator_new">其他资料(官方解析)</a></li>
+</ul>
+</blockquote>
+
+<h2>operator delete 与 delete operator 的区别</h2>
+
+<p>与operator new与new operator 的区别类似</p>
+
+<h2>成员函数的重载，覆盖以及隐藏</h2>
+
+<blockquote>
+<ul>
+<li>类层次中的同名函数才有可能存在重载，覆盖和隐藏的问题</li>
+</ul>
+</blockquote>
+
+<h2>显式转换(page 175)</h2>
+
+<h2>static_cast(重点)(page 176)</h2>
+
+<p>相当于编译器的隐式转换，且仅在隐式转换能够发生时(除类层次间的下行转换以外)，<code>static_cast</code>的转换才是合法的，否则将出错。</p>
+
+<h2>dynamic_cast(重点)(page 177)</h2>
+
+<p><code>dynamic_cast</code>涉及运行时类型检查，进行类型检查时需要运行时类型信息，这个信息存储在<strong>虚函数表</strong>中，且只有定义了<strong>虚函数</strong>的类才能有<strong>虚函数表</strong>。</p>
+
+<h2>外部参考资料：</h2>
+
+<blockquote>
+<ul>
+<li><a href="http://blog.csdn.net/zhuriyuxiao/article/details/8642593">dynamic_cast 类型转换全面深入讨论</a></li>
+<li><a href="http://blog.csdn.net/gogogo/article/details/7073981">C++ 中dynamic_cast&lt;&gt;的使用方法</a></li>
+</ul>
+</blockquote>
+
+<h2>const_cast</h2>
+
+<h2>reinterpret_cast</h2>
+
+<h2>复习情况</h2>
+
+<ol>
+<li> 操作符重载 (page 145)</li>
+<li> 成员函数的重载，覆盖，隐藏 (page 150)</li>
+<li> 基类成员在派生类中的访问属性 (page 155)</li>
+<li> 虚函数多态(page 162)</li>
+<li> 动态运行时类型识别与显式转换 (page 175)</li>
+</ol>
+
+<h2>复习重点问题</h2>
+
+<ol>
+<li> operator new 与 operator delete的重载</li>
+<li> 成员函数的<strong>覆盖</strong> 与 <strong>隐藏</strong>,以及其区别
+当子类函数屏蔽父类中的同名成员函数时，这种情况叫做<strong>成员函数的隐藏</strong>，如果此时子类对象仍然想调用父类的成员函数可以使用<strong>父类::要调用的同名成员函数</strong> 这种方式来调用。<strong>示例如下</strong>：</li>
+</ol>
+
+<div class="highlight"><pre><code class="c--"><span class="n">B</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">b</span><span class="p">.</span><span class="n">A</span><span class="o">::</span><span class="n">func</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">//A是B的父类,func函数被隐藏</span></code></pre></div>
+
+<ol>
+<li><p>对于继承时的访问属性的总结（page 155）</p>
+
+<blockquote>
+<ul>
+<li>注意要区分好子类中的对象（<strong>外部访问</strong>）和子类中的成员函数（<strong>内部访问</strong>）对基类的访问不同</li>
+<li>子类对象（<strong>外部访问</strong>）仅在公有继承（public）继承时能够访问父类中的public成员</li>
+<li>子类中的成员函数（<strong>内部访问</strong>）仅在publich和protected继承时能够访问父类中的public成员和protected成员</li>
+</ul>
+</blockquote></li>
+<li><p>基类与派生类相互转换的问题（page 157）</p>
+
+<blockquote>
+<ul>
+<li>参考资料：<a href="http://blog.csdn.net/jiang1013nan/article/details/4801537">基类与派生类的转换</a></li>
+<li>测试代码 <strong>MyCode/0610/page_157.cpp</strong></li>
+<li>当强制（显式）转换进行时,如果仅仅把基类对象引用/指针转成派生类对象引用/指针，转后的派生类引用/指针所指向对象的派生类部分均为初始化，都是垃圾值</li>
+</ul>
+</blockquote></li>
+</ol>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include&lt;iostream&gt;</span>
+    
+    <span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="n">A</span><span class="p">(</span><span class="kt">int</span> <span class="n">a_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a_</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">b_</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;constructor A&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Print</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">class</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="n">B</span><span class="p">(</span><span class="kt">int</span> <span class="n">a_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span><span class="n">A</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="n">c_</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;constructor B&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+        <span class="kt">void</span> <span class="n">GetC</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+        <span class="kt">void</span> <span class="n">Print</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">A</span><span class="o">::</span><span class="n">Print</span><span class="p">();</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">A</span> <span class="n">a1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">B</span> <span class="n">b1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="n">B</span> <span class="o">&amp;</span><span class="n">c1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B</span><span class="o">&amp;</span><span class="p">)</span><span class="n">a1</span><span class="p">;</span><span class="c1">//将基类对象a1强制转换成派生类对象c1</span>
+    
+        <span class="n">a1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;**********&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">c1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+        <span class="n">c1</span><span class="p">.</span><span class="n">GetC</span><span class="p">();</span> <span class="c1">//c的结果是垃圾值（不定值）</span>
+    
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></div>
+
+<ol>
+<li> 派生类显式调用基类构造函数（示例代码）</li>
+</ol>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include&lt;iostream&gt;</span>
+    
+    <span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="n">A</span><span class="p">(</span><span class="kt">int</span> <span class="n">a_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a_</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">b_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">}</span>
+    
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Print</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="k">class</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="n">B</span><span class="p">(</span><span class="kt">int</span> <span class="n">a_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">:</span><span class="n">A</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">),</span> <span class="n">c</span><span class="p">(</span><span class="n">c_</span><span class="p">)</span> <span class="p">{</span><span class="c1">//显式调用基类构造函数，初始化基类成员，必须在初始化列表中进行</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;constructor B a_: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">a_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;constructor B b_: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;constructor B c_: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">c_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+        <span class="kt">void</span> <span class="n">Print</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">A</span><span class="o">::</span><span class="n">Print</span><span class="p">();</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+    
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+    <span class="p">};</span>
+    
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">A</span> <span class="n">a1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">B</span> <span class="n">b1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    
+        <span class="n">a1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+        <span class="c1">//b1.A::Print();</span>
+        <span class="n">b1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></div>
+
+<ol>
+<li><p>关于C++虚函数默认参数的问题(page 166, 例7)
+<strong>虚函数是动态绑定而缺省参数值是静态绑定的</strong></p>
+
+<blockquote>
+<ul>
+<li>参考资料（重点）：<a href="http://blog.csdn.net/hw_henry2008/article/details/6439128">关于C++虚函数默认参数的问题。Effective C++ 条款38: 决不要重新定义继承而来的缺省参数值</a></li>
+<li>参考资料：<a href="http://www.cnblogs.com/chgaowei/archive/2011/05/21/2053129.html">深入理解C++的动态绑定和静态绑定</a></li>
+<li>Effective C++ 条款38: 决不要重新定义继承而来的缺省参数值</li>
+</ul>
+</blockquote></li>
+<li><p>赋值操作符</p>
+
+<blockquote>
+<ul>
+<li>赋值操作符必须防止自身赋值</li>
+</ul>
+</blockquote></li>
+</ol>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#技术学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>

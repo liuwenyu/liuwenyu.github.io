@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>递归 宏定义 内联函数 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,56 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">递归 宏定义 内联函数</h2>
+    2014年06月07日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>递归</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">递归的本质是一个栈结构
+</code></pre></div>
+<h2>递归需要满足两个条件：</h2>
 
+<blockquote>
+<ul>
+<li>递归表达式（递归体）</li>
+<li>边界条件（递归出口）</li>
+</ul>
+</blockquote>
+
+<h2>递归的开销</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">递归由于是函数调用自身，所以每一次函数调用，都需要在内存栈中分配空间以保存参数，返回地址以及临时变量，而且往栈中压入数据和弹出数据都需要时间。
+</code></pre></div>
+<h2>复习情况</h2>
+
+<blockquote>
+<ul>
+<li>函数模板（page 118）</li>
+<li>类模板（page 119）</li>
+<li>递归（page 119）</li>
+</ul>
+</blockquote>
+
+<h2>复习重点问题</h2>
+
+<ol>
+<li> 宏定义与内联函数的区别：
+首先，宏定义是在预处理阶段进行代码替换（仅仅是简单的文本替换），而内联函数是在编译阶段插入代码；其次，宏定义没有类型检查，而内联函数有类型检查</li>
+</ol>
+
+<h2>重要习题</h2>
+
+<blockquote>
+<ul>
+<li>例4 单链表的反向打印 (page 121, 递归思路)</li>
+<li>10 （page 123，递归调用）</li>
+<li>11 （page 123，需要复习）</li>
+<li>12 （page 124，依然不懂）</li>
+<li>13 （page 125，不是很懂）</li>
+<li>14 （page 125，新概念）</li>
+</ul>
+</blockquote>
 
     </div>
     <hr>
@@ -316,7 +346,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

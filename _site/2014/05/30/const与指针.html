@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>const与指针 函数返回值 声明 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,118 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">const与指针 函数返回值 声明</h2>
+    2014年05月30日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>指针</h2>
 
+<blockquote>
+<ul>
+<li>指针只能与常量相加减，不能与变量相加减</li>
+</ul>
+</blockquote>
+
+<h2>关于声明</h2>
+
+<div class="highlight"><pre><code class="c"><span class="kt">char</span> <span class="o">*</span><span class="n">ptr1</span><span class="p">,</span> <span class="n">ptr2</span></code></pre></div>
+
+<p>中，第一个声明<code>*ptr1</code>中，其声明符中带有<code>*</code>号，所以这表明<code>ptr1</code>是一个指向<code>char</code>类型的指针，而在第二个声明符中，只包含有<code>ptr2</code>，所以<code>ptr2</code>本声明成了普通的char型变量,另外<code>*是声明符的一部分</code>.</p>
+
+<p>同理可看下面</p>
+
+<blockquote>
+<ul>
+<li>const double *cptr</li>
+<li>double const *cptr</li>
+</ul>
+</blockquote>
+
+<h2>Const</h2>
+
+<h2>指针与Const修饰符（page 95）</h2>
+
+<p>注意：
+在C语言中，声明的语法和解释并非</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">类型    标识符
+</code></pre></div>
+<p>而是</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">基本类型    生成基本类型的东西（声明符,这个要区别于标识符）
+</code></pre></div>
+<p>在</p>
+
+<div class="highlight"><pre><code class="c"><span class="kt">double</span> <span class="o">*</span><span class="n">cptr</span></code></pre></div>
+
+<p>中，<code>double</code>是基本类型，<code>*cptr</code>是生成的的基本类型的声明符，所以<code>cptr</code>是指向double类型的指针</p>
+
+<h2>函数参数与Const修饰符（page 98）</h2>
+
+<ol>
+<li> 当函数参数为普通类型时：</li>
+</ol>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">);</span></code></pre></div>
+
+<p>函数只能接受非const参数
+2.  当参数有const修饰时：</p>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">void</span> <span class="nf">fun</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">i</span><span class="p">);</span></code></pre></div>
+
+<p>函数能接受const参数与非const参数
+3.  当函数参数为引用时，函数接受一个常量或者一个函数的返回值时，编译器会为函数分配一<code>个临时存储单元</code>，同时将其初始化为相应的常量值（或者函数返回值），存储的是一个常量，其<code>实参</code>为相应的const类型，而形参是非const引用，会发生编译错误</p>
+
+<h2>const在类中的应用</h2>
+
+<blockquote>
+<ul>
+<li>const 也是函数重载的一中类型</li>
+<li>const适用于成员函数的目的在于：确保该成员函数能够作用于const对象上，const对象，const对象的指针或引用只能调用其const成员函数，</li>
+<li>const成员变量不能再类定义外初始化，只能通过构造函数的初始化列表进行，并且必须有构造函数。</li>
+</ul>
+</blockquote>
+
+<h2>函数返回值————指针</h2>
+
+<p>指针作为函数返回值时，该指针不能返回存在于内存栈中的局部变量，因为栈中的局部变量在函数调用结束后会被自动清理掉，但是可以返回&lt;静态存储区的变量&gt;&lt;和&lt;堆存储分配的变量&gt;</p>
+
+<h2>32位与64位机，int数据类型</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">常用数据类型对应字节数
+  可用如sizeof（char),sizeof(char*)等得出
+ 32位编译器：
+      char ：1个字节
+      char*（即指针变量）: 4个字节（32位的寻址空间是2^32, 即32个bit，也就是4个字节。同理64位编译器）
+      short int : 2个字节
+      int：  4个字节
+      unsigned int : 4个字节
+      float:  4个字节
+      double:   8个字节
+      long:   4个字节
+      long long:  8个字节
+      unsigned long:  4个字节
+  64位编译器：
+      char ：1个字节
+      char*(即指针变量): 8个字节
+      short int : 2个字节
+      int：  4个字节
+      unsigned int : 4个字节
+      float:  4个字节
+      double:   8个字节
+      long:   8个字节
+      long long:  8个字节
+      unsigned long:  8个字节
+</code></pre></div>
+<h2>复习重点</h2>
+
+<blockquote>
+<ul>
+<li>指针运算</li>
+<li>指针数组与数组指针</li>
+<li>二维数组</li>
+<li>数组与指针的区别与联系</li>
+</ul>
+</blockquote>
 
     </div>
     <hr>
@@ -316,7 +408,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

@@ -1,0 +1,221 @@
+---
+layout: post
+title: 重载 虚函数 动态绑定
+category: 学习
+tags: linux
+keywords: linux
+---
+
+
+##静态绑定与动态绑定（page 163）
+结合书本与下面的资料统一复习
+>* [参考资料](http://huoxingmowang.blog.163.com/blog/static/18146610320118365449881/)
+
+##为什么要将一个父类的析构函数写成一个虚函数,和内存泄漏有关，怎么理解？
+如果在子类的构造函数中对某个成员函数在堆空间中分配了空间，而之类没有被调用，是不是会造成**内存泄漏**呢？答案是肯定的，那有什么办法可以解决这种情况下出现的内存泄漏呢?那就是把父类的析构函数写为虚函数,在写父类的时候，**最好将其析构函数写为虚函数**。这样可以防止比较隐蔽的内存泄漏.
+
+##参考资料：
+>* (重点看)：[为什么要将一个父类的析构函数写成一个虚函数,和内存泄漏有关，怎么理解？][1]
+>* [为什么析构函数常常是虚函数][2]
+
+##operator new与new operator 的区别
+##C++Primer (page 637)
+
+##Stackoverflow
+I usually try to phrase things differently to differentiate between the two a bit better, but it's a good question in any case.
+
+Operator new is a function that allocates raw memory -- at least conceptually, it's not much different from `malloc()`. Though it's fairly unusual unless you're writing something like your own container, you can call operator new directly, like:
+
+{% highlight c++ %}
+char *x = static_cast<char *>(operator new(100));
+{% endhighlight %}
+
+It's also possible to overload operator new either globally, or for a specific class. IIRC, the signature is:
+
+{% highlight c++ %}
+void *operator new(size_t);
+{% endhighlight %}
+
+Of course, if you overload an operator new (either global or for a class), you'll also want/need to overload the matching operator delete as well. For what it's worth, there's also a separate operator `new[]` that's used to allocate memory for arrays -- but you're almost certainly better off ignoring that whole mess completely.
+
+The new operator is what you normally use to create an object from the free store:
+
+{% highlight c++ %}
+my_class *x = new my_class(0);
+{% endhighlight %}
+
+The difference between the two is that operator new just allocates raw memory, nothing else. The new operator starts by using operator new to allocate memory, but then it invokes the constructor for the right type of object, so the result is a real live object created in that memory. If that object contains any other objects (either embedded or as base classes) those constructors as invoked as well.
+
+>* [资料出处](http://stackoverflow.com/questions/1885849/difference-between-new-operator-and-operator-new)
+>* [其他资料(官方解析)](http://en.cppreference.com/w/cpp/memory/new/operator_new)
+
+
+##operator delete 与 delete operator 的区别
+与operator new与new operator 的区别类似
+
+
+##成员函数的重载，覆盖以及隐藏
+>* 类层次中的同名函数才有可能存在重载，覆盖和隐藏的问题
+
+
+##显式转换(page 175)
+##static_cast(重点)(page 176)
+相当于编译器的隐式转换，且仅在隐式转换能够发生时(除类层次间的下行转换以外)，`static_cast`的转换才是合法的，否则将出错。
+
+##dynamic_cast(重点)(page 177)
+`dynamic_cast`涉及运行时类型检查，进行类型检查时需要运行时类型信息，这个信息存储在**虚函数表**中，且只有定义了**虚函数**的类才能有**虚函数表**。
+
+##外部参考资料：
+>* [dynamic_cast 类型转换全面深入讨论][3]
+>* [C++ 中dynamic_cast<>的使用方法][4]
+
+##const_cast
+
+
+##reinterpret_cast
+
+
+
+##复习情况
+1.  操作符重载 (page 145)
+2.  成员函数的重载，覆盖，隐藏 (page 150)
+3.  基类成员在派生类中的访问属性 (page 155)
+4.  虚函数多态(page 162)
+5.  动态运行时类型识别与显式转换 (page 175)
+
+##复习重点问题
+1.  operator new 与 operator delete的重载
+2.  成员函数的**覆盖** 与 **隐藏**,以及其区别
+    当子类函数屏蔽父类中的同名成员函数时，这种情况叫做**成员函数的隐藏**，如果此时子类对象仍然想调用父类的成员函数可以使用**父类::要调用的同名成员函数** 这种方式来调用。**示例如下**：
+
+    {% highlight c++ %}
+    B b;
+    b.A::func(2); //A是B的父类,func函数被隐藏
+    {% endhighlight %}
+    
+3.  对于继承时的访问属性的总结（page 155）
+    >* 注意要区分好子类中的对象（**外部访问**）和子类中的成员函数（**内部访问**）对基类的访问不同
+    >* 子类对象（**外部访问**）仅在公有继承（public）继承时能够访问父类中的public成员
+    >* 子类中的成员函数（**内部访问**）仅在publich和protected继承时能够访问父类中的public成员和protected成员
+
+4.  基类与派生类相互转换的问题（page 157）
+    >* 参考资料：[基类与派生类的转换][5]
+    >* 测试代码 **MyCode/0610/page_157.cpp**
+    >* 当强制（显式）转换进行时,如果仅仅把基类对象引用/指针转成派生类对象引用/指针，转后的派生类引用/指针所指向对象的派生类部分均为初始化，都是垃圾值
+
+    {% highlight c++ %}
+    #include<iostream>
+    
+    class A {
+    public:
+    	A(int a_ = 0, int b_ = 0): a(a_), b(b_) {
+    		std::cout << "constructor A" << std::endl;
+    	}
+    
+    	virtual void Print() {
+    		std::cout << a << std::endl;
+    		std::cout << b << std::endl;
+    	}
+    
+    private:
+    	int a;
+    	int b;
+    };
+    
+    class B : public A {
+    public:
+    	B(int a_ = 0, int b_ = 0, int c_ = 0):A(a_, b_), c(c_) {
+    		std::cout << "constructor B" << std::endl;
+    	}
+    
+    	void GetC() {
+    		std::cout << c << std::endl;
+    	}
+    
+    	void Print() {
+    		A::Print();
+    		std::cout << c << std::endl;
+    	}
+    
+    private:
+    	int c;
+    };
+    
+    int main() {
+    	A a1(1, 1);
+    	B b1(2, 2, 2);
+    	B &c1 = (B&)a1;//将基类对象a1强制转换成派生类对象c1
+    
+    	a1.Print();
+    	std::cout << "**********" << std::endl;
+    	c1.Print();
+    	c1.GetC(); //c的结果是垃圾值（不定值）
+    
+    	return 0;
+    }
+    {% endhighlight %}
+
+5.  派生类显式调用基类构造函数（示例代码）
+
+    {% highlight c++ %}
+    #include<iostream>
+    
+    class A {
+    public:
+    	A(int a_ = 0, int b_ = 0): a(a_), b(b_) {
+    	}
+    
+    	virtual void Print() {
+    		std::cout << a << std::endl;
+    		std::cout << b << std::endl;
+    	}
+    
+    private:
+    	int a;
+    	int b;
+    };
+    
+    class B : public A {
+    public:
+    	B(int a_ = 0, int b_ = 0, int c_ = 0):A(a_, b_), c(c_) {//显式调用基类构造函数，初始化基类成员，必须在初始化列表中进行
+    		std::cout << "constructor B a_: " << a_ << std::endl;
+    		std::cout << "constructor B b_: " << b_ << std::endl;
+    		std::cout << "constructor B c_: " << c_ << std::endl;
+    	}
+    
+    	void Print() {
+    		A::Print();
+    		std::cout << c << std::endl;
+    	}
+    
+    private:
+    	int c;
+    };
+    
+    int main() {
+    	A a1(1, 1);
+    	B b1(2, 2, 2);
+    
+    	a1.Print();
+    	//b1.A::Print();
+    	b1.Print();
+    	return 0;
+    }
+    {% endhighlight %}
+
+6.  关于C++虚函数默认参数的问题(page 166, 例7)
+    **虚函数是动态绑定而缺省参数值是静态绑定的**
+    >* 参考资料（重点）：[关于C++虚函数默认参数的问题。Effective C++ 条款38: 决不要重新定义继承而来的缺省参数值][6]
+    >* 参考资料：[深入理解C++的动态绑定和静态绑定][7]
+    >* Effective C++ 条款38: 决不要重新定义继承而来的缺省参数值
+
+7.  赋值操作符
+    >* 赋值操作符必须防止自身赋值
+
+  [1]: http://blog.csdn.net/bravekingzhang/article/details/6436366
+  [2]: http://hi.baidu.com/taozpwater/item/07eea3c8980c45dd9744525d
+  [3]: http://blog.csdn.net/zhuriyuxiao/article/details/8642593
+  [4]: http://blog.csdn.net/gogogo/article/details/7073981
+  [5]: http://blog.csdn.net/jiang1013nan/article/details/4801537
+  [6]: http://blog.csdn.net/hw_henry2008/article/details/6439128
+  [7]: http://www.cnblogs.com/chgaowei/archive/2011/05/21/2053129.html

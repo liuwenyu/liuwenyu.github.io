@@ -1,0 +1,234 @@
+---
+layout: post
+title: MySql
+category: 学习
+tags: MySql
+keywords: MySql
+---
+##MySQL
+## 世界上最流行的开源数据库
+    >* 社区版服务器 V5.6
+
+##SQL
+##结构化查询程序
+ >* 数据定义语言 (DDL)
+ >* 数据操纵语言 (DML)
+
+##数据定义语言 （Data Definition Language,DDL）
+- CREATE
+```
+CREAT DATABASE MyDatabase； 
+```
+```
+CREATE TABLE `user` (
+	`user_id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(45) NOT NULL,
+	`email` varchar(255) NOT NULL,
+	PRIMARY KEY (`user_id`),
+	UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+- DROP
+```
+DROP DATABASE MyDatabase; 
+```
+- ALTER
+
+
+
+##数据操纵语言 （Data Manipulation Language,DML）
+
+| 动作  | SQL    |  描述  | 示例 |
+| ----- | :-----  | :----  |:---|
+| 创建  | INSERT | 插入新数据 |INSERT INTO user VALUES (‘Tom’,  24);|
+| 读取  | SELECT | 读取数据   |SELECT * FROM user WHERE name=‘Tom’;|
+| 更新  | UPDATE | 更新数据   |UPDATE user SET name = ‘Alex’ WHERE id=1;|
+| 删除  | DELETE | 删除数据   |DELETE FROM user WHERE id=1;|
+
+
+
+##SQL查询
+##简单查询
+```
+Select * From user Where id = 1；
+```
+##子查询
+```
+Select * From article Where uid In
+    (Select uid From user Where status=1)；
+
+```
+##JOIN
+假定有两张表：
+```
+A:             B:
+Id  Name       Id  Name
+1   张三        1   小明
+2   李四        2   张三
+3   王五        3   小红
+4   赵六        4   王五
+```
+## 内连接
+内连接只生成表A和表B中匹配的记录的集合。
+```
+Select * From A Inner Join B On A.name = B.name
+```
+```
+结果：
+Id    Name   Id     Name
+1      张三     2      张三
+3      王五     4      王五
+
+```
+
+## 全外连接（MySql不支持）
+全外连接生成表A和表B中所有记录的集合。如果匹配，两边都有值，否则以null填充。
+```
+Select * From A Full Outer Join B On A.name = B.name
+```
+```
+结果：
+Id    Name      Id     Name
+1     张三       2      张三
+2     李四       null   null
+3     王五       4      王五
+4     赵六       null   null
+null  null       1      小明
+null  null       3      小红
+
+```
+## 左外连接
+左外连接生成表A中所有记录和表B中匹配的记录的集合。如果不匹配，右端以null填充。
+```
+Select * From A Left Outer Join B On A.name = B.name
+```
+```
+结果：
+Id  Name      Id     Name
+1   张三       2      张三
+2   李四       null   null
+3   王五       4      王五
+4   赵六       null   null
+```
+为了获得只在Table A而不在Table B中的记录，使用左外连接，通过where语句来排除右边不想要的部分。
+```
+Select * From A Left Outer Join B On A.name = B.name 
+Where B.id Is null 
+```
+```
+结果：
+Id  Name      Id     Name
+2   李四      null   null
+4   赵六      null   null
+```
+## 右外连接
+```
+Select * From A Right Outer Join B On A.name = B.name
+```
+## 全连接（Full Join）
+ 将两个表中所有记录做一次笛卡尔乘积，不使用任何匹配或者选取条件。
+```
+//以下语句等效：
+	Select * From A Funll Join B；
+	Select * From A Cross Join B；
+支持 ON，WHERE
+例如：Select * From A Cross Join B On A.name=B.name Where A.id=1;
+	Select * From A, B；
+支持 WHERE
+例如：Select * From A, B Where A.name=B.name And A.id=1;
+	Select * From A Join B；
+支持ON，WHERE
+例如： Select * From A Join B On A.name=B.name Where A.id=1;
+```
+
+
+## SQL语句及常用函数
+1.语句
+```
+Group By    //结合统计函数，根据一列或多列对结果进行分组
+```
+```
+Order By    //对结果集进行排序
+```
+```
+Having      //弥补WHERE语句无法与统计函数一起使用
+```
+2.统计函数
+
+1) Count()
+```
+//返回指定列的值的数目
+Select Count(column_name) From table_name
+```
+2) Sum()
+```
+//返回数值列的总和
+Select Sum(column_name) From table_name
+```
+
+
+##练习
+创建表
+```
+Student:        sid,  name,  age
+Class:          cid,  name
+StudentClass:   sid,  cid
+//往每张表插入>10行的数据
+```
+查询：
+
+- 查询年龄>20的学生的名字
+```
+Select name, age From Student Where age>20
+```
+- 查询每个班级的学生的数量
+```
+Select c.name, sc.num 
+    From Class c, (Select cid, Count(sid) num From StudentClass Group By cid) sc 
+    Where c.cid = sc.cid
+```
+- 查询学生数量>30的班级的名字
+```
+Selcet c.name sc.num
+    From Class, (Select cid, Count(sid) num From StudentClass Group By cid) sc
+    Where c.cid = sc.cid and sc.num > 30
+```
+- 查询Tom所在班级的学生的数量
+```
+Select Count(sid) From StudentClass Group By cid 
+    Having StudentClass.cid in 
+    (Select StudentClass.cid From Student, StudentClass Where Student.name = "Tom" and Student.sid = StudentClass.sid)
+```
+---
+
+##复杂Select组合语句
+{% highlight sql %}
+/* 使用world数据库 */
+USE world;
+
+/*
+*	从city表和右链接countrylanguage表中，
+*	取得两个表中CountryCode相同，
+*	且CountryCode是‘ARG’的，
+*	且city的Population在267980与357589之间的结果，
+*	最后按Population升序排出
+*/
+SELECT countrylanguage.* FROM city RIGHT JOIN countrylanguage ON (city.CountryCode = countrylanguage.CountryCode)
+WHERE city.CountryCode = 'ARG' GROUP BY city.Population ASC HAVING Population BETWEEN 267980 AND 357589;
+
+
+/*
+*	从country表中，同时右链接从city取出的结果
+*	（该结果是：从city表中取出Population并且按照每个CountryCode来计算每个CountryCode中的Population总数，还有CountryCode
+*	（用于与country中的Code1进行配对），按照CoutryCode组织起来，作为一个变量叫做 cp），
+*	在cp.CountryCode = country.Code的条件下，取出coutnry.Name,cp.CountryPopulation,country.Population，按照CountryCode组织起来
+*	最后按Population升序排出
+*/
+SELECT country.Name, cp.CountryPopulation , country.Population AS CountrySumPopulation FROM Country RIGHT JOIN 
+(
+	SELECT CountryCode, SUM(Population) AS CountryPopulation FROM city GROUP BY CountryCode
+) AS cp ON (cp.CountryCode = country.Code);
+
+{% endhighlight %}
+
+

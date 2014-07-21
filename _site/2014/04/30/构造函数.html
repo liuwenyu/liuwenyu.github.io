@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>构造函数 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,101 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">构造函数</h2>
+    2014年04月30日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>总结：</h2>
 
+<h2>默认参数的构造函数</h2>
+
+<p>对于有参数的构造函数，在定义对象时必须给构造函数传递参数。实际情况中，虽然有些构造函数有参数，但其参数是不变的，这就是默认参数的构造函数。此时构造函数的形式如下：</p>
+
+<p>类名(函数名)(参数1=默认值，参数2=默认值，…) 
+构造函数中的参数与普通函数的参数是一样的，所谓的默认参数即为该参数设置一个默认的取值。可以为全部或者部分参数设置默认值。</p>
+
+<h2>【示例4.11】</h2>
+
+<p>利用前面的point类，用带默认参数的构造函数计算（2，3）、（7，3）、（4，6）到原点的距离。</p>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include&quot;iostream.h&quot;  </span>
+<span class="cp">#include&quot;math.h&quot;                </span><span class="c1">//包含头文件  </span>
+<span class="k">class</span> <span class="nc">point</span>  
+<span class="p">{</span>  
+<span class="nl">private:</span>  
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span><span class="p">;</span>  
+<span class="nl">public:</span>  
+    <span class="kt">float</span> <span class="nf">distance</span><span class="p">()</span>            <span class="c1">//类的成员函数  </span>
+    <span class="p">{</span>  
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">);</span>  
+    <span class="p">}</span>  
+    <span class="n">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>      <span class="c1">//默认参数的构造函数  </span>
+    <span class="p">{</span>  
+        <span class="n">x</span><span class="o">=</span><span class="n">a</span><span class="p">;</span><span class="n">y</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>  
+    <span class="p">}</span>  
+<span class="p">};</span>  
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>  
+<span class="p">{</span>  
+    <span class="n">point</span> <span class="n">A</span><span class="p">;</span>                    <span class="c1">//全部使用默认值  </span>
+    <span class="n">point</span> <span class="n">B</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>                 <span class="c1">//只取一个默认值  </span>
+    <span class="n">point</span> <span class="n">C</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>               <span class="c1">//不取默认值  </span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">A</span><span class="p">.</span><span class="n">distance</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;   &quot;</span><span class="o">&lt;&lt;</span><span class="n">B</span><span class="p">.</span><span class="n">distance</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;  &quot;</span><span class="o">&lt;&lt;</span><span class="n">C</span><span class="p">.</span><span class="n">distance</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  
+<span class="p">}</span></code></pre></div>
+
+<p>输出结果如下：</p>
+
+<blockquote>
+<ul>
+<li>3.60555<br></li>
+<li>7.61577<br></li>
+<li>7.2111 </li>
+</ul>
+</blockquote>
+
+<h2>分析：</h2>
+
+<p>上面的函数中有一个构造函数，并且该构造函数有默认值。在主函数中如果定义对象时不给出参数，则使用默认参数。如果给出部分参数，则把前面的参数改变取值，而后面的参数仍取默认值。当给定参数与形式参数个数相同时，则全部使用实参。</p>
+
+<h2>说明：</h2>
+
+<p>程序中如果定义了构造函数，无论它是否带有参数，系统不会再添加构造函数。因此，如果此时的构造函数带有参数，并且没有指定默认值，那么在创建对象时必须指定参数。</p>
+
+<h2>【示例4.12】</h2>
+
+<p>利用构造函数的默认参数计算（1，3）、（4，3）两个点到原点的距离。上面的各个点的纵坐标都是3，因此可以采用默认参数。代码如下：</p>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include&quot;iostream.h&quot;  </span>
+<span class="cp">#include&quot;math.h&quot;  </span>
+<span class="k">class</span> <span class="nc">point</span>  
+<span class="p">{</span>  
+<span class="nl">private:</span>  
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span><span class="kt">int</span> <span class="n">y</span><span class="p">;</span>  
+<span class="nl">public:</span>  
+    <span class="kt">float</span> <span class="nf">distance</span><span class="p">()</span>            <span class="c1">//类的成员函数  </span>
+    <span class="p">{</span>  
+        <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">);</span>  
+    <span class="p">}</span>  
+    <span class="n">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>        <span class="c1">//只要一个默认值的构造函数  </span>
+    <span class="p">{</span>  
+        <span class="n">x</span><span class="o">=</span><span class="n">a</span><span class="p">;</span><span class="n">y</span><span class="o">=</span><span class="n">b</span><span class="p">;</span>  
+    <span class="p">}</span>  
+<span class="p">};</span>  
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>  
+<span class="p">{</span>  
+    <span class="n">point</span> <span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                 <span class="c1">//使用默认值  </span>
+    <span class="n">point</span> <span class="n">B</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                 <span class="c1">//使用默认值  </span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">A</span><span class="p">.</span><span class="n">distance</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;   &quot;</span><span class="o">&lt;&lt;</span><span class="n">B</span><span class="p">.</span><span class="n">distance</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  
+<span class="p">}</span></code></pre></div>
+
+<h2>分析：</h2>
+
+<p>上面的程序是部分参数使用默认值的例子。当使用部分默认参数时，应该把拥有默认参数的参数放在参数列表的最右边，此时传递实参时可以正确地得到参数。</p>
+
+<h2>注意：</h2>
+
+<p>如果将默认参数设置在参数列表的左侧，例如point(int a=3,int b)，此时系统会报错。</p>
 
     </div>
     <hr>
@@ -316,7 +391,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

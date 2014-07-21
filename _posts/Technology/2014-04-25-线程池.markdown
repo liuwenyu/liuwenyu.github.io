@@ -1,0 +1,361 @@
+---
+layout: post
+title: 内存 线程池
+category: 学习
+tags: linux
+keywords: linux
+---
+
+##内存操作函数
+>* memmove
+Move block of memory
+>* memcopy
+Copy block of memory
+>* memset
+Fill block of memory
+>* memcmp
+Compare two blocks of memory
+>* memchr 
+Locate character in block of memory
+
+
+##线程池
+##MyMutex.h
+{% highlight c++ %}
+#ifndef __MYMUTEX_H__
+#define __MYNUTEX_H__
+#include <pthread.h>
+class MyMutex
+{
+	public:
+		friend class MyCondition ;
+		MyMutex()
+		{
+			pthread_mutex_init(&m_mutex, NULL);
+		}
+		void lock()
+		{
+			pthread_mutex_lock(&m_mutex);
+		}
+		void unlock()
+		{
+			pthread_mutex_unlock(&m_mutex);
+		}
+		~MyMutex()
+		{
+			pthread_mutex_destroy(&m_mutex);
+		}
+	private:
+		pthread_mutex_t m_mutex ;
+		MyMutex(const MyMutex& obj);
+		MyMutex& operator = (const MyMutex& obj);
+		
+};
+#endif
+{% endhighlight %}
+##MyCondition
+{% highlight c++ %}
+#ifndef __MYCONDITION_H__
+#define __MYCONDITION_H__
+#include "MyMutex.h"
+class MyCondition
+{
+	public:
+	MyCondition(MyMutex& mutex):m_mutex(mutex)
+	{	
+		if(pthread_cond_init(&m_cond, NULL))
+		{
+			throw std::runtime_error("pthread_cond_init");
+		}
+	}
+	void wait()
+	{
+		pthread_cond_wait(&m_cond, &m_mutex.m_mutex);
+	}
+	void notify()
+	{
+		pthread_cond_signal(&m_cond);
+	}
+	void notifyall()
+	{
+		pthread_cond_broadcast(&m_cond);
+	}
+	~MyCondition()
+	{
+		pthread_cond_destroy(&m_cond);
+	}
+	private:
+	MyCondition(const MyCondition& obj);
+	MyCondition& operator = (const MyCondition& obj) ;
+	pthread_cond_t m_cond ;
+	MyMutex& m_mutex ;
+};
+#endif
+{% endhighlight %}
+##Thread.h
+{% highlight c++ %}
+#ifndef __THREAD_H__
+#define __THREAD_H__
+#include "pthread.h"
+#include <stdexcept>
+class Thread
+{
+
+	private:
+		pthread_t m_tid ;
+		bool m_is_started ;
+		pthread_attr_t m_attr ;
+	protected:
+		virtual void run() = 0 ;
+		void* m_arg ;
+		static void* thread_handle(void* arg); 
+	public:
+		Thread():m_tid(0),m_is_started(false)
+	{
+		pthread_attr_init(&m_attr);			
+	}
+		void start(void* arg = NULL)
+		{
+			
+			if(!m_is_started)
+			{	
+				m_arg = arg ;
+				if(pthread_attr_setdetachstate(&m_attr, PTHREAD_CREATE_DETACHED))
+				{
+					throw std::runtime_error("pthread_attr_setdetachstate");
+					return  ;
+				}	
+				if(pthread_create(&m_tid, &m_attr, Thread::thread_handle, this))
+				{
+					throw std::runtime_error("pthread_create");
+					return  ;
+				}
+			}
+		}
+		~Thread()
+		{
+			pthread_attr_destroy(&m_attr);
+		}
+
+
+};
+void* Thread::thread_handle(void* arg)
+{
+	Thread* p = (Thread*)arg ;
+	p -> run() ;	
+}
+#endif
+{% endhighlight %}
+##MyThread.h
+{% highlight c++ %}
+#ifndef __MYTHREAD_H__
+#define __MYTHREAD_H__
+#include "Thread.h"
+#include <iostream>
+#include "MyCondition.h"
+#include <stdlib.h>
+struct MyTask
+{
+	int left ;
+	int right;
+	int op ;
+};
+class ThreadPool ;
+class MyThread: public Thread
+{
+	public:
+	MyThread()
+	{
+	}
+	void get_related(ThreadPool* pobj)
+	{
+		m_threadpool = pobj ;
+	}
+	void run();
+		/*
+	{
+		while(true)
+		{
+			MyTask task;
+			if( ! (m_threadpool->get_task(task)) )	
+			{
+				break ;
+			}
+			execute_task(task);
+			sleep(1);
+		}
+	}*/
+	private:
+		void execute_task(MyTask& task)
+		{
+			switch(task.op)
+			{
+				case 0:
+					std::cout << task.left << "+" << task.right << "=" << task.left + task.right << std::endl ;
+			 		break ;
+				case 1:
+					
+					std::cout << task.left << "-" << task.right << "=" << task.left - task.right << std::endl ;
+					break ;
+				case 2:
+					
+					std::cout << task.left << "*" << task.right << "=" << task.left * task.right << std::endl ;
+					break ;
+				case 3:
+					
+					std::cout << task.left << "/" << task.right<< "=" << task.left / task.right << std::endl ;
+					break ;
+				case 4:
+					
+					std::cout << task.left << "%" << task.right << "=" << task.left % task.right << std::endl ;
+			 		break ;
+			}
+		}
+		ThreadPool* m_threadpool ;
+};
+#endif
+{% endhighlight %}
+##ThreadPool
+{% highlight c++ %}
+#ifndef __THREADPOOL_H__
+#define __THREADPOOL_H__
+#include "MyThread.h"
+#include <vector>
+#include <queue>
+#include <time.h>
+class ThreadPool 
+{
+	public:
+		ThreadPool(const int num = 12):m_threads(num),m_mutex(),m_cond(m_mutex),m_on(false)
+		{
+			std::vector<MyThread>::iterator iter = m_threads.begin();
+			for(; iter != m_threads.end(); iter ++)
+			{
+				iter -> get_related(this);
+			}
+		} 		
+		void threadpool_work()
+		{
+			if(!m_on)
+			{
+				m_on = true ;
+#ifndef NDEBUG
+				std::cout << "ThreadPool started !" << std::endl;
+#endif
+				std::vector<MyThread>::iterator iter = m_threads.begin();
+				for(; iter != m_threads.end(); iter ++)
+				{
+					iter -> start();
+				}
+					
+			}
+		}
+		void threadpool_stop()
+		{
+			if(m_on)
+			{
+				m_on = false ;
+				m_cond.notifyall();
+			}
+		}
+		void make_task(MyTask &task)
+		{
+			srand(time(NULL));
+			task.left = rand() % 1000 ;
+			task.right = rand() % 1000 + 1;
+			task.op = rand()% 5;
+		}
+		bool allocate_task()
+		{
+			sleep(5) ;
+			m_mutex.lock();
+			MyTask task ;
+			make_task(task);
+			m_tasks.push(task);
+#ifndef NDEBUG
+				std::cout << "Task add !" << std::endl;
+#endif
+			m_mutex.unlock();
+			m_cond.notifyall();
+		}		
+		bool get_task(MyTask& task)
+		{
+			m_mutex.lock();
+			while( m_on &&m_tasks.empty())
+			{
+	 		m_cond.wait();
+			}
+			if(!m_on)
+			{
+				m_mutex.unlock();
+				m_cond.notifyall();
+				return false ;
+			}else if(!m_tasks.empty())
+			{
+				task =  m_tasks.front();
+				m_tasks.pop();
+				m_mutex.unlock();
+				//m_cond.notifyall();
+#ifndef NDEBUG
+				std::cout << "Task get !" << std::endl;
+#endif
+				return true ;
+			}
+
+		}
+	private:
+		ThreadPool(const ThreadPool& obj);
+		ThreadPool& operator =(const ThreadPool& obj);
+		std::vector<MyThread> m_threads ;
+		std::queue<MyTask> m_tasks ;
+		MyMutex m_mutex ;
+		MyCondition m_cond ;
+		bool m_on ;
+};
+#endif
+{% endhighlight %}
+##
+{% highlight c++ %}
+#include "ThreadPool.h"
+void MyThread::run()
+{
+#ifndef NDEBUG
+	std::cout << "thread run" << std::endl ;
+#endif
+	while(true)
+	{
+		MyTask task;
+		if( ! (m_threadpool->get_task(task)) )	
+		{
+			break ;
+		}
+		execute_task(task);
+		sleep(1);
+	}
+}
+
+int main(int argc, char* argv[])
+{
+	ThreadPool myThreadPool ;
+	myThreadPool.threadpool_work() ;
+	int num = 5 ;
+	while(num --)
+	{
+		myThreadPool.allocate_task();
+		sleep(1);
+	}
+	myThreadPool.threadpool_stop() ;
+	return 0 ;
+}
+{% endhighlight %}
+
+##总结  
+
+##一些问题
+{% highlight c++ %}
+int ((int *)0 + 4) //值为16
+{% endhighlight %}
+
+
+
+

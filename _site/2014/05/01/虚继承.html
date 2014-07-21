@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>约瑟夫问题 虚继承 | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,29 +288,124 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">约瑟夫问题 虚继承</h2>
+    2014年05月01日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>约瑟夫问题（数学解法）</h2>
 
+<p>&lt;见于《具体数学》&gt;
+问题描述：n个人（编号0~(n-1))，从0开始报数，报到(m-1)的退出，剩下的人继续从0开始报数。求胜利者的编号。</p>
 
+<p>我们知道第一个人(编号一定是m%n-1) 出列之后，剩下的n-1个人组成了一个新的约瑟夫环（以编号为k=m%n的人开始）:</p>
+
+<blockquote>
+<ul>
+<li>k  k+1  k+2  ... n-2, n-1, 0, 1, 2, ... k-2</li>
+</ul>
+</blockquote>
+
+<p>并且从k开始报0。</p>
+
+<p>现在我们把他们的编号做一下转换：</p>
+
+<blockquote>
+<ul>
+<li>k     --&gt; 0</li>
+<li>k+1   --&gt; 1</li>
+<li>k+2   --&gt; 2</li>
+<li>...</li>
+<li>...</li>
+<li>k-2   --&gt; n-2</li>
+<li>k-1   --&gt; n-1</li>
+</ul>
+</blockquote>
+
+<p>变换后就完完全全成为了(n-1)个人报数的子问题，假如我们知道这个子问题的解：例如x是最终的胜利者，那么根据上面这个表把这个x变回去不刚好就是n个人情况的解吗？！！变回去的公式很简单，相信大家都可以推出来：</p>
+
+<blockquote>
+<ul>
+<li>x&#39;=(x+k)%n</li>
+</ul>
+</blockquote>
+
+<p>如何知道(n-1)个人报数的问题的解？对，只要知道(n-2)个人的解就行了。(n-2)个人的解呢？当然是先求(n-3)的情况 ---- 这显然就是一个倒推问题！好了，思路出来了，下面写递推公式：</p>
+
+<p>令f[i]表示i个人玩游戏报m退出最后胜利者的编号，最后的结果自然是f[n]</p>
+
+<h2>递推公式</h2>
+
+<blockquote>
+<ul>
+<li>f<a href="http://h.hiphotos.bdimg.com/album/s%3D1100%3Bq%3D90/sign=9bc6f2eccebf6c81f33728e98c0e8a44/a8ec8a13632762d0f047b23ba2ec08fa513dc63c.jpg">1</a>=0;</li>
+<li>f[i]=(f[i-1]+m)%i;  (i&gt;1)</li>
+</ul>
+</blockquote>
+
+<p>有了这个公式，我们要做的就是从1-n顺序算出f[i]的数值，最后结果是f[n]。因为实际生活中编号总是从1开始，我们输出f[n]+1</p>
+
+<h2>关于递推公式的理解</h2>
+
+<p>将这些人从0到n编号，假设除去第k个人。</p>
+
+<blockquote>
+<ul>
+<li>0, 1, 2, 3, ..., k-2, k-1, k, ..., n-1　　//original sequence (1)</li>
+<li>0, 1, 2, 3, ..., k-2,      , k, ..., n-1　　//get rid of kth person (2)</li>
+<li>k, k+1, ..., n-1,    0,    1,        ..., k-2　　//rearrange the sequence (3)</li>
+<li>0, 1,     ..., n-k-1, n-k, n-k+1, ..., n-2　　//the n-1 person (4)</li>
+</ul>
+</blockquote>
+
+<p>我们假设f(n)的值为n个人中最后存活的人的序号，则
+注意到(2)式(3)式(4)式其实是同一个序列。
+注意(1)式和(4)式，是同一个问题，不同的仅仅是人数。
+对比(3)(4)两式，可以看出(3)中的编号x&#39;与(4)中的编号x对应关系即为x&#39;=(x+k) mod n</p>
+
+<p>由于是逐级递推，不需要保存每个f[i]，程序也是异常简单：</p>
+
+<h2>C语言实现</h2>
+
+<div class="highlight"><pre><code class="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;N M = &quot;</span><span class="p">);</span> <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">m</span><span class="p">)</span><span class="o">%</span><span class="n">i</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;The winner is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>这个算法的时间复杂度为O(n)，相对于模拟算法已经有了很大的提高。算n，m等于一百万，一千万的情况不是问题了。可见，适当地运用数学策略，不仅可以让编程变得简单，而且往往会成倍地提高算法执行效率。</p>
+
+<h2>虚继承</h2>
+
+<p>虚继承仅仅在多重继承体系中才能体现其价值
+下图说明了虚继承使用的典型事例:
+<img src="http://h.hiphotos.bdimg.com/album/s%3D1100%3Bq%3D90/sign=9bc6f2eccebf6c81f33728e98c0e8a44/a8ec8a13632762d0f047b23ba2ec08fa513dc63c.jpg" alt="虚继承"></p>
+
+<h2>非虚继承情况:</h2>
+
+<p>class A, class B, class D, class E均包含一个函数f().</p>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">B</span><span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">D</span><span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">E</span><span class="o">:</span> <span class="k">public</span> <span class="n">B</span><span class="p">,</span> <span class="k">public</span> <span class="n">D</span> <span class="p">{};</span></code></pre></div>
+
+<p>其中class B和class D为class A的直接子类，此时class B和class D中均有一个继承自class A的函数f(), class E为class B与class D的直接子类，当class E的对象调用f()时，会产生二义性错误，因为编译器无法确认class E时继承自class B还是class D。</p>
+
+<h2>虚继承情况：</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">B</span><span class="o">:</span> <span class="k">virtual</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">D</span><span class="o">:</span> <span class="k">virtual</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{};</span>
+<span class="k">class</span> <span class="nc">E</span><span class="o">:</span> <span class="k">public</span> <span class="n">B</span><span class="p">,</span> <span class="k">public</span> <span class="n">D</span> <span class="p">{};</span></code></pre></div>
+
+<p>但是当在继承时加入virtual这个关键字时，class B和class D中的class A的部分就会只有一份，也就是说只会有一个从class A继承来的f()函数，不会发生二义性问题。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">同时class B 与 class D 共享继承基类class A子对象，
+</code></pre></div>
     </div>
     <hr>
     <div id="disqus_thread">
@@ -316,7 +413,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

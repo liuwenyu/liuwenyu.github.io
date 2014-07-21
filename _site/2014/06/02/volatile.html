@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>全局变量 volatile | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="linux">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,146 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">全局变量 volatile</h2>
+    2014年06月02日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>全局变量</h2>
 
+<ol>
+<li> page 88 <code>如果用引用头文件的方式...</code></li>
+<li> 当一个局部变量屏蔽了全局变量时，又想要使用全局变量时，有两种方法：
+&gt;* 使用作用域操作符<code>::</code>
+&gt;* 使用<code>extern</code></li>
+</ol>
+
+<h2>关键字volatile</h2>
+
+<p>一个定义为<code>volatile</code>的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。下面是<code>volatile</code>变量的几个例子：</p>
+
+<ol>
+<li> 并行设备的硬件寄存器（如：状态寄存器）</li>
+<li> 一个中断服务子程序中会访问到的非自动变量(<code>Non-automatic variables</code>)</li>
+<li> 多线程应用中被几个任务共享的变量
+回答不出这个问题的人是不会被雇佣的。我认为这是区分C程序员和嵌入式系统程序员的最基本的问题。嵌入式系统程序员经常同硬件、中断、RTOS等等打交道，所用这些都要求<code>volatile</code>变量。不懂得<code>volatile</code>内容将会带来灾难。</li>
+</ol>
+
+<p>假设被面试者正确地回答了这是问题（嗯，怀疑这否会是这样），我将稍微深究一下，看一下这家伙是不是直正懂得<code>volatile</code>完全的重要性。
+1.  一个参数既可以是<code>const</code>还可以是<code>volatile</code>吗？解释为什么。
+2.  一个指针可以是<code>volatile</code>吗？解释为什么。
+3.  下面的函数有什么错误：</p>
+
+<div class="highlight"><pre><code class="c"><span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">*</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>下面是答案：
+1.  是的。一个例子是只读的状态寄存器。它是<code>volatile</code>因为它可能被意想不到地改变。它是<code>const</code>因为程序不应该试图去修改它。
+2.  是的。尽管这并不很常见。一个例子是当一个中服务子程序修该一个指向一个buffer的指针时。
+3.  这段代码的有个恶作剧。这段代码的目的是用来返指针<em>ptr指向值的平方，但是，由于</em>ptr指向一个<code>volatile</code>型参数，编译器将产生类似下面的代码：</p>
+
+<div class="highlight"><pre><code class="c"><span class="kt">int</span> <span class="nf">square</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>由于*ptr的值可能被意想不到地该变，因此a和b可能是不同的。结果，这段代码可能返不是你所期望的平方值！正确的代码如下：</p>
+
+<div class="highlight"><pre><code class="c"><span class="kt">long</span> <span class="nf">square</span><span class="p">(</span><span class="k">volatile</span> <span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>volitate</h2>
+
+<p>1 、在嵌入式系统中，<code>volitate</code>的作用是什么？并给出三个不同的例子。
+答：一个定义为<code>volatile</code>的变量是说这变量可能会被意想不到地改变，这样，编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值，而不是使用保存在寄存器里的备份。
+下面是<code>volatile</code>变量的几个例子：
+1.  并行设备的硬件寄存器（如：状态寄存器）
+2.  一个中断服务子程序中会访问到的非自动变量(Non-automatic variables)
+3.  多线程应用中被几个任务共享的变量</p>
+
+<h2>维基百科的解释</h2>
+
+<p>C和C++中的<code>volatile</code>
+在C，以及C++中，<code>volatile</code>关键字的作用：</p>
+
+<blockquote>
+<ul>
+<li>允许访问内存映射设备</li>
+<li>允许在setjmp和longjmp之间使用变量</li>
+<li>允许在信号处理函数中使用<code>sig_atomic_t</code>变量</li>
+</ul>
+</blockquote>
+
+<p>根据相关的标准（C,C++,POSIX,WIN32)和目前绝大多数实现，对<code>volatile</code>变量的操作并不是原子的，也不能用来为线程建立严格的happens-before关系。<code>volatile</code>关键字就像便携式线程构建一样基本没什么用处</p>
+
+<h2>复习疑难点</h2>
+
+<ol>
+<li> page 102 <code>关于堆内存的分配与释放，以及其生存周期</code>.</li>
+<li> page 103 <code>删除const对象</code></li>
+<li> page 91 <code>static只能进行一次初始化且具有“记忆性”</code></li>
+<li> page 89 <code>例3</code>
+Test Code：</li>
+</ol>
+
+<div class="highlight"><pre><code class="c"><span class="cp">#include&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">sum</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">count</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;static int %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after ++ static int %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">==</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">extern</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;if extern int %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after ++ if extern int %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after ++ if extern int sum : %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;endle of loop for count:  %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;endle of loop for sum:  %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+        <span class="n">sum</span> <span class="o">+=</span><span class="n">count</span><span class="p">;</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after sum +=count endle of loop for sum:  %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>result:</p>
+
+<div class="highlight"><pre><code class="c"><span class="k">static</span> <span class="kt">int</span> <span class="mi">4</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">static</span> <span class="kt">int</span> <span class="mi">5</span>
+<span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="mi">3</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="mi">4</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">:</span> <span class="mi">4</span>
+<span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">count</span><span class="o">:</span>  <span class="mi">5</span>
+<span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">sum</span><span class="o">:</span>  <span class="mi">4</span>
+<span class="n">after</span> <span class="n">sum</span> <span class="o">+=</span><span class="n">count</span> <span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">sum</span><span class="o">:</span>  <span class="mi">9</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="mi">5</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">static</span> <span class="kt">int</span> <span class="mi">6</span>
+<span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="mi">4</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="mi">5</span>
+<span class="n">after</span> <span class="o">++</span> <span class="k">if</span> <span class="k">extern</span> <span class="kt">int</span> <span class="n">sum</span> <span class="o">:</span> <span class="mi">14</span>
+<span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">count</span><span class="o">:</span>  <span class="mi">6</span>
+<span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">sum</span><span class="o">:</span>  <span class="mi">14</span>
+<span class="n">after</span> <span class="n">sum</span> <span class="o">+=</span><span class="n">count</span> <span class="n">endle</span> <span class="n">of</span> <span class="n">loop</span> <span class="k">for</span> <span class="n">sum</span><span class="o">:</span>  <span class="mi">20</span>
+<span class="mi">4</span> <span class="mi">20</span></code></pre></div>
 
     </div>
     <hr>
@@ -316,7 +436,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

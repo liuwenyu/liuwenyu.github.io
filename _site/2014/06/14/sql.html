@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>关于 | 落枫的博客</title>
+<title>MySql | 落枫的博客</title>
 <meta name="author" content="">
+
+  <meta name="keywords" content="MySql">
 
 
 <link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
@@ -286,28 +288,240 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">关于</h2>
+    <h2 id="#identifier">MySql</h2>
+    2014年06月14日
   </div>
   <div class="col-md-12 aside3-content">
-    <div id="page-content">
-      <h2>关于我</h2>
-<p style="font-size:18px;">
-Hi, thank you for visiting this blog. My name is yuandong, a web developer based on Shenzhen, China. I mostly write about information technology that I have been playing with, but every now and then I share the feeling of live, the observation of society, the travelling note and english learning skills.
-</p>
-<p style="font-size:18px;">
-If you have any question, suggestion or correction, pls feel free to leave a comment or contact me with <font style="color:red;" >yuandong618#gmail.com</font>.
-</p>
-<p style="font-size:18px;">
-Enjoy!
-</p>
-<hr>
-<a href="http://github.com/liuwenyu" target="_blank">
-  <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="mailto:liuwenyu21@gmail.com">
-  <i class="fa fa-envelope-o fa-2x"></i>
-</a>
+    <hr>
+    <div id="content">
+      <h2>MySQL</h2>
 
+<h2>世界上最流行的开源数据库</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&gt;* 社区版服务器 V5.6
+</code></pre></div>
+<h2>SQL</h2>
+
+<h2>结构化查询程序</h2>
+
+<blockquote>
+<ul>
+<li>数据定义语言 (DDL)</li>
+<li>数据操纵语言 (DML)</li>
+</ul>
+</blockquote>
+
+<h2>数据定义语言 （Data Definition Language,DDL）</h2>
+
+<ul>
+<li>CREATE
+<code>
+CREAT DATABASE MyDatabase； 
+</code>
+<code>
+CREATE TABLE `user` (
+`user_id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(45) NOT NULL,
+`email` varchar(255) NOT NULL,
+PRIMARY KEY (`user_id`),
+UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></li>
+<li>DROP
+<code>
+DROP DATABASE MyDatabase; 
+</code></li>
+<li>ALTER</li>
+</ul>
+
+<h2>数据操纵语言 （Data Manipulation Language,DML）</h2>
+
+<p>| 动作  | SQL    |  描述  | 示例 |
+| ----- | :-----  | :----  |:---|
+| 创建  | INSERT | 插入新数据 |INSERT INTO user VALUES (‘Tom’,  24);|
+| 读取  | SELECT | 读取数据   |SELECT * FROM user WHERE name=‘Tom’;|
+| 更新  | UPDATE | 更新数据   |UPDATE user SET name = ‘Alex’ WHERE id=1;|
+| 删除  | DELETE | 删除数据   |DELETE FROM user WHERE id=1;|</p>
+
+<h2>SQL查询</h2>
+
+<h2>简单查询</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Select * From user Where id = 1；
+</code></pre></div>
+<h2>子查询</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Select * From article Where uid In
+    (Select uid From user Where status=1)；
+</code></pre></div>
+<h2>JOIN</h2>
+
+<p>假定有两张表：
+<code>
+A:             B:
+Id  Name       Id  Name
+1   张三        1   小明
+2   李四        2   张三
+3   王五        3   小红
+4   赵六        4   王五
+</code></p>
+
+<h2>内连接</h2>
+
+<p>内连接只生成表A和表B中匹配的记录的集合。
+<code>
+Select * From A Inner Join B On A.name = B.name
+</code>
+```
+结果：
+Id    Name   Id     Name
+1      张三     2      张三
+3      王五     4      王五</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## 全外连接（MySql不支持）
+全外连接生成表A和表B中所有记录的集合。如果匹配，两边都有值，否则以null填充。
+</code></pre></div>
+<p>Select * From A Full Outer Join B On A.name = B.name
+<code>
+</code>
+结果：
+Id    Name      Id     Name
+1     张三       2      张三
+2     李四       null   null
+3     王五       4      王五
+4     赵六       null   null
+null  null       1      小明
+null  null       3      小红</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## 左外连接
+左外连接生成表A中所有记录和表B中匹配的记录的集合。如果不匹配，右端以null填充。
+</code></pre></div>
+<p>Select * From A Left Outer Join B On A.name = B.name
+<code>
+</code>
+结果：
+Id  Name      Id     Name
+1   张三       2      张三
+2   李四       null   null
+3   王五       4      王五
+4   赵六       null   null
+<code>
+为了获得只在Table A而不在Table B中的记录，使用左外连接，通过where语句来排除右边不想要的部分。
+</code>
+Select * From A Left Outer Join B On A.name = B.name 
+Where B.id Is null 
+<code>
+</code>
+结果：
+Id  Name      Id     Name
+2   李四      null   null
+4   赵六      null   null
+```</p>
+
+<h2>右外连接</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Select * From A Right Outer Join B On A.name = B.name
+</code></pre></div>
+<h2>全连接（Full Join）</h2>
+
+<p>将两个表中所有记录做一次笛卡尔乘积，不使用任何匹配或者选取条件。
+<code>
+//以下语句等效：
+    Select * From A Funll Join B；
+    Select * From A Cross Join B；
+支持 ON，WHERE
+例如：Select * From A Cross Join B On A.name=B.name Where A.id=1;
+    Select * From A, B；
+支持 WHERE
+例如：Select * From A, B Where A.name=B.name And A.id=1;
+    Select * From A Join B；
+支持ON，WHERE
+例如： Select * From A Join B On A.name=B.name Where A.id=1;
+</code></p>
+
+<h2>SQL语句及常用函数</h2>
+
+<p>1.语句
+<code>
+Group By    //结合统计函数，根据一列或多列对结果进行分组
+</code>
+<code>
+Order By    //对结果集进行排序
+</code>
+<code>
+Having      //弥补WHERE语句无法与统计函数一起使用
+</code>
+2.统计函数</p>
+
+<p>1) Count()
+<code>
+//返回指定列的值的数目
+Select Count(column_name) From table_name
+</code>
+2) Sum()
+<code>
+//返回数值列的总和
+Select Sum(column_name) From table_name
+</code></p>
+
+<h2>练习</h2>
+
+<p>创建表
+<code>
+Student:        sid,  name,  age
+Class:          cid,  name
+StudentClass:   sid,  cid
+//往每张表插入&gt;10行的数据
+</code>
+查询：</p>
+
+<ul>
+<li>查询年龄&gt;20的学生的名字
+<code>
+Select name, age From Student Where age&gt;20
+</code></li>
+<li>查询每个班级的学生的数量
+<code>
+Select c.name, sc.num 
+From Class c, (Select cid, Count(sid) num From StudentClass Group By cid) sc 
+Where c.cid = sc.cid
+</code></li>
+<li>查询学生数量&gt;30的班级的名字
+<code>
+Selcet c.name sc.num
+From Class, (Select cid, Count(sid) num From StudentClass Group By cid) sc
+Where c.cid = sc.cid and sc.num &gt; 30
+</code></li>
+<li>查询Tom所在班级的学生的数量
+<code>
+Select Count(sid) From StudentClass Group By cid 
+Having StudentClass.cid in 
+(Select StudentClass.cid From Student, StudentClass Where Student.name = &quot;Tom&quot; and Student.sid = StudentClass.sid)
+</code>
+---</li>
+</ul>
+
+<h2>复杂Select组合语句</h2>
+
+<div class="highlight"><pre><code class="sql"><span class="cm">/* 使用world数据库 */</span>
+<span class="n">USE</span> <span class="n">world</span><span class="p">;</span>
+
+<span class="cm">/*</span>
+<span class="cm">*  从city表和右链接countrylanguage表中，</span>
+<span class="cm">*  取得两个表中CountryCode相同，</span>
+<span class="cm">*  且CountryCode是‘ARG’的，</span>
+<span class="cm">*  且city的Population在267980与357589之间的结果，</span>
+<span class="cm">*  最后按Population升序排出</span>
+<span class="cm">*/</span>
+<span class="k">SELECT</span> <span class="n">countrylanguage</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="n">city</span> <span class="k">RIGHT</span> <span class="k">JOIN</span> <span class="n">countrylanguage</span> <span class="k">ON</span> <span class="p">(</span><span class="n">city</span><span class="p">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="n">countrylanguage</span><span class="p">.</span><span class="n">CountryCode</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">city</span><span class="p">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="s1">&#39;ARG&#39;</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">city</span><span class="p">.</span><span class="n">Population</span> <span class="k">ASC</span> <span class="k">HAVING</span> <span class="n">Population</span> <span class="k">BETWEEN</span> <span class="mi">267980</span> <span class="k">AND</span> <span class="mi">357589</span><span class="p">;</span>
+
+
+<span class="cm">/*</span>
+<span class="cm">*  从country表中，同时右链接从city取出的结果</span>
+<span class="cm">*  （该结果是：从city表中取出Population并且按照每个CountryCode来计算每个CountryCode中的Population总数，还有CountryCode</span>
+<span class="cm">*  （用于与country中的Code1进行配对），按照CoutryCode组织起来，作为一个变量叫做 cp），</span>
+<span class="cm">*  在cp.CountryCode = country.Code的条件下，取出coutnry.Name,cp.CountryPopulation,country.Population，按照CountryCode组织起来</span>
+<span class="cm">*  最后按Population升序排出</span>
+<span class="cm">*/</span>
+<span class="k">SELECT</span> <span class="n">country</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">cp</span><span class="p">.</span><span class="n">CountryPopulation</span> <span class="p">,</span> <span class="n">country</span><span class="p">.</span><span class="n">Population</span> <span class="k">AS</span> <span class="n">CountrySumPopulation</span> <span class="k">FROM</span> <span class="n">Country</span> <span class="k">RIGHT</span> <span class="k">JOIN</span> 
+<span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">CountryCode</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">Population</span><span class="p">)</span> <span class="k">AS</span> <span class="n">CountryPopulation</span> <span class="k">FROM</span> <span class="n">city</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">CountryCode</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">cp</span> <span class="k">ON</span> <span class="p">(</span><span class="n">cp</span><span class="p">.</span><span class="n">CountryCode</span> <span class="o">=</span> <span class="n">country</span><span class="p">.</span><span class="n">Code</span><span class="p">);</span></code></pre></div>
 
     </div>
     <hr>
@@ -316,7 +530,14 @@ Enjoy!
 </div>
 
   </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
 </div>
+
 
           </div>
         </div>

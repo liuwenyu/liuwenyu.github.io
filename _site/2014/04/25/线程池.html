@@ -1,0 +1,685 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>内存 线程池 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+          <li><a href="#技术学习" data-toggle="tab">技术学习</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/06/16/%E9%93%BE%E8%A1%A8.html" class="list-group-item pjaxlink">二叉树 链表</a>
+                
+                  <a href="/2014/06/15/fork.html" class="list-group-item pjaxlink">多进程 fork</a>
+                
+                  <a href="/2014/06/14/sql.html" class="list-group-item pjaxlink">MySql</a>
+                
+                  <a href="/2014/06/13/%E6%8E%92%E5%BA%8F.html" class="list-group-item pjaxlink">排序 查找 键树 结构体</a>
+                
+                  <a href="/2014/06/10/%E9%87%8D%E8%BD%BD.html" class="list-group-item pjaxlink">重载 虚函数 动态绑定</a>
+                
+                  <a href="/2014/06/07/%E9%80%92%E5%BD%92.html" class="list-group-item pjaxlink">递归 宏定义 内联函数</a>
+                
+                  <a href="/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html" class="list-group-item pjaxlink">联合体 大端小端 位域 指针引用</a>
+                
+                  <a href="/2014/06/02/volatile.html" class="list-group-item pjaxlink">全局变量 volatile</a>
+                
+                  <a href="/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html" class="list-group-item pjaxlink">const与指针 函数返回值 声明</a>
+                
+                  <a href="/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html" class="list-group-item pjaxlink">UDP服务器 僵尸进程</a>
+                
+                  <a href="/2014/05/02/%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">学习总结</a>
+                
+                  <a href="/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">约瑟夫问题 虚继承</a>
+                
+                  <a href="/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html" class="list-group-item pjaxlink">构造函数</a>
+                
+                  <a href="/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html" class="list-group-item pjaxlink">内存 线程池</a>
+                
+                  <a href="/2014/04/24/c++.html" class="list-group-item pjaxlink">c++</a>
+                
+                  <a href="/2014/04/23/%E5%86%85%E5%AD%98.html" class="list-group-item pjaxlink">内存 复制控制</a>
+                
+                  <a href="/2014/04/22/%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">继承 函数重载覆盖隐藏</a>
+                
+                  <a href="/2014/04/21/string.html" class="list-group-item pjaxlink">重载运算符-智能指针-String</a>
+                
+                  <a href="/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html" class="list-group-item pjaxlink">复制控制</a>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="技术学习">
+              <div class="list-group">
+                <h2 class="center">技术学习</h2>
+                
+                  <a href="/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html" class="list-group-item pjaxlink">epoll</a>
+                
+                  <a href="/2014/05/02/mini%E6%90%9C%E7%B4%A2.html" class="list-group-item pjaxlink">mini搜索</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">29</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/16/%E9%93%BE%E8%A1%A8.html' class="list-group-item pjaxlink">
+                        二叉树 链表
+                      </a>
+                    
+                      <a  href='/2014/06/15/fork.html' class="list-group-item pjaxlink">
+                        多进程 fork
+                      </a>
+                    
+                      <a  href='/2014/06/13/%E6%8E%92%E5%BA%8F.html' class="list-group-item pjaxlink">
+                        排序 查找 键树 结构体
+                      </a>
+                    
+                      <a  href='/2014/06/10/%E9%87%8D%E8%BD%BD.html' class="list-group-item pjaxlink">
+                        重载 虚函数 动态绑定
+                      </a>
+                    
+                      <a  href='/2014/06/07/%E9%80%92%E5%BD%92.html' class="list-group-item pjaxlink">
+                        递归 宏定义 内联函数
+                      </a>
+                    
+                      <a  href='/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html' class="list-group-item pjaxlink">
+                        联合体 大端小端 位域 指针引用
+                      </a>
+                    
+                      <a  href='/2014/06/02/volatile.html' class="list-group-item pjaxlink">
+                        全局变量 volatile
+                      </a>
+                    
+                      <a  href='/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html' class="list-group-item pjaxlink">
+                        const与指针 函数返回值 声明
+                      </a>
+                    
+                      <a  href='/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html' class="list-group-item pjaxlink">
+                        epoll
+                      </a>
+                    
+                      <a  href='/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        UDP服务器 僵尸进程
+                      </a>
+                    
+                      <a  href='/2014/05/02/%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        学习总结
+                      </a>
+                    
+                      <a  href='/2014/05/02/mini%E6%90%9C%E7%B4%A2.html' class="list-group-item pjaxlink">
+                        mini搜索
+                      </a>
+                    
+                      <a  href='/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        约瑟夫问题 虚继承
+                      </a>
+                    
+                      <a  href='/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html' class="list-group-item pjaxlink">
+                        构造函数
+                      </a>
+                    
+                      <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink">
+                        内存 线程池
+                      </a>
+                    
+                      <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink">
+                        c++
+                      </a>
+                    
+                      <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink">
+                        内存 复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        继承 函数重载覆盖隐藏
+                      </a>
+                    
+                      <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink">
+                        重载运算符-智能指针-String
+                      </a>
+                    
+                      <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink">
+                        复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySql">MySql</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="MySql" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/14/sql.html' class="list-group-item pjaxlink">
+                        MySql
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">内存 线程池</h2>
+    2014年04月25日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>内存操作函数</h2>
+
+<blockquote>
+<ul>
+<li>memmove
+Move block of memory</li>
+<li>memcopy
+Copy block of memory</li>
+<li>memset
+Fill block of memory</li>
+<li>memcmp
+Compare two blocks of memory</li>
+<li>memchr 
+Locate character in block of memory</li>
+</ul>
+</blockquote>
+
+<h2>线程池</h2>
+
+<h2>MyMutex.h</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef __MYMUTEX_H__</span>
+<span class="cp">#define __MYNUTEX_H__</span>
+<span class="cp">#include &lt;pthread.h&gt;</span>
+<span class="k">class</span> <span class="nc">MyMutex</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyCondition</span> <span class="p">;</span>
+        <span class="n">MyMutex</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">pthread_mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mutex</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">lock</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mutex</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">unlock</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mutex</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="o">~</span><span class="n">MyMutex</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">pthread_mutex_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_mutex</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nl">private:</span>
+        <span class="kt">pthread_mutex_t</span> <span class="n">m_mutex</span> <span class="p">;</span>
+        <span class="n">MyMutex</span><span class="p">(</span><span class="k">const</span> <span class="n">MyMutex</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">);</span>
+        <span class="n">MyMutex</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">MyMutex</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">);</span>
+        
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>MyCondition</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef __MYCONDITION_H__</span>
+<span class="cp">#define __MYCONDITION_H__</span>
+<span class="cp">#include &quot;MyMutex.h&quot;</span>
+<span class="k">class</span> <span class="nc">MyCondition</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">MyCondition</span><span class="p">(</span><span class="n">MyMutex</span><span class="o">&amp;</span> <span class="n">mutex</span><span class="p">)</span><span class="o">:</span><span class="n">m_mutex</span><span class="p">(</span><span class="n">mutex</span><span class="p">)</span>
+    <span class="p">{</span>    
+        <span class="k">if</span><span class="p">(</span><span class="n">pthread_cond_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_cond</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;pthread_cond_init&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">wait</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_cond</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_mutex</span><span class="p">.</span><span class="n">m_mutex</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">notify</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_cond</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">notifyall</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">pthread_cond_broadcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_cond</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">~</span><span class="n">MyCondition</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">pthread_cond_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_cond</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nl">private:</span>
+    <span class="n">MyCondition</span><span class="p">(</span><span class="k">const</span> <span class="n">MyCondition</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">);</span>
+    <span class="n">MyCondition</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">MyCondition</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">)</span> <span class="p">;</span>
+    <span class="kt">pthread_cond_t</span> <span class="n">m_cond</span> <span class="p">;</span>
+    <span class="n">MyMutex</span><span class="o">&amp;</span> <span class="n">m_mutex</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>Thread.h</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef __THREAD_H__</span>
+<span class="cp">#define __THREAD_H__</span>
+<span class="cp">#include &quot;pthread.h&quot;</span>
+<span class="cp">#include &lt;stdexcept&gt;</span>
+<span class="k">class</span> <span class="nc">Thread</span>
+<span class="p">{</span>
+
+    <span class="nl">private:</span>
+        <span class="kt">pthread_t</span> <span class="n">m_tid</span> <span class="p">;</span>
+        <span class="kt">bool</span> <span class="n">m_is_started</span> <span class="p">;</span>
+        <span class="kt">pthread_attr_t</span> <span class="n">m_attr</span> <span class="p">;</span>
+    <span class="nl">protected:</span>
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">run</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span>
+        <span class="kt">void</span><span class="o">*</span> <span class="n">m_arg</span> <span class="p">;</span>
+        <span class="k">static</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">thread_handle</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">);</span> 
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">Thread</span><span class="p">()</span><span class="o">:</span><span class="n">m_tid</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">m_is_started</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">pthread_attr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_attr</span><span class="p">);</span>          
+    <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">start</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="p">{</span>
+            
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_is_started</span><span class="p">)</span>
+            <span class="p">{</span>    
+                <span class="n">m_arg</span> <span class="o">=</span> <span class="n">arg</span> <span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">pthread_attr_setdetachstate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_attr</span><span class="p">,</span> <span class="n">PTHREAD_CREATE_DETACHED</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;pthread_attr_setdetachstate&quot;</span><span class="p">);</span>
+                    <span class="k">return</span>  <span class="p">;</span>
+                <span class="p">}</span>    
+                <span class="k">if</span><span class="p">(</span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_tid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m_attr</span><span class="p">,</span> <span class="n">Thread</span><span class="o">::</span><span class="n">thread_handle</span><span class="p">,</span> <span class="k">this</span><span class="p">))</span>
+                <span class="p">{</span>
+                    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&quot;pthread_create&quot;</span><span class="p">);</span>
+                    <span class="k">return</span>  <span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="o">~</span><span class="n">Thread</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">pthread_attr_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m_attr</span><span class="p">);</span>
+        <span class="p">}</span>
+
+
+<span class="p">};</span>
+<span class="kt">void</span><span class="o">*</span> <span class="n">Thread</span><span class="o">::</span><span class="n">thread_handle</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Thread</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">Thread</span><span class="o">*</span><span class="p">)</span><span class="n">arg</span> <span class="p">;</span>
+    <span class="n">p</span> <span class="o">-&gt;</span> <span class="n">run</span><span class="p">()</span> <span class="p">;</span>  
+<span class="p">}</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>MyThread.h</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef __MYTHREAD_H__</span>
+<span class="cp">#define __MYTHREAD_H__</span>
+<span class="cp">#include &quot;Thread.h&quot;</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &quot;MyCondition.h&quot;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="k">struct</span> <span class="n">MyTask</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="p">;</span>
+    <span class="kt">int</span> <span class="n">right</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">op</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="k">class</span> <span class="nc">ThreadPool</span> <span class="p">;</span>
+<span class="k">class</span> <span class="nc">MyThread</span><span class="o">:</span> <span class="k">public</span> <span class="n">Thread</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">MyThread</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">get_related</span><span class="p">(</span><span class="n">ThreadPool</span><span class="o">*</span> <span class="n">pobj</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m_threadpool</span> <span class="o">=</span> <span class="n">pobj</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">run</span><span class="p">();</span>
+        <span class="cm">/*</span>
+<span class="cm">   {</span>
+<span class="cm">       while(true)</span>
+<span class="cm">       {</span>
+<span class="cm">           MyTask task;</span>
+<span class="cm">           if( ! (m_threadpool-&gt;get_task(task)) )   </span>
+<span class="cm">           {</span>
+<span class="cm">               break ;</span>
+<span class="cm">           }</span>
+<span class="cm">           execute_task(task);</span>
+<span class="cm">           sleep(1);</span>
+<span class="cm">       }</span>
+<span class="cm">   }*/</span>
+    <span class="nl">private:</span>
+        <span class="kt">void</span> <span class="nf">execute_task</span><span class="p">(</span><span class="n">MyTask</span><span class="o">&amp;</span> <span class="n">task</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">switch</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">op</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">case</span> <span class="mi">0</span>:
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;+&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">+</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+                    <span class="k">break</span> <span class="p">;</span>
+                <span class="k">case</span> <span class="mi">1</span>:
+                    
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;-&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">-</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+                    <span class="k">break</span> <span class="p">;</span>
+                <span class="k">case</span> <span class="mi">2</span>:
+                    
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;*&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">*</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+                    <span class="k">break</span> <span class="p">;</span>
+                <span class="k">case</span> <span class="mi">3</span>:
+                    
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;/&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span><span class="o">&lt;&lt;</span> <span class="s">&quot;=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">/</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+                    <span class="k">break</span> <span class="p">;</span>
+                <span class="k">case</span> <span class="mi">4</span>:
+                    
+                    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;%&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">%</span> <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+                    <span class="k">break</span> <span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">ThreadPool</span><span class="o">*</span> <span class="n">m_threadpool</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>ThreadPool</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef __THREADPOOL_H__</span>
+<span class="cp">#define __THREADPOOL_H__</span>
+<span class="cp">#include &quot;MyThread.h&quot;</span>
+<span class="cp">#include &lt;vector&gt;</span>
+<span class="cp">#include &lt;queue&gt;</span>
+<span class="cp">#include &lt;time.h&gt;</span>
+<span class="k">class</span> <span class="nc">ThreadPool</span> 
+<span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="n">ThreadPool</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span><span class="o">:</span><span class="n">m_threads</span><span class="p">(</span><span class="n">num</span><span class="p">),</span><span class="n">m_mutex</span><span class="p">(),</span><span class="n">m_cond</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">),</span><span class="n">m_on</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MyThread</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">m_threads</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+            <span class="k">for</span><span class="p">(;</span> <span class="n">iter</span> <span class="o">!=</span> <span class="n">m_threads</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">iter</span> <span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">iter</span> <span class="o">-&gt;</span> <span class="n">get_related</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>        
+        <span class="kt">void</span> <span class="n">threadpool_work</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_on</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">m_on</span> <span class="o">=</span> <span class="nb">true</span> <span class="p">;</span>
+<span class="cp">#ifndef NDEBUG</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;ThreadPool started !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="cp">#endif</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MyThread</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">m_threads</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+                <span class="k">for</span><span class="p">(;</span> <span class="n">iter</span> <span class="o">!=</span> <span class="n">m_threads</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">iter</span> <span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">iter</span> <span class="o">-&gt;</span> <span class="n">start</span><span class="p">();</span>
+                <span class="p">}</span>
+                    
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">threadpool_stop</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">m_on</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">m_on</span> <span class="o">=</span> <span class="nb">false</span> <span class="p">;</span>
+                <span class="n">m_cond</span><span class="p">.</span><span class="n">notifyall</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">make_task</span><span class="p">(</span><span class="n">MyTask</span> <span class="o">&amp;</span><span class="n">task</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+            <span class="n">task</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">1000</span> <span class="p">;</span>
+            <span class="n">task</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">task</span><span class="p">.</span><span class="n">op</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span><span class="o">%</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kt">bool</span> <span class="n">allocate_task</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">;</span>
+            <span class="n">m_mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+            <span class="n">MyTask</span> <span class="n">task</span> <span class="p">;</span>
+            <span class="n">make_task</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+            <span class="n">m_tasks</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="cp">#ifndef NDEBUG</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Task add !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="cp">#endif</span>
+            <span class="n">m_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+            <span class="n">m_cond</span><span class="p">.</span><span class="n">notifyall</span><span class="p">();</span>
+        <span class="p">}</span>        
+        <span class="kt">bool</span> <span class="n">get_task</span><span class="p">(</span><span class="n">MyTask</span><span class="o">&amp;</span> <span class="n">task</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">m_mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+            <span class="k">while</span><span class="p">(</span> <span class="n">m_on</span> <span class="o">&amp;&amp;</span><span class="n">m_tasks</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+            <span class="p">{</span>
+            <span class="n">m_cond</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_on</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">m_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+                <span class="n">m_cond</span><span class="p">.</span><span class="n">notifyall</span><span class="p">();</span>
+                <span class="k">return</span> <span class="nb">false</span> <span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_tasks</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">task</span> <span class="o">=</span>  <span class="n">m_tasks</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+                <span class="n">m_tasks</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">m_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+                <span class="c1">//m_cond.notifyall();</span>
+<span class="cp">#ifndef NDEBUG</span>
+                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Task get !&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="cp">#endif</span>
+                <span class="k">return</span> <span class="nb">true</span> <span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="nl">private:</span>
+        <span class="n">ThreadPool</span><span class="p">(</span><span class="k">const</span> <span class="n">ThreadPool</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">);</span>
+        <span class="n">ThreadPool</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ThreadPool</span><span class="o">&amp;</span> <span class="n">obj</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MyThread</span><span class="o">&gt;</span> <span class="n">m_threads</span> <span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">queue</span><span class="o">&lt;</span><span class="n">MyTask</span><span class="o">&gt;</span> <span class="n">m_tasks</span> <span class="p">;</span>
+        <span class="n">MyMutex</span> <span class="n">m_mutex</span> <span class="p">;</span>
+        <span class="n">MyCondition</span> <span class="n">m_cond</span> <span class="p">;</span>
+        <span class="kt">bool</span> <span class="n">m_on</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;ThreadPool.h&quot;</span>
+<span class="kt">void</span> <span class="n">MyThread</span><span class="o">::</span><span class="n">run</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="cp">#ifndef NDEBUG</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;thread run&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">;</span>
+<span class="cp">#endif</span>
+    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">MyTask</span> <span class="n">task</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span> <span class="p">(</span><span class="n">m_threadpool</span><span class="o">-&gt;</span><span class="n">get_task</span><span class="p">(</span><span class="n">task</span><span class="p">))</span> <span class="p">)</span>  
+        <span class="p">{</span>
+            <span class="k">break</span> <span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">execute_task</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">ThreadPool</span> <span class="n">myThreadPool</span> <span class="p">;</span>
+    <span class="n">myThreadPool</span><span class="p">.</span><span class="n">threadpool_work</span><span class="p">()</span> <span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">num</span> <span class="o">--</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">myThreadPool</span><span class="p">.</span><span class="n">allocate_task</span><span class="p">();</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">myThreadPool</span><span class="p">.</span><span class="n">threadpool_stop</span><span class="p">()</span> <span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>总结</h2>
+
+<h2>一些问题</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">int</span> <span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">//值为16</span></code></pre></div>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#技术学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>
