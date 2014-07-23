@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-<title>二叉树 链表 | 落枫的博客</title>
+<title>枚举 sizeof | 落枫的博客</title>
 <meta name="author" content="">
 
   <meta name="keywords" content="linux">
@@ -375,172 +375,75 @@
             <div class="row">
   <div class="col-md-12 aside3-title">
     <br>
-    <h2 id="#identifier">二叉树 链表</h2>
-    2014年06月16日
+    <h2 id="#identifier">枚举 sizeof</h2>
+    2014年06月06日
   </div>
   <div class="col-md-12 aside3-content">
     <hr>
     <div id="content">
-      <h2>二叉树的遍历</h2>
+      <h2>枚举</h2>
 
-<ol>
-<li> 前序非递归算法
-<strong>我的版本</strong>：</li>
-</ol>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">BinaryTreeNode</span><span class="o">::</span><span class="n">PreOrder</span><span class="p">(</span><span class="n">BinaryTreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">stack</span><span class="o">&lt;</span><span class="n">BinaryTreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">traversal_stack</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">||</span> <span class="o">!</span><span class="n">traversal_stack</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">!=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-            <span class="n">Visit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="p">}</span>
+<blockquote>
+<ul>
+<li>如果没有给枚举赋初值，编译器会自动为每个枚举常量赋上一个不同的初值，第一个为0，第二个为1.。。。。。。</li>
+<li>枚举表中某个常量赋值后，其后的成员则按依次加1的规则确定值</li>
+</ul>
+</blockquote>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">);</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">);</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p><strong>参考版本</strong>：</p>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">preOrder2</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>     <span class="c1">//非递归前序遍历 </span>
-<span class="p">{</span>
-    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BinTree</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
-    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-    <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-        <span class="p">{</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<ol>
-<li> 中序非递归算法</li>
-</ol>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="n">BinaryTreeNode</span><span class="o">::</span><span class="n">InOrder</span><span class="p">(</span><span class="n">BinaryTreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">stack</span><span class="o">&lt;</span><span class="n">BinaryTreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">traversal_stack</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span> <span class="o">||</span> <span class="o">!</span><span class="n">traversal_stack</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">!=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left_child</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">Visit</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">())</span> <span class="p">{</span>
-                <span class="n">traversal_stack</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-            <span class="p">}</span>
+<h2>sizeof运算符 (page 46)</h2>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nb">NULL</span> <span class="o">!=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">traversal_stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-                <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right_child</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">root</span> <span class="o">=</span> <span class="n">traversal_stack</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>参考版本：</p>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">inOrder2</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>      <span class="c1">//非递归中序遍历</span>
-<span class="p">{</span>
-    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BinTree</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
-    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-    <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-        <span class="p">{</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>    
-<span class="p">}</span> 
-</code></pre></div>
-<ol>
-<li> 后序非递归算法
-我的版本：</li>
-</ol>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++">
-</code></pre></div>
-<p>参考版本：</p>
-<div class="highlight"><pre><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">postOrder</span><span class="p">(</span><span class="n">BinTree</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>    <span class="c1">//非递归后序遍历</span>
-<span class="p">{</span>
-    <span class="n">stack</span><span class="o">&lt;</span><span class="n">BTNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
-    <span class="n">BinTree</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">root</span><span class="p">;</span>
-    <span class="n">BTNode</span> <span class="o">*</span><span class="n">temp</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">||!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-    <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span>              <span class="c1">//沿左子树一直往下搜索，直至出现没有左子树的结点 </span>
-        <span class="p">{</span>
-            <span class="n">BTNode</span> <span class="o">*</span><span class="n">btn</span><span class="o">=</span><span class="p">(</span><span class="n">BTNode</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">BTNode</span><span class="p">));</span>
-            <span class="n">btn</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
-            <span class="n">btn</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lchild</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-        <span class="p">{</span>
-            <span class="n">temp</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">==</span><span class="nb">true</span><span class="p">)</span>     <span class="c1">//表示是第一次出现在栈顶 </span>
-             <span class="p">{</span>
-                <span class="n">temp</span><span class="o">-&gt;</span><span class="n">isFirst</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
-                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
-                <span class="n">p</span><span class="o">=</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">-&gt;</span><span class="n">rchild</span><span class="p">;</span>    
-            <span class="p">}</span>
-            <span class="k">else</span>                        <span class="c1">//第二次出现在栈顶 </span>
-             <span class="p">{</span>
-                <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">temp</span><span class="o">-&gt;</span><span class="n">btnode</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
-                <span class="n">p</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>    
-<span class="p">}</span> 
-</code></pre></div>
+<h2>pragma pack（改变边界对齐条件）</h2>
+
+<p>事实上，很多人对<code>#pragma pack</code>的理解是错误的。
+<code>#pragma pack</code>规定的对齐长度，实际使用的规则是：
+结构，联合，或者类的数据成员，第一个放在偏移为0的地方，以后每个数据成员的对齐，按照#pragma pack指定的数值和这个数据成员自身长度中，比较小的那个进行
+也就是说，当#pragma pack的值等于或超过所有数据成员长度的时候，这个值的大小将不产生任何效果。
+而结构整体的对齐，则按照结构体中最大的数据成员 和 #pragma pack指定值 之间，较小的那个进行。</p>
+
 <h2>复习情况</h2>
 
-<ol>
-<li> 链表（page 197）</li>
-<li> 栈与队列（page 209）</li>
-<li> <strong>二叉树的应用</strong>（page 220）</li>
-<li> <strong>二叉排序树</strong>（page 225）</li>
-<li> <strong>平衡二叉树</strong>（page 226）</li>
-<li> 哈夫曼树（page 229）</li>
-<li> 并查集（page 230）</li>
-</ol>
+<blockquote>
+<ul>
+<li>枚举 (page 45)</li>
+<li>sizeof运算符 (page 46)</li>
+</ul>
+</blockquote>
 
 <h2>复习重点问题</h2>
 
 <ol>
-<li> 链表的基本操作（增删改查）</li>
-<li> 快慢指针 （page 200）
-&gt;* 寻找循环链表的入口（page 201）
-&gt;* <strong>例1</strong>（同步指针）
-&gt;* <strong>例2</strong></li>
-<li> 双链表（双向链表）（page 204）</li>
-<li> 栈与队列（注重这两个数据结构的应用）</li>
-<li> 二叉树的遍历
-&gt;* <strong>前序中序后序</strong> （三个遍历的递归实现与非递归实现，这里相当重要，经常考察）</li>
-<li> 由遍历序列构造二叉树（page 223）</li>
+<li><p>一定要注意<code>sizeof</code>是运算符，会遇到相关复合运算问题时要特别注意（比如运算优先级的问题），需要注意在windows的VS和Linux+GCC下的多种不同情况</p></li>
+<li><p>struct的空间计算 (page 49)</p>
+
+<blockquote>
+<ul>
+<li>注意两个原则（page 49）</li>
+<li>含有结构体的结构体空间的计算(新的两个原则，page 51)，例题1（page 50）</li>
+<li>含有数组的结构体的空间计算（page 51）</li>
+<li>含有位域结构体的空间计算（page 52,5个规则）</li>
+<li>使用<code>“#pragma pack”</code>时结构体空间的计算（page 53,需要注意<code>#pragma pack</code>的使用意义）</li>
+<li>空结构体的大小（page 54）</li>
+<li>例题1（page 49）</li>
+<li><a href="http://blog.sina.com.cn/s/blog_5a42533f01017z0l.html">网络参考资料</a></li>
+<li>对于结构体的空间计算，不管是包含结构体，位域，数组，pragma pack，都要注意对齐的问题，都是 <strong>选择结构体中长度最大的数据类型为标准进行对齐</strong></li>
+</ul>
+</blockquote></li>
+<li><p>union的空间计算</p>
+
+<blockquote>
+<ul>
+<li>例2(page 54)</li>
+</ul>
+</blockquote></li>
+<li><p>习题</p>
+
+<blockquote>
+<ul>
+<li>1 (page 55,又见大端小端)</li>
+<li>19(page 61, <strong>位域的问题</strong> （位域会进行压缩）)</li>
+<li>21(page 62)</li>
+</ul>
+</blockquote></li>
 </ol>
 
     </div>

@@ -1,0 +1,1779 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>c++笔试300题 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="linux/C/C++">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+          <li><a href="#技术学习" data-toggle="tab">技术学习</a></li>
+        
+          <li><a href="#面试必备" data-toggle="tab">面试必备</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/06/16/%E9%93%BE%E8%A1%A8.html" class="list-group-item pjaxlink">二叉树 链表</a>
+                
+                  <a href="/2014/06/15/fork.html" class="list-group-item pjaxlink">多进程 fork</a>
+                
+                  <a href="/2014/06/14/sql.html" class="list-group-item pjaxlink">MySql</a>
+                
+                  <a href="/2014/06/13/%E6%8E%92%E5%BA%8F.html" class="list-group-item pjaxlink">排序 查找 键树 结构体</a>
+                
+                  <a href="/2014/06/10/%E9%87%8D%E8%BD%BD.html" class="list-group-item pjaxlink">重载 虚函数 动态绑定</a>
+                
+                  <a href="/2014/06/07/%E9%80%92%E5%BD%92.html" class="list-group-item pjaxlink">递归 宏定义 内联函数</a>
+                
+                  <a href="/2014/06/06/%E6%9E%9A%E4%B8%BE.html" class="list-group-item pjaxlink">枚举 sizeof</a>
+                
+                  <a href="/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html" class="list-group-item pjaxlink">联合体 大端小端 位域 指针引用</a>
+                
+                  <a href="/2014/06/02/volatile.html" class="list-group-item pjaxlink">全局变量 volatile</a>
+                
+                  <a href="/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html" class="list-group-item pjaxlink">const与指针 函数返回值 声明</a>
+                
+                  <a href="/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html" class="list-group-item pjaxlink">UDP服务器 僵尸进程</a>
+                
+                  <a href="/2014/05/02/%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">学习总结</a>
+                
+                  <a href="/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">约瑟夫问题 虚继承</a>
+                
+                  <a href="/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html" class="list-group-item pjaxlink">构造函数</a>
+                
+                  <a href="/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html" class="list-group-item pjaxlink">内存 线程池</a>
+                
+                  <a href="/2014/04/24/c++.html" class="list-group-item pjaxlink">c++</a>
+                
+                  <a href="/2014/04/23/%E5%86%85%E5%AD%98.html" class="list-group-item pjaxlink">内存 复制控制</a>
+                
+                  <a href="/2014/04/22/%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">继承 函数重载覆盖隐藏</a>
+                
+                  <a href="/2014/04/21/string.html" class="list-group-item pjaxlink">重载运算符-智能指针-String</a>
+                
+                  <a href="/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html" class="list-group-item pjaxlink">复制控制</a>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/11/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">设计模式 单例模式</a>
+                
+                  <a href="/2014/04/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%AF%94%E8%BE%83.html" class="list-group-item pjaxlink">进程 线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="技术学习">
+              <div class="list-group">
+                <h2 class="center">技术学习</h2>
+                
+                  <a href="/2014/06/19/%E5%9F%BA%E4%BA%8EHTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E6%B5%8F%E8%A7%88%E5%92%8C%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8.html" class="list-group-item pjaxlink">FTP文件服务器 项目</a>
+                
+                  <a href="/2014/06/01/%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9.html" class="list-group-item pjaxlink">学习方向与重点</a>
+                
+                  <a href="/2014/05/26/MiniSearchEngine%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">MiniSearchEngine总结</a>
+                
+                  <a href="/2014/05/24/minisearchengin.html" class="list-group-item pjaxlink">MiniSearchEngine 项目</a>
+                
+                  <a href="/2014/05/22/SpellCorrector.html" class="list-group-item pjaxlink">SpellCorrector 项目</a>
+                
+                  <a href="/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html" class="list-group-item pjaxlink">epoll</a>
+                
+                  <a href="/2014/05/02/mini%E6%90%9C%E7%B4%A2.html" class="list-group-item pjaxlink">mini搜索</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="面试必备">
+              <div class="list-group">
+                <h2 class="center">面试必备</h2>
+                
+                  <a href="/2014/06/20/c++300.html" class="list-group-item pjaxlink">c++笔试300题</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">36</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/19/%E5%9F%BA%E4%BA%8EHTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E6%B5%8F%E8%A7%88%E5%92%8C%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8.html' class="list-group-item pjaxlink">
+                        FTP文件服务器 项目
+                      </a>
+                    
+                      <a  href='/2014/06/16/%E9%93%BE%E8%A1%A8.html' class="list-group-item pjaxlink">
+                        二叉树 链表
+                      </a>
+                    
+                      <a  href='/2014/06/15/fork.html' class="list-group-item pjaxlink">
+                        多进程 fork
+                      </a>
+                    
+                      <a  href='/2014/06/13/%E6%8E%92%E5%BA%8F.html' class="list-group-item pjaxlink">
+                        排序 查找 键树 结构体
+                      </a>
+                    
+                      <a  href='/2014/06/10/%E9%87%8D%E8%BD%BD.html' class="list-group-item pjaxlink">
+                        重载 虚函数 动态绑定
+                      </a>
+                    
+                      <a  href='/2014/06/07/%E9%80%92%E5%BD%92.html' class="list-group-item pjaxlink">
+                        递归 宏定义 内联函数
+                      </a>
+                    
+                      <a  href='/2014/06/06/%E6%9E%9A%E4%B8%BE.html' class="list-group-item pjaxlink">
+                        枚举 sizeof
+                      </a>
+                    
+                      <a  href='/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html' class="list-group-item pjaxlink">
+                        联合体 大端小端 位域 指针引用
+                      </a>
+                    
+                      <a  href='/2014/06/02/volatile.html' class="list-group-item pjaxlink">
+                        全局变量 volatile
+                      </a>
+                    
+                      <a  href='/2014/06/01/%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9.html' class="list-group-item pjaxlink">
+                        学习方向与重点
+                      </a>
+                    
+                      <a  href='/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html' class="list-group-item pjaxlink">
+                        const与指针 函数返回值 声明
+                      </a>
+                    
+                      <a  href='/2014/05/26/MiniSearchEngine%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        MiniSearchEngine总结
+                      </a>
+                    
+                      <a  href='/2014/05/24/minisearchengin.html' class="list-group-item pjaxlink">
+                        MiniSearchEngine 项目
+                      </a>
+                    
+                      <a  href='/2014/05/22/SpellCorrector.html' class="list-group-item pjaxlink">
+                        SpellCorrector 项目
+                      </a>
+                    
+                      <a  href='/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html' class="list-group-item pjaxlink">
+                        epoll
+                      </a>
+                    
+                      <a  href='/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        UDP服务器 僵尸进程
+                      </a>
+                    
+                      <a  href='/2014/05/02/%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        学习总结
+                      </a>
+                    
+                      <a  href='/2014/05/02/mini%E6%90%9C%E7%B4%A2.html' class="list-group-item pjaxlink">
+                        mini搜索
+                      </a>
+                    
+                      <a  href='/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        约瑟夫问题 虚继承
+                      </a>
+                    
+                      <a  href='/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html' class="list-group-item pjaxlink">
+                        构造函数
+                      </a>
+                    
+                      <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink">
+                        内存 线程池
+                      </a>
+                    
+                      <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink">
+                        c++
+                      </a>
+                    
+                      <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink">
+                        内存 复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        继承 函数重载覆盖隐藏
+                      </a>
+                    
+                      <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink">
+                        重载运算符-智能指针-String
+                      </a>
+                    
+                      <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink">
+                        复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/11/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        设计模式 单例模式
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#总结">总结</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="总结" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/04/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%AF%94%E8%BE%83.html' class="list-group-item pjaxlink">
+                        进程 线程
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySql">MySql</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="MySql" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/14/sql.html' class="list-group-item pjaxlink">
+                        MySql
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux/C/C++">linux/C/C++</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="linux/C/C++" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/20/c++300.html' class="list-group-item pjaxlink">
+                        c++笔试300题
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">c++笔试300题</h2>
+    2014年06月20日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>1.面向对象的程序设计思想是什么？</h2>
+
+<blockquote>
+<p>答：把数据结构和对数据结构进行操作的方法封装形成一个个的对象。</p>
+</blockquote>
+
+<h2>2.什么是类？</h2>
+
+<blockquote>
+<p>答: 把一些具有公共性的对象归类后形成一个集合，也就是所谓的类。</p>
+</blockquote>
+
+<h2>3.对象都具有的二方面特征是什么？分别是什么含义？</h2>
+
+<blockquote>
+<p>答： 对象都具有的特征是：静态特征和动态特征。静态特征是指能描述对象的一些属性；动态特征是指对象表现出来的行为；</p>
+</blockquote>
+
+<h2>4.在头文件中进行类的声明，在对应的实现的文件中进行的定义有什么意义？</h2>
+
+<blockquote>
+<p>答： 1. 这样可以提高编译效率，因为分开的话只需要编译一次就生成对应的.obj文件后，再次应用该类的地方，这个类就不会被再次编译，从而大大提高了效率。 2.隐藏了代码；</p>
+</blockquote>
+
+<h2>5.在类的内部定义成员函数的函数体，这种函数会具备那种属性？</h2>
+
+<blockquote>
+<p>答： 这种函数会自动为内联函数，这种函数在函数调用的地方在编译阶段都会进行代码替换。</p>
+</blockquote>
+
+<h2>6. 成员函数通过什么来区分不同对象的成员数据？为什么它能够区分？</h2>
+
+<blockquote>
+<p>答： 通过 this 指针来区分的，因为它指向的是对象的首地址。</p>
+</blockquote>
+
+<h2>7.C++编译器自动为类产生的四个缺省函数是什么？</h2>
+
+<blockquote>
+<p>答： 默认构造函数，拷贝构造函数，析构函数，赋值函数。</p>
+</blockquote>
+
+<h2>8.拷贝构造函数在哪几种情况下会被调用？</h2>
+
+<blockquote>
+<p>答： 1.当类的一个对象去初始化该类的里一个对象时； 2.如果函数的形参是类的都想，调用函数进行形参和实参结合时； 3.如果函数的返回之是类的对象，函数调用完成返回时。</p>
+</blockquote>
+
+<h2>9.构造函数与普通函数相比在形式上有什么不同？（构造函数的作用，它的声明形式来分析）</h2>
+
+<blockquote>
+<p>答： 构造函数是类的一种特殊成员函数，一般情况下，它是专门用来初始化对象成员变量的。 构造函数的名字必须与类名相同，它不具有任何类型，不返回任何值。</p>
+</blockquote>
+
+<h2>10.什么时候必须重写拷贝构造函数？</h2>
+
+<blockquote>
+<p>答： 当构造函数涉及到动态存储分配空间时，要自己写拷贝构造函数，并且要深拷贝。</p>
+</blockquote>
+
+<h2>11.构造函数的调用顺序是什么？</h2>
+
+<blockquote>
+<p>答： 1.先调用基类构造函数 2.按声明顺序初始化数据成员 3.最后调用自己的构造函数。</p>
+</blockquote>
+
+<h2>12.哪几种情况必须用到初始化成员列表？</h2>
+
+<blockquote>
+<p>答： 类的成员是常量成员初始化；类的阿成员是对象成员初始化，而该对象没有无参构造函数。类的成员变量时。</p>
+</blockquote>
+
+<h1>13.什么是常对象？</h1>
+
+<blockquote>
+<p>答： 常对象是指在任何场合都不能对其成员的值进行修改的对象。</p>
+</blockquote>
+
+<h2>14.静态函数存在的意义？</h2>
+
+<blockquote>
+<p>答： 1.静态似有成员在类外不能被访问，可以通过类的静态成员函数来访问； 2.当类的构造函数是私有的时，不像普通类那样实例化自己，只能通过静态成员函数来调用构造函数。</p>
+</blockquote>
+
+<h2>15.在类外有什么办法可以访问类的阿非公有成员？</h2>
+
+<blockquote>
+<p>答：友元，继承，公有成员函数。</p>
+</blockquote>
+
+<h2>16.什么叫抽象类</h2>
+
+<blockquote>
+<p>答： 不用来定义对象而只作为一种基本类型用作继承的类。</p>
+</blockquote>
+
+<h2>17.运算符重载的意义？</h2>
+
+<blockquote>
+<p>答： 为了对用户自定义数据类型的数据的操作与内定义的数据类型的数据操作形式一致。</p>
+</blockquote>
+
+<h2>18.不允许重载的5个运算符是哪些？</h2>
+
+<blockquote>
+<p>答： 1. * （成员指针访问运算符号）  2 . ：： （域运算符）  3. sizeof 长度运算符号  4. ？： 条件运算符号  5. . 成员访问符</p>
+</blockquote>
+
+<h2>19.运算符重载的三种方式？</h2>
+
+<blockquote>
+<p>答： 普通函数，友元函数，类成员函数。</p>
+</blockquote>
+
+<h2>20.流运算符为什么不能通过类的成员函数重载？一般怎么解决？</h2>
+
+<blockquote>
+<p>答： 因为通过类的成员函数重载必须是运算符的第一个是自己，而对流运算的第一个是自己，而对流运算的重载要求第一个参数是流对象。 一般通过友元来解决</p>
+</blockquote>
+
+<h2>21.赋值运算符和拷贝构造函数的区别与联系？</h2>
+
+<blockquote>
+<p>答： 相同点：都是将一个对象copy到另一个中去。不同点：拷贝构造函数涉及到要新建立一个对象。</p>
+</blockquote>
+
+<h2>22.在哪种情况下要调用该类的析构函数？</h2>
+
+<blockquote>
+<p>答：对象生命周期结束时。</p>
+</blockquote>
+
+<h2>23.对象见是怎样实现数据的共享的？</h2>
+
+<blockquote>
+<p>答： 通过类的静态成员变量来实现的。静态成员变量占有自己独立的空间部位某个对象所私有。</p>
+</blockquote>
+
+<h2>24.友元关系有什么特性？</h2>
+
+<blockquote>
+<p>答： 单向的，非传递的， 不能继承的。</p>
+</blockquote>
+
+<h2>25.对对象成员进行初始化的次序是什么？</h2>
+
+<blockquote>
+<p>答： 它的次序完全不受它们在初始化表中次序的影响，只与成员对象在类中生命的次序来决定的。</p>
+</blockquote>
+
+<h2>26.类和对象之间的关系是什么？</h2>
+
+<blockquote>
+<p>答： 类是对象的抽象，对象是类的实例。</p>
+</blockquote>
+
+<h2>27.对象的成员的访问属性有什么？</h2>
+
+<blockquote>
+<p>答： public， protected， private。</p>
+</blockquote>
+
+<h2>28.const char <em>P ，char</em> const p;的区别</h2>
+
+<blockquote>
+<p>答： 如果const位于星号的左侧，则const就是用来修饰指针所指向的变量，即指针指向为常量；如果const位于星号的右侧，const即使修饰指针本身，即指针本身就是常量。</p>
+</blockquote>
+
+<h2>29.是不是一个父类写了一个virtual函数，如果子类覆盖它的函数不加virtual，也能实现多态？</h2>
+
+<blockquote>
+<p>答： virtual修饰符会倍隐形继承的。virtual可加可不加，子类的覆盖它的函数不加virtual也能实现多态。</p>
+</blockquote>
+
+<h2>30.函数重载是什么意思？它与虚函数的概念有什么区别？</h2>
+
+<blockquote>
+<p>答： 函数重载是一个同名函数完成不同的功能，编译系统在编译阶段通过函数参数个数、参数类型不同，即实现的是静态的多态性。但是记住：不能仅仅通过函数返回值不同来现实函数重载。而虚函数实现的实在基类中通过使用关键字virtual来申明一个函数为虚函数，含义就是该函数的功能可能在将来的派生类中定义或者在基类的基础之上进行扩展，系统只能在运行阶段才能动态决定该调用哪一个函数，所以实现的是动态的多态性。它体现的是一个纵向的概念，也即在基类和派生类间实现。</p>
+</blockquote>
+
+<h2>31.构造函数和析构函数是否可以重载，为什么？</h2>
+
+<blockquote>
+<p>答： 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数，而析构函数只能有一个，且不能带参数。</p>
+</blockquote>
+
+<h2>32.如何定义和实现一个类的成员函数为回调函数？</h2>
+
+<blockquote>
+<p>答：所谓的回调函数，就是预先在系统对函数进行注册，让系统知道这个函数的u内在，以后，当某个时间发生时，再调用这个函数对事件进行响应。定义一个类的成员函数时在该函数名前家CALLBACK即将其定义为回调函数，函数的实现和普通函数没有什么区别。</p>
+</blockquote>
+
+<h2>33.虚函数是怎么实现的？</h2>
+
+<blockquote>
+<p>答： 简单来说使用了虚函数表。（虚函数表：在这张表的虚函数的地址表，这张表解决了继承，覆盖的问题，保证其真实反应实际的函数）</p>
+</blockquote>
+
+<h2>34.抽象类不会产生实例，所以不需要有构造函数？</h2>
+
+<blockquote>
+<p>答：错，初始化抽象类的成员，为继承它的子类的使用</p>
+</blockquote>
+
+<h2>35.从一个模版类可以派生新的模版类，也可以派生非模版类？</h2>
+
+<blockquote>
+<p>答： 对</p>
+</blockquote>
+
+<h2>36.main函数执行以前，喊会执行什么代码？</h2>
+
+<blockquote>
+<p>答： 全局对象的构造函数会在main函数之前执行</p>
+</blockquote>
+
+<h2>37.当一个类A中没有申明任何成员变量与成员函数，这时sizeof（A）的值是多，如果不是零，请解释一下编译器为什么没有让它为零。</h2>
+
+<blockquote>
+<p>答：肯定是不为零。举个反例，如果为零的花，生命一个class A[10]对象数组，而每一个对象占用的空间是零，这时就没办法区分A[0]A[1]~~了。</p>
+</blockquote>
+
+<h2>38. delete与delete[]的区别</h2>
+
+<blockquote>
+<p>答：delete智慧调用一次析构函数，而delete[]会调用每一个成员的析构函数。</p>
+</blockquote>
+
+<h2>39.子类析构时要调用父类的析构函数吗？</h2>
+
+<blockquote>
+<p>答： 会调用，析构函数调用的次序是先派生类的析构后基类的的析构调用的时候，派生类的信息已经全部销毁了。</p>
+</blockquote>
+
+<h2>40.继承的优缺点。</h2>
+
+<blockquote>
+<p>答：优点： </p>
+
+<blockquote>
+<p>1、类的继承实在编译时刻静态定义的，且可直接使用； 2、类的继承可以较方便地改变父类的实现。
+ 缺点：
+1、 因为继承在编译时刻就定义了，所以无法在运行时刻改变从父类继承的实现。 2、父类通常至少定义了子类的部分行为，父类的任何改变都可能影响子类的行为。 3、如果继承下来的实现不适合解决新的问题，则父类必须重写或被其他更适合的类替换。这种依赖关系限制了灵活性并最终限制了复用性。</p>
+</blockquote>
+</blockquote>
+
+<h2>41.解释堆和栈的区别。</h2>
+
+<blockquote>
+<p>答： 栈区（stack）————由编译器自动分配释放，存放函数的参数值，局部变量的值等。 堆————一般由程序员分配释放，若程序员不释放，程序结束时可能由OS回收。</p>
+</blockquote>
+
+<h2>42.一个类的构造函数和析构函数什么时候被调用，是否需要手工调用？</h2>
+
+<blockquote>
+<p>答： 析构函数在创建类对象的适合被自动调用，析构函数在类对象生命周期结束时，由系统自动调用。</p>
+</blockquote>
+
+<h2>43.何时需要预编译：</h2>
+
+<blockquote>
+<p>答： 总是使用不经常改动的大型代码体。程序由多个模块组成，所有模块都使用一组标准的包含文件和相同的编译选项。在这种情况下，可以将所有包含文件预编译为一个预编译头。</p>
+</blockquote>
+
+<h2>44.多态的作用？</h2>
+
+<blockquote>
+<p>答： 主要是两个：1、隐藏实现细节，使得代码能够模块化；扩展代码模块，实现代码重用； 2、接口重用：为了类在继承和派生的时候，保证使用家族中任一类的实例的某一属性时的正确调用。</p>
+</blockquote>
+
+<h2>45.虚拟函数与普通成员函数的区别？内联函数和构造函数能否为虚拟函数？</h2>
+
+<blockquote>
+<p>答： 区别：虚拟函数有virtual关键字，有虚拟指针和虚函数表，虚拟指针就是虚拟函数的接口，而普通成员函数没有。内敛函数和构造函数不能为虚拟函数。</p>
+</blockquote>
+
+<h2>46.构造函数和析构函数的调用顺序？ 析构函数为什么要虚拟？</h2>
+
+<blockquote>
+<p>答： 构造函数的调用顺序：积累构造函数——对象成员构造函数——派生类构造函数； 析构函数的调用顺序与构造函数相反。析构函数虚拟是为了防止析构不彻底，造成内存的泄漏。</p>
+</blockquote>
+
+<h2>47.C++中private的成员变量可以由哪些函数访问？</h2>
+
+<blockquote>
+<p>答： 只可以由本类中的成员函数和友元函数访问</p>
+</blockquote>
+
+<h2>48.C++中类型为private、protect、public三种访问限制类型的区别</h2>
+
+<blockquote>
+<p>答：private是私有类型，只有本类中的成员函数访问；protect是保护型的，本类和继承类可以访问； public是公有类型，任何类都可以访问。</p>
+</blockquote>
+
+<h2>49.类中成员变量怎么进行初始化？</h2>
+
+<blockquote>
+<p>答： 可以通过构造函数的初始化列表或构造函数的函数体实现。</p>
+</blockquote>
+
+<h2>50.在什么时候需要i使用“常引用”？</h2>
+
+<blockquote>
+<p>答： 如果既要利用引用提高程序的效率，又要保护传递给函数的数据不在函数中被改变，就应使用常引用。</p>
+</blockquote>
+
+<h2>51.引用与指针有什么区别？</h2>
+
+<blockquote>
+<p>答： 1）引用必须被初始化，指针不必。 2）引用初始化以后不能被改变，指针可以改变所指的对象。 3）不逊在指向空值的引用，但是存在指向空值的指针。</p>
+</blockquote>
+
+<h2>52.描述实时系统的基本特征</h2>
+
+<blockquote>
+<p>答：在特定时间内完成特定的任务，实时性与可靠性。</p>
+</blockquote>
+
+<h2>54. 全局变量和局部变量在内存中是否有区别？如果有，是什么区别？</h2>
+
+<blockquote>
+<p>答: 全局变量储存在静态数据区，局部变量在栈中。</p>
+</blockquote>
+
+<h2>55. 堆栈溢出一般是由什么原因导致的？</h2>
+
+<blockquote>
+<p>答: 没有回收垃圾资源</p>
+</blockquote>
+
+<h2>56. 什么函数不能声明为虚函数？</h2>
+
+<blockquote>
+<p>答: 构造函数（constructor）</p>
+</blockquote>
+
+<h2>57. .IP地址的编码分为哪俩部分？</h2>
+
+<blockquote>
+<p>答: IP地址由两部分组成，网络号和主机号。</p>
+</blockquote>
+
+<h2>58. .不能做switch()的参数类型是：</h2>
+
+<blockquote>
+<p>答: switch的参数不能为实型。</p>
+</blockquote>
+
+<h2>59. 如何引用一个已经定义过的全局变量？</h2>
+
+<blockquote>
+<p>答: 可以用引用头文件的方式，也可以用extern关键字，如果用引用头文件方式来引用某个在头文件中声明的全局变量，假定你将那个变量写错了，那么在编译期间会报错，如果你用extern方式引用时，假定你犯了同样的错误，那么在编译期间不会报错，而在连接期间报错</p>
+</blockquote>
+
+<h2>60. 对于一个频繁使用的短小函数,在C语言中应用什么实现,在C++中应用什么实现?</h2>
+
+<blockquote>
+<p>答: c用宏定义，c++用inline</p>
+</blockquote>
+
+<h2>61. C++是不是类型安全的？</h2>
+
+<blockquote>
+<p>答：不是。两个不同类型的指针之间可以强制转换（用reinterpret cast)</p>
+</blockquote>
+
+<h2>62. 当一个类A 中没有生命任何成员变量与成员函数,这时sizeof(A)的值是多少，请解释一下编译器为什么没有让它为零。</h2>
+
+<blockquote>
+<p>答：为1。举个反例，如果是零的话，声明一个class A[10]对象数组，而每一个对象占用的空间是零，这时就没办法区分A[0],A[1]„了。</p>
+</blockquote>
+
+<h2>63. 简述数组与指针的区别？</h2>
+
+<blockquote>
+<p>数组要么在静态存储区被创建（如全局数组），要么在栈上被创建。指针可以随时指向任意类型的内存块。
+(1)修改内容上的区别</p>
+
+<blockquote>
+<p>char a[] = &quot;hello&quot;;
+a[0] = &#39;X&#39;;
+char *p = “world”; // 注意p 指向常量字符串
+p[0] = ‘X’; // 编译器不能发现该错误，运行时错误
+(2) 用运算符sizeof 可以计算出数组的容量（字节数）。sizeof(p),p 为指针得到的是一个指针变量的字节数，而不是p 所指的内存容量。</p>
+</blockquote>
+</blockquote>
+
+<h2>64. C++函数中值的传递方式</h2>
+
+<blockquote>
+<p>有三种方式：值传递、指针传递、引用传递</p>
+</blockquote>
+
+<h2>65. 内存的分配方式</h2>
+
+<blockquote>
+<p>分配方式有三种，</p>
+
+<blockquote>
+<p>1、 静态存储区，是在程序编译时就已经分配好的，在整个运行期间都存在，如全局变量、常量。
+2、 栈上分配，函数内的局部变量就是从这分配的，但分配的内存容易有限。
+3、 堆上分配，也称动态分配，如我们用new,malloc分配内存，用delete,free来释放的内存。</p>
+</blockquote>
+</blockquote>
+
+<h2>66. extern“C”有什么作用？</h2>
+
+<blockquote>
+<p>extern “C”是由Ｃ＋＋提供的一个连接交换指定符号，用于告诉Ｃ＋＋这段代码是Ｃ函数。这是因为C++编译后库中函数名会变得很长，与C生成的不一致，造成Ｃ＋＋不能直接调用C函数，加上extren “c”后，C++就能直接调用C函数了。
+extern “C”主要使用正规DLL函数的引用和导出 和 在C++包含C函数或C头文件时使用。使用时在前面加上extern “c” 关键字即可。</p>
+</blockquote>
+
+<h2>67. 用什么函数开启新进程、线程。</h2>
+
+<blockquote>
+<p>答案：
+线程：CreateThread/AfxBeginThread等
+进程：CreateProcess等</p>
+</blockquote>
+
+<h2>68. SendMessage和PostMessage有什么区别</h2>
+
+<blockquote>
+<p>答案：SendMessage是阻塞的，等消息被处理后，代码才能走到SendMessage的下一行。PostMessage是非阻塞的，不管消息是否已被处理，代码马上走到PostMessage的下一行。</p>
+</blockquote>
+
+<h2>69. CMemoryState主要功能是什么</h2>
+
+<blockquote>
+<p>答案：查看内存使用情况，解决内存泄露问题。</p>
+</blockquote>
+
+<h2>70. #include <filename.h> 和 #include “filename.h” 有什么区别？</h2>
+
+<blockquote>
+<p>答：对于#include <filename.h> ，编译器从标准库路径开始搜索 filename.h
+对于#include “filename.h” ，编译器从用户的工作路径开始搜索 filename.h</p>
+</blockquote>
+
+<h2>71. 处理器标识#error的目的是什么？</h2>
+
+<blockquote>
+<p>答：编译时输出一条错误信息，并中止继续编译。</p>
+</blockquote>
+
+<h2>72. #if!defined(AFX<em>…</em>HADE_H)</h2>
+
+<blockquote>
+<p>#define(AFX<em>…</em>HADE_H)
+ „„
+ #endif作用？
+ 防止该头文件被重复引用。</p>
+</blockquote>
+
+<h2>73. 在定义一个宏的时候要注意什么？</h2>
+
+<blockquote>
+<p>定义部分的每个形参和整个表达式都必须用括号括起来，以避免不可预料的错误发生</p>
+</blockquote>
+
+<h2>74. 数组在做函数实参的时候会转变为什么类型？</h2>
+
+<blockquote>
+<p>数组在做实参时会变成指针类型。</p>
+</blockquote>
+
+<h2>75. 系统会自动打开和关闭的3个标准的文件是？</h2>
+
+<blockquote>
+<p>(1) 标准输入----键盘---stdin
+(2) 标准输出----显示器---stdout
+(3) 标准出错输出----显示器---stderr</p>
+</blockquote>
+
+<h2>76. .在Win32下 char, int, float, double各占多少位？</h2>
+
+<blockquote>
+<p>(1) Char 占用8位
+(2) Int 占用32位
+(3) Float 占用32位
+(4) Double 占用64位</p>
+</blockquote>
+
+<h2>77. strcpy()和memcpy()的区别？</h2>
+
+<blockquote>
+<p>strcpy()和memcpy()都可以用来拷贝字符串，strcpy()拷贝以’\0’结束，但memcpy()必须指定拷贝的长度。</p>
+</blockquote>
+
+<h2>78. 说明#define和const在语法和含义上有什么不同？</h2>
+
+<blockquote>
+<p>(1) #define是C语法中定义符号变量的方法，符号常量只是用来表达一个值，在编译阶段符号就被值替换了，它没有类型；
+(2) Const是C++语法中定义常变量的方法，常变量具有变量特性，它具有类型，内存中存在以它命名的存储单元，可以用sizeof测出长度。</p>
+</blockquote>
+
+<h2>79. 说出字符常量和字符串常量的区别，并使用运算符sizeof计算有什么不用？</h2>
+
+<blockquote>
+<p>字符常量是指单个字符，字符串常量以‘\0’结束，使用运算符sizeof计算多占一字节的存储空间。</p>
+</blockquote>
+
+<h2>80. 简述全局变量的优缺点？</h2>
+
+<blockquote>
+<p>全局变量也称为外部变量，它是在函数外部定义的变量，它属于一个源程序文件，它保存上一次被修改后的值，便于数据共享，但不方便管理，易引起意想不到的错误。</p>
+</blockquote>
+
+<h2>81. 总结static的应用和作用？</h2>
+
+<blockquote>
+<p>（1）函数体内static变量的作用范围为该函数体，不同于auto变量，该变量的内存只被分配一次，因此其值在下次调用时仍维持上次的值；
+（2）在模块内的static全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；
+（3）在模块内的static函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内；
+（4）在类中的static成员变量属于整个类所拥有，对类的所有对象只有一份拷贝；
+（5）在类中的static成员函数属于整个类所拥有，这个函数不接收this指针，因而只能访问类的static成员变量。</p>
+</blockquote>
+
+<h2>82.总结const的应用和作用？</h2>
+
+<blockquote>
+<p>（1）欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了；
+（2）对指针来说，可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const；
+（3）在一个函数声明中，const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值；
+（4）对于类的成员函数，若指定其为const类型，则表明其是一个常函数，不能修改类的成员变量；
+（5）对于类的成员函数，有时候必须指定其返回值为const类型，以使得其返回值不为“左值”。</p>
+</blockquote>
+
+<h2>83. 什么是指针？谈谈你对指针的理解？</h2>
+
+<blockquote>
+<p>指针是一个变量，该变量专门存放内存地址；
+指针变量的类型取决于其指向的数据类型，在所指数据类型前加*
+指针变量的特点是它可以访问所指向的内存。</p>
+</blockquote>
+
+<h2>84. 什么是常指针，什么是指向常变量的指针？</h2>
+
+<blockquote>
+<p>常指针的含义是该指针所指向的地址不能变，但该地址所指向的内容可以变化，使用常指针可以保证我们的指针不能指向其它的变量，
+指向常变量的指针是指该指针的变量本身的地址可以变化，可以指向其它的变量，但是它所指的内容不可以被修改。指向长变量的指针定义，</p>
+</blockquote>
+
+<h2>85. 函数指针和指针函数的区别？</h2>
+
+<blockquote>
+<p>函数指针是指指向一个函数入口的指针；
+指针函数是指函数的返回值是一个指针类型。</p>
+</blockquote>
+
+<h2>87. 简述Debug版本和Release版本的区别？</h2>
+
+<blockquote>
+<p>Debug版本是调试版本，Release版本是发布给用户的最终非调试的版本，</p>
+</blockquote>
+
+<h2>88. 指针的几种典型应用情况？</h2>
+
+<blockquote>
+<p>int <em>p[n];-----指针数组，每个元素均为指向整型数据的指针。
+int (</em>)p[n];------p为指向一维数组的指针，这个一维数组有n个整型数据。
+int <em>p();----------函数带回指针，指针指向返回的值。
+int (</em>)p();------p为指向函数的指针。</p>
+</blockquote>
+
+<h2>89. static函数与普通函数有什么区别?</h2>
+
+<blockquote>
+<p>static函数在内存中只有一份，普通函数在每个被调用中维持一份拷贝</p>
+</blockquote>
+
+<h2>90. struct(结构) 和 union(联合)的区别？</h2>
+
+<blockquote>
+<ol>
+<li>结构和联合都是由多个不同的数据类型成员组成, 但在任何同一时刻, 联合中只存放了一个被选中的成员（所有成员共用一块地址空间）, 而结构的所有成员都存在（不同成员的存放地址不同）。</li>
+<li>对于联合的不同成员赋值, 将会对其它成员重写, 原来成员的值就不存在了, 而对于结构的不同成员赋值是互不影响的。</li>
+</ol>
+</blockquote>
+
+<h2>91. class 和 struct 的区别？</h2>
+
+<blockquote>
+<p>struct 的成员默认是公有的，而类的成员默认是私有的。</p>
+</blockquote>
+
+<h2>92. 简述枚举类型？</h2>
+
+<blockquote>
+<p>枚举方便一次定义一组常量，使用起来很方便；</p>
+</blockquote>
+
+<h2>93. assert()的作用？</h2>
+
+<blockquote>
+<p>ASSERT()是一个调试程序时经常使用的宏，在程序运行时它计算括号内的表达式，如果表达式为FALSE (0), 程序将报告错误，并终止执行。如果表达式不为0，则继续执行后面的语句。这个宏通常原来判断程序中是否出现了明显非法的数据，如果出现了终止程序以免导致严重后果，同时也便于查找错误。</p>
+</blockquote>
+
+<h2>94. 局部变量和全局变量是否可以同名？</h2>
+
+<blockquote>
+<p>能，局部会屏蔽全局。要用全局变量，需要使用&quot;::&quot;(域运算符)。</p>
+</blockquote>
+
+<h2>95. 程序的局部变量存在于（栈）中，全局变量存在于（静态区 ）中，动态申请数据存在于（ 堆）中。</h2>
+
+<h2>96. 在什么时候使用常引用？</h2>
+
+<blockquote>
+<p>如果既要利用引用提高程序的效率，又要保护传递给函数的数据不在函数中被改变，就应使用常引用。</p>
+</blockquote>
+
+<h2>97. 类的声明和实现的分开的好处？</h2>
+
+<blockquote>
+<ol>
+<li>起保护作用；</li>
+<li>提高编译的效率。</li>
+</ol>
+</blockquote>
+
+<h2>98. windows消息系统由哪几部分构成？</h2>
+
+<blockquote>
+<p>由一下3部分组成：</p>
+
+<blockquote>
+<ol>
+<li>消息队列：操作系统负责为进程维护一个消息队列，程序运行时不断从该消息队列中获取消息、处理消息；</li>
+<li>消息循环：应用程序通过消息循环不断获取消息、处理消息。</li>
+<li>消息处理：消息循环负责将消息派发到相关的窗口上使用关联的窗口过程函数进行处理。</li>
+</ol>
+</blockquote>
+</blockquote>
+
+<h2>99. 什么是消息映射？</h2>
+
+<blockquote>
+<p>消息映射就是让程序员指定MFC类（有消息处理能力的类）处理某个消息。然后由程序员完成对该处理函数的编写，以实现消息处理功能。</p>
+</blockquote>
+
+<h2>100. 什么是UDP和TCP的区别是什么？</h2>
+
+<blockquote>
+<p>TCP的全称为传输控制协议。这种协议可以提供面向连接的、可靠的、点到点的通信。 UDP全称为用户报文协议，它可以提供非连接的不可靠的点到多点的通信。
+用TCP还是UDP，那要看你的程序注重哪一个方面？可靠还是快速？</p>
+</blockquote>
+
+<h2>101. winsock建立连接的主要实现步骤?</h2>
+
+<blockquote>
+<p>答：服务器端：socket()建立套接字，绑定（bind）并监听（listen），用accept（）等待客户端连接, accept（）发现有客户端连接，建立一个新的套接字，自身重新开始等待连接。该新产生的套接字使用send()和recv（）写读数据，直至数据交换完毕，closesocket()关闭套接字。
+客户端：socket()建立套接字，连接（connect）服务器，连接上后使用send()和recv（），在套接字上写读数据，直至数据交换完毕，closesocket()关闭套接字。</p>
+</blockquote>
+
+<h2>102. 进程间主要的通讯方式？</h2>
+
+<blockquote>
+<p>信号量，管道，消息，共享内存</p>
+</blockquote>
+
+<h2>103. 构成Win32 API 函数的三个动态链接库是什么？</h2>
+
+<blockquote>
+<p>答：内核库，用户界面管理库，图形设备界面库。</p>
+</blockquote>
+
+<h2>104. 创建一个窗口的步骤是？</h2>
+
+<blockquote>
+<p>答：填充一个窗口类结构-&gt;注册这个窗口类-&gt;然后再创建窗口-&gt;显示窗口-&gt;更新窗口。</p>
+</blockquote>
+
+<h2>105. 模态对话框和非模态对话框有什么区别？</h2>
+
+<blockquote>
+<p>答：1.调用规则不同：前者是用DoModal()调用，后者通过属性和ShowWindow()来显示。
+2．模态对话框在没有关闭前用户不能进行其他操作，而非模态对话框可以。
+3．非模态对话框创建时必须编写自己的共有构造函数，还要调用Create()函数。</p>
+</blockquote>
+
+<h2>106. 从EDIT框中取出数据给关联的变量，已经把关联的变量的数据显示在EDIT框上的函数是什么？</h2>
+
+<blockquote>
+<p>答： UpdateData(TRUE), Updatedata(FALSE).</p>
+</blockquote>
+
+<h2>107. 简单介绍GDI？</h2>
+
+<blockquote>
+<p>答；GDI是Graphics Device Interface 的缩写，译为：图形设备接口；是一个在Windows应用程序中执行与设备无关的函数库，这些函数在不同的输出设备上产生图形以及文字输出。</p>
+</blockquote>
+
+<h2>108. windows消息分为几类？并对各类做简单描述。</h2>
+
+<blockquote>
+<p>1.窗口消息：与窗口相关的消息，除WM<em>COMMAND之外的所有以WM</em>开头的消息；
+2.命令消息；用于处理用户请求，以WM<em>COMMAND表示的消息；
+3.控件通知消息：统一由WM</em>NOTIFT表示，
+4.用户自定义消息。</p>
+</blockquote>
+
+<h2>109. 如何自定义消息？</h2>
+
+<blockquote>
+<p>使用WM<em>USER 和WM</em>APP两个宏来自定义消息，</p>
+</blockquote>
+
+<h2>110. 简述Visual C++ 、Win32 API和MFC之间的关系？</h2>
+
+<blockquote>
+<p>(1) Visual C+是一个以C++程序设计语言为基础的、集成的、可视化的编程环境；
+(2) Win32 API是32位Windows操作系以C/C++形式提供的一组应用程序接口；
+(3) MFC是对Win32 API的封装，简化了开发过程。</p>
+</blockquote>
+
+<h2>111.怎样消除多重继承中的二义性？</h2>
+
+<blockquote>
+<p>1．成员限定符
+2．虚基类</p>
+</blockquote>
+
+<h2>112.什么叫静态关联，什么叫动态关联</h2>
+
+<blockquote>
+<p>在多态中，如果程序在编译阶段就能确定实际执行动作，则称静态关联，如果等到程序运行才能确定叫动态关联。</p>
+</blockquote>
+
+<h2>113.多态的两个必要条件</h2>
+
+<blockquote>
+<p>1.一个基类的指针或引用指向一个派生类对象，
+2.虚函数</p>
+</blockquote>
+
+<h2>114.什么叫智能指针？</h2>
+
+<blockquote>
+<p>当一个类中，存在一个指向另一个类对象的指针时，对指针运算符进行重载，那么当前类对象可以通过指针像调用自身成员一样调用另一个类的成员。</p>
+</blockquote>
+
+<h2>115.什么时候需要用虚析构函数？</h2>
+
+<blockquote>
+<p>当基类指针指向用new运算符生成的派生类对象时，delete基类指针时，派生类部分没有释放掉而造成释放不彻底现象，需要虚析构函数。</p>
+</blockquote>
+
+<h2>116. MFC中，大部分类是从哪个类继承而来?</h2>
+
+<blockquote>
+<p>CObject</p>
+</blockquote>
+
+<h2>117.什么是平衡二叉树？</h2>
+
+<blockquote>
+<p>答：左右子树都是平衡二叉树，而且左右子树的深度差值的约对值不大于1</p>
+</blockquote>
+
+<h2>118.语句for( ；1 ；)有什么问题？它是什么意思？</h2>
+
+<blockquote>
+<p>答：无限循环，和while(1)相同。</p>
+</blockquote>
+
+<h2>119．派生新类的过程要经历三个步骤</h2>
+
+<blockquote>
+<p>1吸收基类成员
+2.改造基类成员
+3.添加新成员</p>
+</blockquote>
+
+<h2>121. TCP/IP 建立连接的过程</h2>
+
+<blockquote>
+<p>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。
+第一次握手：建立连接时，客户端发送连接请求到服务器，并进入SYN<em>SEND状态，等待服务器确认；
+第二次握手：服务器收到客户端连接请求，向客户端发送允许连接应答，此时服务器进入SYN</em>RECV状态；
+第三次握手：客户端收到服务器的允许连接应答，向服务器发送确认，客户端和服务器进入通信状态，完成三次握手</p>
+</blockquote>
+
+<h2>122 .memset ,memcpy 的区别</h2>
+
+<blockquote>
+<p>memset用来对一段内存空间全部设置为某个字符，一般用在对定义的字符串进行初始化为&#39;\0&#39;。
+memcpy用来做内存拷贝，你可以拿它拷贝任何数据类型的对象，可以指定拷贝的数据长度；</p>
+</blockquote>
+
+<h2>123. 在C++ 程序中调用被 C 编译器编译后的函数，为什么要加 extern “C”？</h2>
+
+<blockquote>
+<p>答：C++语言支持函数重载，C 语言不支持函数重载。函数被C++编译后在库中的名字与C 语言的不同。假设某个函数的原型为： void foo(int x, int y);该函数被C 编译器编译后在库中的名字为<em>foo ， 而C++编译器则会产生像</em>foo<em>int</em>int 之类的名字。C++提供了C 连接交换指定符号extern“C”来解决名字匹配问题。</p>
+</blockquote>
+
+<h2>124怎样定义一个纯虚函数？含有纯虚函数的类称为什么？</h2>
+
+<blockquote>
+<p>在虚函数的后面加=0，含有虚函数的类称为抽象类。</p>
+</blockquote>
+
+<h2>125．已知strcpy函数的原型是：char * strcpy(char * strDest,const char * strSrc);不调用库函数，实现strcpy函数。</h2>
+
+<blockquote>
+<p>答案：</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="c--"><span class="kt">char</span> <span class="o">*</span><span class="nf">strcpy</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">strDest</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">strSrc</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">strDest</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">strSrc</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span> <span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">strDest</span> <span class="o">==</span> <span class="n">strSrc</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">strDest</span> <span class="p">;</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">tempptr</span> <span class="o">=</span> <span class="n">strDest</span> <span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="o">*</span><span class="n">strDest</span><span class="o">++</span> <span class="o">=</span> <span class="o">*</span><span class="n">strSrc</span><span class="o">++</span><span class="p">)</span> <span class="o">!=</span> <span class="err">„\\</span><span class="mi">0</span><span class="err">‟</span><span class="p">)</span>
+                <span class="p">;</span>
+                <span class="k">return</span> <span class="n">tempptr</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>126．已知类String 的原型为：</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="k">class</span> <span class="nc">String</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span> <span class="c1">// 普通构造函数</span>
+    <span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span> <span class="c1">// 拷贝构造函数</span>
+    <span class="o">~</span> <span class="n">String</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">// 析构函数</span>
+    <span class="n">String</span> <span class="o">&amp;</span> <span class="n">operate</span> <span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span> <span class="c1">// 赋值函数</span>
+    <span class="nl">private:</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">m_data</span><span class="p">;</span> <span class="c1">// 用于保存字符串</span>
+<span class="p">};</span></code></pre></div>
+
+<p>请编写String 的上述4 个函数。</p>
+
+<blockquote>
+<p>答案：</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="c--"><span class="n">String</span><span class="o">::</span><span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">str</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="p">)</span> <span class="c1">//strlen在参数为NULL时会抛异常才会有这步判断</span>
+    <span class="p">{</span>
+        <span class="n">m_data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">;</span>
+        <span class="n">m_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="err">&#39;&#39;</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">m_data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">m_data</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">String</span><span class="o">::</span><span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">m_data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">m_data</span><span class="p">,</span><span class="n">other</span><span class="p">.</span><span class="n">m_data</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">String</span> <span class="o">&amp;</span> <span class="n">String</span><span class="o">::</span><span class="k">operator</span> <span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="k">this</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="p">;</span>
+        <span class="k">delete</span> <span class="p">[]</span><span class="n">m_data</span><span class="p">;</span>
+        <span class="n">m_data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">m_data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">m_data</span><span class="p">,</span><span class="n">other</span><span class="p">.</span><span class="n">m_data</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="n">String</span><span class="o">::~</span> <span class="n">String</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">delete</span> <span class="p">[]</span><span class="n">m_data</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>127．类成员函数的重载、覆盖和隐藏区别</h2>
+
+<blockquote>
+<p>答案：
+成员函数被重载的特征：</p>
+
+<blockquote>
+<p>（1）相同的范围（在同一个类中）；
+（2）函数名字相同；
+（3）参数不同；
+（4）virtual 关键字可有可无。
+覆盖是指派生类函数覆盖基类函数，特征是：
+（1）不同的范围（分别位于派生类与基类）；
+（2）函数名字相同；
+（3）参数相同；
+（4）基类函数必须有virtual 关键字。
+“隐藏”是指派生类的函数屏蔽了与其同名的基类函数，规则如下：
+（1）如果派生类的函数与基类的函数同名，但是参数不同。此时，不论有无virtual关键字，基类的函数将被隐藏（注意别与重载混淆）。
+（2）如果派生类的函数与基类的函数同名，并且参数也相同，但是基类函数没有virtual 关键字。此时，基类的函数被隐藏（注意别与覆盖混淆）</p>
+</blockquote>
+</blockquote>
+
+<h2>128．如何打印出当前源文件的文件名以及源文件的当前行号？</h2>
+
+<blockquote>
+<p>答案：
+cout &lt;&lt; <strong>FILE</strong> ;
+cout&lt;&lt;<strong>LINE</strong> ;
+<strong>FILE</strong>和<strong>LINE</strong>是系统预定义宏，这种宏并不是在某个文件中定义的，而是由编译器定义的。</p>
+</blockquote>
+
+<h2>129．文件中有一组整数，要求排序后输出到另一个文件中</h2>
+
+<blockquote>
+<p>答案：</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="c"><span class="kt">void</span> <span class="nf">Order</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="c1">//起泡排序</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span>
+    <span class="kt">int</span> <span class="n">tag</span> <span class="o">=</span> <span class="nb">false</span> <span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">count</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">tag</span> <span class="o">=</span> <span class="nb">true</span> <span class="p">;</span>
+                <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">;</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">;</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span> <span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">tag</span> <span class="p">)</span>
+            <span class="k">break</span> <span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">data</span><span class="p">;</span>
+    <span class="n">ifstream</span> <span class="n">in</span><span class="p">(</span><span class="s">&quot;c:</span><span class="se">\\</span><span class="s">data.txt&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">in</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;file error!&quot;</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">in</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">in</span><span class="o">&gt;&gt;</span><span class="n">temp</span><span class="p">;</span>
+        <span class="n">data</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">in</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="n">Order</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="n">ofstream</span> <span class="n">out</span><span class="p">(</span><span class="s">&quot;c:</span><span class="se">\\</span><span class="s">result.txt&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="n">out</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;file error!&quot;</span><span class="p">;</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">&lt;&lt;</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="s">&quot; &quot;</span><span class="p">;</span>
+        <span class="n">out</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>130．一个链表的结点结构</h2>
+
+<blockquote>
+</blockquote>
+
+<div class="highlight"><pre><code class="c"><span class="k">struct</span> <span class="n">Node</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">data</span> <span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">next</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Node</span> <span class="n">Node</span> <span class="p">;</span><span class="err">已知链表的头结点</span><span class="n">head</span><span class="p">,</span><span class="err">写一个函数把这个链表逆序</span> <span class="p">(</span> <span class="n">Intel</span><span class="p">)</span> <span class="n">Node</span> <span class="o">*</span> <span class="n">ReverseList</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="c1">//链表逆序</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+        <span class="n">Node</span> <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="n">head</span> <span class="p">;</span>
+        <span class="n">Node</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+        <span class="n">Node</span> <span class="o">*</span><span class="n">p3</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+        <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span> <span class="n">p3</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p1</span> <span class="p">;</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span> <span class="p">;</span>
+            <span class="n">p2</span> <span class="o">=</span> <span class="n">p3</span> <span class="p">;</span>
+            <span class="n">p3</span> <span class="o">=</span> <span class="n">p3</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p1</span> <span class="p">;</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">p2</span> <span class="p">;</span>
+        <span class="k">return</span> <span class="n">head</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>131. 一个链表的结点结构</h2>
+
+<blockquote>
+</blockquote>
+
+<div class="highlight"><pre><code class="c"><span class="k">struct</span> <span class="n">Node</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">data</span> <span class="p">;</span>
+    <span class="n">Node</span> <span class="o">*</span><span class="n">next</span> <span class="p">;</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Node</span> <span class="n">Node</span> <span class="p">;</span></code></pre></div>
+
+<p>已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序。</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">Node</span> <span class="o">*</span> <span class="nf">Merge</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head1</span> <span class="p">,</span> <span class="n">Node</span> <span class="o">*</span><span class="n">head2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">head1</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">head2</span> <span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">head2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">head1</span> <span class="p">;</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="n">head1</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">head2</span><span class="o">-&gt;</span><span class="n">data</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="n">head</span> <span class="o">=</span> <span class="n">head1</span> <span class="p">;</span>
+                <span class="n">p1</span> <span class="o">=</span> <span class="n">head1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+                <span class="n">p2</span> <span class="o">=</span> <span class="n">head2</span> <span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">head</span> <span class="o">=</span> <span class="n">head2</span> <span class="p">;</span>
+                <span class="n">p2</span> <span class="o">=</span> <span class="n">head2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+                <span class="n">p1</span> <span class="o">=</span> <span class="n">head1</span> <span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">pcurrent</span> <span class="o">=</span> <span class="n">head</span> <span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span> <span class="n">p1</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">p2</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">data</span> <span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">pcurrent</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p1</span> <span class="p">;</span>
+                    <span class="n">pcurrent</span> <span class="o">=</span> <span class="n">p1</span> <span class="p">;</span>
+                    <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">pcurrent</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p2</span> <span class="p">;</span>
+                    <span class="n">pcurrent</span> <span class="o">=</span> <span class="n">p2</span> <span class="p">;</span>
+                    <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="n">p1</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span>
+                <span class="n">pcurrent</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p1</span> <span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="n">p2</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="p">)</span>
+                    <span class="n">pcurrent</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p2</span> <span class="p">;</span>
+                    <span class="k">return</span> <span class="n">head</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>132.已知两个链表head1 和head2 各自有序，请把它们合并成一个链表依然有序，这次要求用递归方法进行。 ( Autodesk)</h2>
+
+<p>答案：</p>
+
+<div class="highlight"><pre><code class="c"><span class="n">Node</span> <span class="o">*</span> <span class="nf">MergeRecursive</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">head1</span> <span class="p">,</span> <span class="n">Node</span> <span class="o">*</span><span class="n">head2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">head1</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">head2</span> <span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="n">head2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">head1</span> <span class="p">;</span>
+            <span class="n">Node</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="n">head1</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">head2</span><span class="o">-&gt;</span><span class="n">data</span> <span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">head</span> <span class="o">=</span> <span class="n">head1</span> <span class="p">;</span>
+                <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">MergeRecursive</span><span class="p">(</span><span class="n">head1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="n">head2</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">head</span> <span class="o">=</span> <span class="n">head2</span> <span class="p">;</span>
+                <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">MergeRecursive</span><span class="p">(</span><span class="n">head1</span><span class="p">,</span><span class="n">head2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">head</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>133．分析一下这段程序的输出 (Autodesk)</h2>
+
+<div class="highlight"><pre><code class="c"><span class="n">class</span> <span class="n">B</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+    <span class="n">B</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;default constructor&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="o">~</span><span class="n">B</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;destructed&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">B</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span><span class="o">:</span><span class="n">data</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;constructed by parameter&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">data</span> <span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">B</span> <span class="nf">Play</span><span class="p">(</span> <span class="n">B</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">b</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">B</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">Play</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>133 将“引用”作为函数参数有哪些特点？</h2>
+
+<blockquote>
+<p>（1）传递引用给函数与传递指针的效果是一样的。这时，被调函数的形参就成为原来主调函数中的实参变量或对象的一个别名来使用，所以在被调函数中对形参变量的操作就是对其相应的目标对象（在主调函数中）的操作。
+（2）使用引用传递函数的参数，在内存中并没有产生实参的副本，它是直接对实参操作；而使用一般变量传递函数的参数，当发生函数调用时，需要给形参分配存储单元，形参变量是实参变量的副本；如果传递的是对象，还将调用拷贝构造函数。因此，当参数传递的数据较大时，用引用比用一般变量传递参数的效率和所占空间都好。
+（3）使用指针作为函数的参数虽然也能达到与使用引用的效果，但是，在被调函数中同样要给形参分配存储单元，且需要重复使用&quot;*指针变量名&quot;的形式进行运算，这很容易产生错误且程序的阅读性较差；另一方面，在主调函数的调用点处，必须用变量的地址作为实参。而引用更容易使用，更清晰。</p>
+</blockquote>
+
+<h2>134. 什么时候需要“引用”？</h2>
+
+<blockquote>
+<p>流操作符（&lt;&lt;、&gt;&gt;）和赋值操作符（=）的返回值、拷贝构造函数的参数、赋值操作符的参数、其它情况都推荐使用引用。</p>
+</blockquote>
+
+<h2>135.面向对象的三个基本特征，并简单叙述之？</h2>
+
+<blockquote>
+<ol>
+<li>封装：将客观事物抽象成类，每个类对自身的数据和方法实行protection(private, protected,public)</li>
+<li>继承：广义的继承有三种实现形式：实现继承（指使用基类的属性和方法而无需额外编码的能力）、可视继承（子窗体使用父窗体的外观和实现代码）、接口继承（仅使用属性和方法，实现滞后到子类实现）。前两种（类继承）和后一种（对象组合=&gt;接口继承以及纯虚函数）构成了功能复用的两种方式。</li>
+<li>多态：是将父对象设置成为和一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。</li>
+</ol>
+</blockquote>
+
+<h2>136.求下面函数的返回值（微软）</h2>
+
+<div class="highlight"><pre><code class="c"><span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">countx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">countx</span> <span class="o">++</span><span class="p">;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">countx</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>假定x = 9999。 答案：8
+思路：将x转化为2进制，看含有的1的个数。</p>
+
+<h2>137、写出下列代码的输出内容</h2>
+
+<div class="highlight"><pre><code class="c"><span class="err">＃</span><span class="n">include</span><span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">inc</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span><span class="p">(</span><span class="o">++</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">multi</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="kt">int</span><span class="o">*</span><span class="n">b</span><span class="p">,</span><span class="kt">int</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="o">=*</span><span class="n">a</span><span class="o">**</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">typedef</span> <span class="kt">int</span><span class="p">(</span><span class="n">FUNC1</span><span class="p">)(</span><span class="kt">int</span> <span class="n">in</span><span class="p">);</span>
+<span class="k">typedef</span> <span class="nf">int</span><span class="p">(</span><span class="n">FUNC2</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="o">*</span><span class="p">,</span><span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">show</span><span class="p">(</span><span class="n">FUNC2</span> <span class="n">fun</span><span class="p">,</span><span class="kt">int</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span><span class="n">arg2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">INCp</span><span class="o">=&amp;</span><span class="n">inc</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span><span class="n">p</span><span class="p">(</span><span class="n">arg1</span><span class="p">);</span>
+    <span class="n">fun</span><span class="p">(</span><span class="o">&amp;</span><span class="n">temp</span><span class="p">,</span><span class="o">&amp;</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="n">arg2</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">multi</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<blockquote>
+<p>答：110</p>
+</blockquote>
+
+<h2>138。编写一个 C 函数，该函数在一个字符串中找到可能的最长的子字符串，且该字符串是由同一字符组成的。</h2>
+
+<div class="highlight"><pre><code class="c"><span class="kt">char</span> <span class="o">*</span> <span class="nf">search</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">cpSource</span><span class="p">,</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">cpTemp</span><span class="o">=</span><span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">cpDest</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">iTemp</span><span class="p">,</span> <span class="n">iCount</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">cpSource</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">cpSource</span> <span class="o">==</span> <span class="n">ch</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">iTemp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">cpTemp</span> <span class="o">=</span> <span class="n">cpSource</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">cpSource</span> <span class="o">==</span> <span class="n">ch</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">iTemp</span><span class="p">,</span> <span class="o">++</span><span class="n">cpSource</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">iTemp</span> <span class="o">&gt;</span> <span class="n">iCount</span><span class="p">)</span>
+                    <span class="n">iCount</span> <span class="o">=</span> <span class="n">iTemp</span><span class="p">,</span> <span class="n">cpDest</span> <span class="o">=</span> <span class="n">cpTemp</span><span class="p">;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="o">!*</span><span class="n">cpSource</span><span class="p">)</span>
+                        <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="o">++</span><span class="n">cpSource</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">cpDest</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>139。请编写一个 C 函数，该函数在给定的内存区域搜索给定的字符，并返回该字符所在位置索引值。</h2>
+
+<div class="highlight"><pre><code class="c"><span class="kt">int</span> <span class="nf">search</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">cpSource</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">cpSource</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ch</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>140.一个单向链表，不知道头节点,一个指针指向其中的一个节点，问如何删除这个指针指向的节点？</h2>
+
+<blockquote>
+<p>答： 将这个指针指向的next节点值copy到本节点，将next指向next-&gt;next,并随后删除原next指向的节点。</p>
+</blockquote>
+
+<h2>141、用指针的方法，将字符串“ABCD1234efgh”前后对调显示</h2>
+
+<div class="highlight"><pre><code class="c"><span class="err">＃</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+<span class="err">＃</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">string</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+<span class="err">＃</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">dos</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;ABCD1234efgh&quot;</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">str</span> <span class="o">+</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="n">p2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">p1</span> <span class="o">=</span> <span class="o">*</span><span class="n">p2</span><span class="p">;</span>
+        <span class="o">*</span><span class="n">p2</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">p1</span><span class="p">;</span>
+        <span class="o">--</span><span class="n">p2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;str now is %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+    <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>142、有一分数序列：1/2,1/4,1/6,1/8„„，用函数调用的方法，求此数列前20项的和</h2>
+
+<div class="highlight"><pre><code class="c"><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="kt">double</span> <span class="nf">getValue</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">42</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//一定要使用1.0做除数，不能用1，否则结果将</span>
+        <span class="err">自动转化成整数，即</span><span class="mf">0.000000</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;result is %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">getValue</span><span class="p">());</span>
+    <span class="n">system</span><span class="p">(</span><span class="s">&quot;pause&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2>143、有一个数组a[1000]存放0--1000;要求每隔二个数删掉一个数，到末尾时循环至开头继续进行，求最后一个被删掉的数的原始下标位置。</h2>
+
+<blockquote>
+<p>以7个数为例：
+{0,1,2,3,4,5,6,7} 0--&gt;1--&gt;2（删除）--&gt;3--&gt;4--&gt;5(删除)--&gt;6--&gt;7--&gt;0（删除），如此循环直到最后一个数被删除。
+方法1：数组</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="c"><span class="err">＃</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#define null 1000</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">count</span><span class="o">&lt;</span><span class="mi">999</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">%</span><span class="mi">1000</span><span class="p">]</span><span class="o">==</span><span class="n">null</span><span class="p">)</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">%</span><span class="mi">1000</span><span class="p">]</span><span class="o">==</span><span class="n">null</span><span class="p">)</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">%</span><span class="mi">1000</span><span class="p">]</span><span class="o">==</span><span class="n">null</span><span class="p">)</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">null</span><span class="p">;</span>
+            <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="n">null</span><span class="p">)</span> <span class="n">j</span><span class="o">=</span><span class="p">(</span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="o">%</span><span class="mi">1000</span><span class="p">;</span> <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>方法2：链表</p>
+
+<div class="highlight"><pre><code class="c"><span class="err">＃</span><span class="n">include</span><span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span> 
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span> 
+<span class="cp">#define null 0 struct node</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+    <span class="n">node</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">node</span><span class="o">*</span> <span class="n">head</span><span class="o">=</span><span class="n">new</span> <span class="n">node</span><span class="p">;</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">null</span><span class="p">;</span> <span class="n">node</span><span class="o">*</span> <span class="n">p</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">node</span><span class="o">*</span> <span class="n">tmp</span><span class="o">=</span><span class="n">new</span> <span class="n">node</span><span class="p">;</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+        <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">null</span><span class="p">;</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">tmp</span><span class="p">;</span> <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">!=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>方法3：通用算法</p>
+
+<div class="highlight"><pre><code class="c"><span class="err">＃</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+<span class="cp">#define MAXLINE 1000 </span><span class="c1">//元素个数</span>
+<span class="cm">/*</span>
+<span class="cm">MAXLINE 元素个数</span>
+<span class="cm">a[] 元素数组</span>
+<span class="cm">R[] 指针场</span>
+<span class="cm">suffix 下标</span>
+<span class="cm">index 返回最后的下标序号</span>
+<span class="cm">values 返回最后的下标对应的值</span>
+<span class="cm">start 从第几个开始</span>
+<span class="cm">K 间隔</span>
+<span class="cm">*/</span>
+<span class="kt">int</span> <span class="n">find_n</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span><span class="kt">int</span> <span class="n">R</span><span class="p">[],</span><span class="kt">int</span> <span class="n">K</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">index</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">values</span><span class="p">,</span><span class="kt">int</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">suffix</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">front_node</span><span class="p">,</span><span class="n">current_node</span><span class="p">;</span>
+<span class="n">suffix</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">current_node</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">front_node</span><span class="o">=</span><span class="n">MAXLINE</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="n">current_node</span><span class="o">=</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">front_node</span><span class="o">=</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">while</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">front_node</span><span class="p">]</span><span class="o">!=</span><span class="n">front_node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">current_node</span><span class="p">]);</span>
+    <span class="n">R</span><span class="p">[</span><span class="n">front_node</span><span class="p">]</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">current_node</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">K</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">current_node</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">front_node</span><span class="p">];</span>
+        <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">K</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">front_node</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">front_node</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">current_node</span><span class="o">=</span><span class="n">R</span><span class="p">[</span><span class="n">front_node</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">index</span><span class="o">=</span><span class="n">front_node</span><span class="p">;</span>
+<span class="n">values</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">front_node</span><span class="p">];</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span><span class="n">suffix</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">values</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">K</span><span class="p">;</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="n">index</span><span class="o">=</span><span class="n">values</span><span class="o">=</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">K</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">MAXLINE</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+        <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">find_n</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">values</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;the value is %d,%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">values</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#技术学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>
