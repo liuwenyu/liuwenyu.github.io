@@ -1,0 +1,347 @@
+---
+layout: post
+title: cocos2d游戏界面----公告栏制作
+category: COCOS2D
+tags: COCOS2D
+keywords: COCOS2D
+---
+
+##DEMO——.h
+{% highlight c++ %}
+#ifndef _ANNOUNCE_LAYER_H_
+#define _ANNOUNCE_LAYER_H_
+#include "cocos2d.h"
+#include "cocos-ext.h"
+#include "json/json.h"
+#include "layer/common/BaseBtn.h"
+USING_NS_CC;
+USING_NS_CC_EXT;
+using namespace std;
+class StartAnnounceLayer :public CCLayer,CCScrollViewDelegate
+{
+    public:
+        ~StartAnnounceLayer();
+        static StartAnnounceLayer *getInstance();
+        bool init();
+        void show(CCNode *parent,string xmlStr);
+        void show2(CCNode *parent,string content);
+        void show3(CCNode *parent,Json::Value stConf);
+        void show4(int number);
+
+        void menuCallback_close_l(CCObject *pSender);
+        void menuCallback_close_s(CCObject *pSender);
+        void menuCallback_Next(CCObject *pSender_n);
+        void menuCallback_Previous(CCObject *pSender_p);
+
+        void scrollViewDidScroll(CCScrollView *pScrollView);
+        void scrollViewDidZoom(CCScrollView *pScrollView);
+
+        void registerWithTouchDispatcher();
+        void onExit();
+        bool ccTouchBegan(CCTouch *pTouch,CCEvent *pEvent);
+        void ccTouchMoved(CCTouch *pTouch,CCEvent *pEvent);
+        void ccTouchEnded(CCTouch *pTouch,CCEvent *pEvent);
+    private:
+        StartAnnounceLayer();
+        void initView();
+    private:
+        static StartAnnounceLayer* m_pInstance;
+        CCScrollView* m_pListView;
+        BaseBtn* pBtnPrevious;
+        BaseBtn* pBtnNext;
+        int m_iCurIdx;
+        Json::Value m_stNotice;
+        BaseBtn *pBtnClose_l;
+        BaseBtn *pBtnClose_s;
+};
+#endif
+{% endhighlight %}
+
+## DEMO--.CPP
+{% highlight c++ %}
+#include "StartAnnounceLayer.h"
+#include "comm/RichTxtCreator.h"
+
+#include "comm/Utils.h"
+#include "comm/SmartRes.h"
+#include "comm/HallMsgParser.h"
+StartAnnounceLayer* StartAnnounceLayer::m_pInstance = NULL;
+const int touch_priority = INT_MIN+3;
+const int touch_priority_menu = touch_priority-1;
+const int touch_priority_scrollview = touch_priority-1;
+StartAnnounceLayer::StartAnnounceLayer()
+{
+    m_pListView = NULL;
+    m_iCurIdx = 0;
+}
+StartAnnounceLayer::~StartAnnounceLayer()
+{
+
+}
+StartAnnounceLayer *StartAnnounceLayer::getInstance()
+{
+    if(!m_pInstance)
+    {
+        m_pInstance = new StartAnnounceLayer();
+        if(m_pInstance && m_pInstance->init())
+        {
+
+        }
+        else
+        {
+            delete m_pInstance;
+            m_pInstance = NULL;
+        }
+    }
+    return m_pInstance;
+}
+bool StartAnnounceLayer::init()
+{
+    bool isOk = false;
+    if(CCLayer::init())
+    {
+        setTouchEnabled(true);
+        initView();
+        isOk = true;
+    }
+    return isOk;
+}
+void StartAnnounceLayer::initView()
+{
+    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("announce/announce.plist");
+
+    //设置游戏阴影
+    CCLayerColor *pShadow = CCLayerColor::create(ccc4(0,0,0,190));
+    addChild(pShadow);
+
+    CCSprite *pBg = CCSprite::createWithSpriteFrameName("bg.png");
+    pBg->setPosition(_center);
+    addChild(pBg);
+
+    //下一页    
+    //CCMenuItemImage* pSure = BaseBtn::create("确认",BTN_STYLE_2,this,menu_selector(PetBagLayer::SureCallBack));
+    //CCMenuItemImage::create("petComm/sure.png","petComm/sure_s.png",this,menu_selector(PetBagLayer::SureCallBack));
+    //pSure->setPosition(pBg->getPosition()+ccp(205,-172));
+    //pSure->setScale(0.8);
+    pBtnNext = BaseBtn::create("下一页",BTN_STYLE_2,this,menu_selector(StartAnnounceLayer::menuCallback_Next));
+    pBtnNext->setScale(0.75);
+    pBtnNext->setPosition(ccp(widthOf(pBg),heightOf(pBg))+ccp(-240,-290));
+    CCMenu *pMenu_N = CCMenu::create(pBtnNext,NULL);
+    pMenu_N->setTouchPriority(touch_priority_menu);
+    pMenu_N->setPosition(CCPointZero);
+    pBtnNext->setVisible(false);
+    pBg->addChild(pMenu_N);
+
+    //上一页
+    pBtnPrevious = BaseBtn::create("上一页",BTN_STYLE_2,this,menu_selector(StartAnnounceLayer::menuCallback_Previous));
+    pBtnPrevious->setPosition(ccp(widthOf(pBg),heightOf(pBg))+ccp(-450,-290));
+    CCMenu *pMenu_P = CCMenu::create(pBtnPrevious,NULL);
+    pBtnPrevious->setScale(0.75);
+    pMenu_P->setTouchPriority(touch_priority_menu);
+    pMenu_P->setPosition(CCPointZero);
+    pBtnPrevious->setVisible(false);
+    //pBg->setVisible(bool) 设置图片是否可见
+    pBg->addChild(pMenu_P);
+
+    //离开当前图层
+    pBtnClose_l = BaseBtn::create(NULL,BTN_STYLE_12,this,menu_selector(StartAnnounceLayer::menuCallback_close_l));
+    pBtnClose_l->setPosition(ccp(widthOf(pBg),heightOf(pBg))+ccp(-50,-40));
+    CCMenu *pMenu_l = CCMenu::create(pBtnClose_l,NULL);
+    pMenu_l->setTouchPriority(touch_priority_menu);
+    pBtnClose_l->setVisible(false);
+    pMenu_l->setPosition(CCPointZero);
+    pBg->addChild(pMenu_l);
+
+    //离开游戏
+    pBtnClose_s = BaseBtn::create(NULL,BTN_STYLE_12,this,menu_selector(StartAnnounceLayer::menuCallback_close_s));
+    pBtnClose_s->setPosition(ccp(widthOf(pBg),heightOf(pBg))+ccp(-50,-40));
+    CCMenu *pMenu_s = CCMenu::create(pBtnClose_s,NULL);
+    pBtnClose_s->setVisible(false);
+    pMenu_s->setTouchPriority(touch_priority_menu);
+    pMenu_s->setPosition(CCPointZero);
+    pBg->addChild(pMenu_s);
+
+    const CCSize viewSize = CCSize(395,190);
+    m_pListView = CCScrollView::create(viewSize);
+    m_pListView->setTouchEnabled(true);
+    m_pListView->setDirection(kCCScrollViewDirectionVertical);
+    m_pListView->setTouchPriority(touch_priority_scrollview);
+    m_pListView->setPosition(ccp(47,93));
+    pBg->addChild(m_pListView);
+}
+void StartAnnounceLayer::show(CCNode *parent,string xmlStr)
+{
+    if(parent)
+    {
+        if(getParent())
+        {
+            removeFromParent();
+        }
+        HallMsgParser *parser = HallMsgParser::create();
+        parser->setMaxLine(-1);
+        CCLayer *pCntntNode = parser->parseMsgFromXMLStrAndShow(xmlStr.c_str(),CCSize(395,0));
+        if(pCntntNode)
+        {
+            CCLayer *pContainerLayer = CCLayer::create();
+            pContainerLayer->setContentSize(pCntntNode->getContentSize());
+            pContainerLayer->addChild(pCntntNode);
+
+            pCntntNode->setPosition(centerOf(pContainerLayer));
+
+            if(m_pListView && pContainerLayer)
+            {
+                m_pListView->setContainer(pContainerLayer);
+                m_pListView->setContentOffset(ccp(0,m_pListView->getViewSize().height - heightOf(pContainerLayer)));
+            }
+            parent->addChild(this,INT_MAX-1);
+        }
+    }
+}
+void StartAnnounceLayer::show2(CCNode *parent,string content)
+{
+    if(parent) 
+    {
+        if(getParent())
+        {
+            removeFromParent();
+        }
+        CCLayer *pContainerLayer = CCLayer::create();
+        RichTxtCreator::getInstance()->setContentSize(CCSize(395,0));
+        RichTxtCreator::getInstance()->add(TxtItemStyle(content.c_str(),STYLE_TXT_ANNOUNCE));
+        CCNode *pCntnt = RichTxtCreator::getInstance()->show(pContainerLayer);
+        if(pCntnt)
+        {
+            pContainerLayer->setContentSize(pCntnt->getContentSize());
+            pCntnt->setPosition(centerOf(pContainerLayer));
+
+            if(m_pListView && pContainerLayer)
+            {
+                m_pListView->setContainer(pContainerLayer);
+                m_pListView->setContentOffset(ccp(0,m_pListView->getViewSize().height - heightOf(pContainerLayer)));
+            }
+            parent->addChild(this,INT_MAX-1);
+        }
+    }
+}
+void StartAnnounceLayer::show3(CCNode *parent,Json::Value stConf)
+{
+    if(stConf.empty())
+    {
+        return ;
+    }
+    m_stNotice = stConf;
+    parent->addChild(this,INT_MAX-1);
+    show4(0);
+
+    //if(stConf[m_iCurIdx+1]["content"].asString().size())
+    //{
+    //  //
+    //}
+    if(m_iCurIdx+1 > stConf.size())
+    {
+        pBtnNext->setVisible(true);
+    }
+    if(stConf[0U]["is_enter"].isInt())
+    {
+        //CCLOG("sssss:%d",stConf[0U]["is_enter"].isUInt());
+        pBtnClose_l->setVisible(true);
+        pBtnClose_s->setVisible(false);
+    }
+    else
+    {
+        //CCLOG("bbbbbbb:%d",stConf[0U]["is_enter"].isUInt());
+        pBtnClose_s->setVisible(true);
+        pBtnClose_l->setVisible(false);
+    }
+
+}
+void StartAnnounceLayer::show4(int number)
+{
+
+    CCLayer *pContent = CCLayer::create();
+    string sTxt = m_stNotice[number]["content"].asString();
+    RichTxtCreator::getInstance()->add(TxtItemStyle(sTxt.c_str(),STYLE_TXT_ANNOUNCE));
+    RichTxtCreator::getInstance()->setContentSize(CCSize(395,0));
+    CCNode *pTxt =  RichTxtCreator::getInstance()->show(pContent);
+    if(pTxt)
+    {
+        pContent->setContentSize(pTxt->getContentSize());
+        pTxt->setPosition(centerOf(pContent));
+        if(m_pListView && pContent)
+        {
+            m_pListView->setContainer(pContent);
+            m_pListView->setContentOffset(ccp(0,m_pListView->getViewSize().height - heightOf(pContent)));
+        }
+        //parent->addChild(this,INT_MAX-1);
+    }
+}
+void StartAnnounceLayer::menuCallback_close_l(CCObject *pSender)
+{
+    //CCMenuItem *pBtn = (CCMenuItem*)(pSender);
+
+    //CCTextureCache::sharedTextureCache()->removeUnusedTextures();
+    removeFromParent();
+}
+void StartAnnounceLayer::menuCallback_close_s(CCObject *pSender)
+{
+    //CCMenuItem *pBtn = (CCMenuItem*)(pSender);
+
+    //CCTextureCache::sharedTextureCache()->removeUnusedTextures();
+    exit(0);
+}
+void StartAnnounceLayer::menuCallback_Next(CCObject *pSender_n)
+{
+    if(m_iCurIdx+1 >= m_stNotice.size())
+    {
+        pBtnNext->setVisible(false);
+    }
+    else{
+        m_iCurIdx+=1;
+        show4(m_iCurIdx);
+        pBtnPrevious->setVisible(true);
+    }
+}
+void StartAnnounceLayer::menuCallback_Previous(CCObject *pSender_p)
+{
+    if( m_iCurIdx > 0)
+    {
+        m_iCurIdx -= 1;
+        show4(m_iCurIdx);
+    }
+    else
+    {
+        pBtnPrevious->setVisible(false);
+    }
+}
+
+void StartAnnounceLayer::scrollViewDidScroll(CCScrollView *pScrollView)
+{
+
+}
+void StartAnnounceLayer::scrollViewDidZoom(CCScrollView *pScrollView)
+{
+
+}
+void StartAnnounceLayer::registerWithTouchDispatcher()
+{
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this,touch_priority,true);
+}
+void StartAnnounceLayer::onExit()
+{
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    CCLayer::onExit();
+}
+bool StartAnnounceLayer::ccTouchBegan(CCTouch *pTouch,CCEvent *pEvent)
+{
+    return true;
+}
+void StartAnnounceLayer::ccTouchMoved(CCTouch *pTouch,CCEvent *pEvent)
+{
+}
+void StartAnnounceLayer::ccTouchEnded(CCTouch *pTouch,CCEvent *pEvent)
+{
+
+}
+
+{% endhighlight %}
+

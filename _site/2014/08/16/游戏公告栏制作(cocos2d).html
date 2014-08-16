@@ -1,0 +1,796 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+<title>cocos2d游戏界面----公告栏制作 | 落枫的博客</title>
+<meta name="author" content="">
+
+  <meta name="keywords" content="COCOS2D">
+
+
+<link rel="shortcut icon" href="/public/upload/gavatar/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<!--<link href="/pages/atom.xml" rel="alternate" title="落枫的博客" type="application/atom+xml"> -->
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+    <div class="col-md-3 col-xs-3 aside1">
+      <br>
+      <a class="pjaxlink" href="/"><img src="/public/upload/gavatar/gavatar.png" class="img-rounded avatar"></a>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        
+          <li><a href="#学习" data-toggle="tab">学习</a></li>
+        
+          <li><a href="#技术学习" data-toggle="tab">技术学习</a></li>
+        
+          <li><a href="#面试必备" data-toggle="tab">面试必备</a></li>
+        
+          <li><a href="#cocos2d" data-toggle="tab">cocos2d</a></li>
+        
+        <li><a href="#tags" data-toggle="tab">标签</a></li>
+        <!--        <li><a class="pjaxlink" href="/pages/about.html">关于</a></li>-->
+      </ul>
+      <div class="aside1_bottom">
+        <!--
+        <table class="table table-condensed">
+          <tr>
+            <td><a href="/pages/atom.xml" target="_blank"><i class="fa fa-rss fa-2x"></i></a></td>
+            <td><a href="mailto:liuwenyu21@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a></td>
+          </tr>
+        </table>
+      -->
+        <!--
+      <img src="" class="img-rounded weixin">
+      -->
+      </div>
+    </div>
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+           
+            <div class="tab-pane" id="学习">
+              <div class="list-group">
+                <h2 class="center">学习</h2>
+                
+                  <a href="/2014/06/16/%E9%93%BE%E8%A1%A8.html" class="list-group-item pjaxlink">二叉树 链表</a>
+                
+                  <a href="/2014/06/15/fork.html" class="list-group-item pjaxlink">多进程 fork</a>
+                
+                  <a href="/2014/06/14/sql.html" class="list-group-item pjaxlink">MySql</a>
+                
+                  <a href="/2014/06/13/%E6%8E%92%E5%BA%8F.html" class="list-group-item pjaxlink">排序 查找 键树 结构体</a>
+                
+                  <a href="/2014/06/10/%E9%87%8D%E8%BD%BD.html" class="list-group-item pjaxlink">重载 虚函数 动态绑定</a>
+                
+                  <a href="/2014/06/07/%E9%80%92%E5%BD%92.html" class="list-group-item pjaxlink">递归 宏定义 内联函数</a>
+                
+                  <a href="/2014/06/06/%E6%9E%9A%E4%B8%BE.html" class="list-group-item pjaxlink">枚举 sizeof</a>
+                
+                  <a href="/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html" class="list-group-item pjaxlink">联合体 大端小端 位域 指针引用</a>
+                
+                  <a href="/2014/06/02/volatile.html" class="list-group-item pjaxlink">全局变量 volatile</a>
+                
+                  <a href="/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html" class="list-group-item pjaxlink">const与指针 函数返回值 声明</a>
+                
+                  <a href="/2014/05/20/gdb.html" class="list-group-item pjaxlink">GDB调试</a>
+                
+                  <a href="/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html" class="list-group-item pjaxlink">UDP服务器 僵尸进程</a>
+                
+                  <a href="/2014/05/02/%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">学习总结</a>
+                
+                  <a href="/2014/05/02/tcp.html" class="list-group-item pjaxlink">网络编程-tcp/ip</a>
+                
+                  <a href="/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">约瑟夫问题 虚继承</a>
+                
+                  <a href="/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html" class="list-group-item pjaxlink">构造函数</a>
+                
+                  <a href="/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html" class="list-group-item pjaxlink">内存 线程池</a>
+                
+                  <a href="/2014/04/24/c++.html" class="list-group-item pjaxlink">c++</a>
+                
+                  <a href="/2014/04/23/%E5%86%85%E5%AD%98.html" class="list-group-item pjaxlink">内存 复制控制</a>
+                
+                  <a href="/2014/04/22/%E7%BB%A7%E6%89%BF.html" class="list-group-item pjaxlink">继承 函数重载覆盖隐藏</a>
+                
+                  <a href="/2014/04/21/string.html" class="list-group-item pjaxlink">重载运算符-智能指针-String</a>
+                
+                  <a href="/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html" class="list-group-item pjaxlink">复制控制</a>
+                
+                  <a href="/2014/04/17/map.html" class="list-group-item pjaxlink">Linux网络编程 map</a>
+                
+                  <a href="/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">工厂模式</a>
+                
+                  <a href="/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html" class="list-group-item pjaxlink">UDP服务器 生产者</a>
+                
+                  <a href="/2014/04/14/%E7%BA%BF%E7%A8%8B.html" class="list-group-item pjaxlink">线程</a>
+                
+                  <a href="/2014/04/11/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html" class="list-group-item pjaxlink">设计模式 单例模式</a>
+                
+                  <a href="/2014/04/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%AF%94%E8%BE%83.html" class="list-group-item pjaxlink">进程 线程</a>
+                
+                  <a href="/2014/04/04/Socket-TCP.html" class="list-group-item pjaxlink">Socket TCP</a>
+                
+                  <a href="/2014/04/03/linux(UDP).html" class="list-group-item pjaxlink">基于UDP的多人群聊</a>
+                
+                  <a href="/2014/04/02/Linux.html" class="list-group-item pjaxlink">Linux网络编程 socket UDP</a>
+                
+                  <a href="/2014/04/01/Linux.html" class="list-group-item pjaxlink">大端小端 ip转换</a>
+                
+                  <a href="/2014/03/31/pthread.html" class="list-group-item pjaxlink">pthread</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="技术学习">
+              <div class="list-group">
+                <h2 class="center">技术学习</h2>
+                
+                  <a href="/2014/06/19/%E5%9F%BA%E4%BA%8EHTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E6%B5%8F%E8%A7%88%E5%92%8C%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8.html" class="list-group-item pjaxlink">FTP文件服务器 项目</a>
+                
+                  <a href="/2014/06/01/%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9.html" class="list-group-item pjaxlink">学习方向与重点</a>
+                
+                  <a href="/2014/05/26/MiniSearchEngine%E6%80%BB%E7%BB%93.html" class="list-group-item pjaxlink">MiniSearchEngine总结</a>
+                
+                  <a href="/2014/05/24/minisearchengin.html" class="list-group-item pjaxlink">MiniSearchEngine 项目</a>
+                
+                  <a href="/2014/05/22/SpellCorrector.html" class="list-group-item pjaxlink">SpellCorrector 项目</a>
+                
+                  <a href="/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html" class="list-group-item pjaxlink">epoll</a>
+                
+                  <a href="/2014/05/02/mini%E6%90%9C%E7%B4%A2.html" class="list-group-item pjaxlink">mini搜索</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="面试必备">
+              <div class="list-group">
+                <h2 class="center">面试必备</h2>
+                
+                  <a href="/2014/06/20/c++300(1-180).html" class="list-group-item pjaxlink">c++笔试300题</a>
+                
+              </div>
+            </div>
+           
+            <div class="tab-pane" id="cocos2d">
+              <div class="list-group">
+                <h2 class="center">cocos2d</h2>
+                
+                  <a href="/2014/08/16/%E6%B8%B8%E6%88%8F%E5%85%AC%E5%91%8A%E6%A0%8F%E5%88%B6%E4%BD%9C(cocos2d).html" class="list-group-item pjaxlink">cocos2d游戏界面----公告栏制作</a>
+                
+              </div>
+            </div>
+          
+          <div class="tab-pane" id="tags">
+            <div class="panel-group" id="accordion">
+              <h2 class="center">标签</h2>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux">linux</a>
+                      <span class="badge pull-right">38</span>
+                    </h4>
+                  </div>
+                  <div id="linux" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/19/%E5%9F%BA%E4%BA%8EHTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E6%B5%8F%E8%A7%88%E5%92%8C%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8.html' class="list-group-item pjaxlink">
+                        FTP文件服务器 项目
+                      </a>
+                    
+                      <a  href='/2014/06/16/%E9%93%BE%E8%A1%A8.html' class="list-group-item pjaxlink">
+                        二叉树 链表
+                      </a>
+                    
+                      <a  href='/2014/06/15/fork.html' class="list-group-item pjaxlink">
+                        多进程 fork
+                      </a>
+                    
+                      <a  href='/2014/06/13/%E6%8E%92%E5%BA%8F.html' class="list-group-item pjaxlink">
+                        排序 查找 键树 结构体
+                      </a>
+                    
+                      <a  href='/2014/06/10/%E9%87%8D%E8%BD%BD.html' class="list-group-item pjaxlink">
+                        重载 虚函数 动态绑定
+                      </a>
+                    
+                      <a  href='/2014/06/07/%E9%80%92%E5%BD%92.html' class="list-group-item pjaxlink">
+                        递归 宏定义 内联函数
+                      </a>
+                    
+                      <a  href='/2014/06/06/%E6%9E%9A%E4%B8%BE.html' class="list-group-item pjaxlink">
+                        枚举 sizeof
+                      </a>
+                    
+                      <a  href='/2014/06/04/%E8%81%94%E5%90%88%E4%BD%93.html' class="list-group-item pjaxlink">
+                        联合体 大端小端 位域 指针引用
+                      </a>
+                    
+                      <a  href='/2014/06/02/volatile.html' class="list-group-item pjaxlink">
+                        全局变量 volatile
+                      </a>
+                    
+                      <a  href='/2014/06/01/%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9.html' class="list-group-item pjaxlink">
+                        学习方向与重点
+                      </a>
+                    
+                      <a  href='/2014/05/30/const%E4%B8%8E%E6%8C%87%E9%92%88.html' class="list-group-item pjaxlink">
+                        const与指针 函数返回值 声明
+                      </a>
+                    
+                      <a  href='/2014/05/26/MiniSearchEngine%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        MiniSearchEngine总结
+                      </a>
+                    
+                      <a  href='/2014/05/24/minisearchengin.html' class="list-group-item pjaxlink">
+                        MiniSearchEngine 项目
+                      </a>
+                    
+                      <a  href='/2014/05/22/SpellCorrector.html' class="list-group-item pjaxlink">
+                        SpellCorrector 项目
+                      </a>
+                    
+                      <a  href='/2014/05/20/gdb.html' class="list-group-item pjaxlink">
+                        GDB调试
+                      </a>
+                    
+                      <a  href='/2014/05/05/epoll%E8%AF%A6%E8%A7%A3.html' class="list-group-item pjaxlink">
+                        epoll
+                      </a>
+                    
+                      <a  href='/2014/05/03/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        UDP服务器 僵尸进程
+                      </a>
+                    
+                      <a  href='/2014/05/02/%E6%80%BB%E7%BB%93.html' class="list-group-item pjaxlink">
+                        学习总结
+                      </a>
+                    
+                      <a  href='/2014/05/02/tcp.html' class="list-group-item pjaxlink">
+                        网络编程-tcp/ip
+                      </a>
+                    
+                      <a  href='/2014/05/02/mini%E6%90%9C%E7%B4%A2.html' class="list-group-item pjaxlink">
+                        mini搜索
+                      </a>
+                    
+                      <a  href='/2014/05/01/%E8%99%9A%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        约瑟夫问题 虚继承
+                      </a>
+                    
+                      <a  href='/2014/04/30/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html' class="list-group-item pjaxlink">
+                        构造函数
+                      </a>
+                    
+                      <a  href='/2014/04/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html' class="list-group-item pjaxlink">
+                        内存 线程池
+                      </a>
+                    
+                      <a  href='/2014/04/24/c++.html' class="list-group-item pjaxlink">
+                        c++
+                      </a>
+                    
+                      <a  href='/2014/04/23/%E5%86%85%E5%AD%98.html' class="list-group-item pjaxlink">
+                        内存 复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/22/%E7%BB%A7%E6%89%BF.html' class="list-group-item pjaxlink">
+                        继承 函数重载覆盖隐藏
+                      </a>
+                    
+                      <a  href='/2014/04/21/string.html' class="list-group-item pjaxlink">
+                        重载运算符-智能指针-String
+                      </a>
+                    
+                      <a  href='/2014/04/18/%E5%A4%8D%E5%88%B6%E6%8E%A7%E5%88%B6.html' class="list-group-item pjaxlink">
+                        复制控制
+                      </a>
+                    
+                      <a  href='/2014/04/17/map.html' class="list-group-item pjaxlink">
+                        Linux网络编程 map
+                      </a>
+                    
+                      <a  href='/2014/04/16/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        工厂模式
+                      </a>
+                    
+                      <a  href='/2014/04/15/UDP%E6%9C%8D%E5%8A%A1%E5%99%A8-%E7%94%9F%E4%BA%A7%E8%80%85.html' class="list-group-item pjaxlink">
+                        UDP服务器 生产者
+                      </a>
+                    
+                      <a  href='/2014/04/14/%E7%BA%BF%E7%A8%8B.html' class="list-group-item pjaxlink">
+                        线程
+                      </a>
+                    
+                      <a  href='/2014/04/11/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.html' class="list-group-item pjaxlink">
+                        设计模式 单例模式
+                      </a>
+                    
+                      <a  href='/2014/04/04/Socket-TCP.html' class="list-group-item pjaxlink">
+                        Socket TCP
+                      </a>
+                    
+                      <a  href='/2014/04/03/linux(UDP).html' class="list-group-item pjaxlink">
+                        基于UDP的多人群聊
+                      </a>
+                    
+                      <a  href='/2014/04/02/Linux.html' class="list-group-item pjaxlink">
+                        Linux网络编程 socket UDP
+                      </a>
+                    
+                      <a  href='/2014/04/01/Linux.html' class="list-group-item pjaxlink">
+                        大端小端 ip转换
+                      </a>
+                    
+                      <a  href='/2014/03/31/pthread.html' class="list-group-item pjaxlink">
+                        pthread
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#总结">总结</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="总结" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/04/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%AF%94%E8%BE%83.html' class="list-group-item pjaxlink">
+                        进程 线程
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySql">MySql</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="MySql" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/14/sql.html' class="list-group-item pjaxlink">
+                        MySql
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#linux/C/C++">linux/C/C++</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="linux/C/C++" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/06/20/c++300(1-180).html' class="list-group-item pjaxlink">
+                        c++笔试300题
+                      </a>
+                    
+                  </div>
+                </div>
+               
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#COCOS2D">COCOS2D</a>
+                      <span class="badge pull-right">1</span>
+                    </h4>
+                  </div>
+                  <div id="COCOS2D" class="panel-collapse collapse">
+                    
+                      <a  href='/2014/08/16/%E6%B8%B8%E6%88%8F%E5%85%AC%E5%91%8A%E6%A0%8F%E5%88%B6%E4%BD%9C(cocos2d).html' class="list-group-item pjaxlink">
+                        cocos2d游戏界面----公告栏制作
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax">
+            <div class="row">
+  <div class="col-md-12 aside3-title">
+    <br>
+    <h2 id="#identifier">cocos2d游戏界面----公告栏制作</h2>
+    2014年08月16日
+  </div>
+  <div class="col-md-12 aside3-content">
+    <hr>
+    <div id="content">
+      <h2>DEMO——.h</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#ifndef _ANNOUNCE_LAYER_H_</span>
+<span class="cp">#define _ANNOUNCE_LAYER_H_</span>
+<span class="cp">#include &quot;cocos2d.h&quot;</span>
+<span class="cp">#include &quot;cocos-ext.h&quot;</span>
+<span class="cp">#include &quot;json/json.h&quot;</span>
+<span class="cp">#include &quot;layer/common/BaseBtn.h&quot;</span>
+<span class="n">USING_NS_CC</span><span class="p">;</span>
+<span class="n">USING_NS_CC_EXT</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">StartAnnounceLayer</span> <span class="o">:</span><span class="k">public</span> <span class="n">CCLayer</span><span class="p">,</span><span class="n">CCScrollViewDelegate</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="o">~</span><span class="n">StartAnnounceLayer</span><span class="p">();</span>
+        <span class="k">static</span> <span class="n">StartAnnounceLayer</span> <span class="o">*</span><span class="nf">getInstance</span><span class="p">();</span>
+        <span class="kt">bool</span> <span class="nf">init</span><span class="p">();</span>
+        <span class="kt">void</span> <span class="nf">show</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">string</span> <span class="n">xmlStr</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">show2</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">string</span> <span class="n">content</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">show3</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">stConf</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">show4</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">);</span>
+
+        <span class="kt">void</span> <span class="nf">menuCallback_close_l</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">menuCallback_close_s</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">menuCallback_Next</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender_n</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">menuCallback_Previous</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender_p</span><span class="p">);</span>
+
+        <span class="kt">void</span> <span class="nf">scrollViewDidScroll</span><span class="p">(</span><span class="n">CCScrollView</span> <span class="o">*</span><span class="n">pScrollView</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">scrollViewDidZoom</span><span class="p">(</span><span class="n">CCScrollView</span> <span class="o">*</span><span class="n">pScrollView</span><span class="p">);</span>
+
+        <span class="kt">void</span> <span class="nf">registerWithTouchDispatcher</span><span class="p">();</span>
+        <span class="kt">void</span> <span class="nf">onExit</span><span class="p">();</span>
+        <span class="kt">bool</span> <span class="nf">ccTouchBegan</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">ccTouchMoved</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">ccTouchEnded</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">);</span>
+    <span class="nl">private:</span>
+        <span class="n">StartAnnounceLayer</span><span class="p">();</span>
+        <span class="kt">void</span> <span class="nf">initView</span><span class="p">();</span>
+    <span class="nl">private:</span>
+        <span class="k">static</span> <span class="n">StartAnnounceLayer</span><span class="o">*</span> <span class="n">m_pInstance</span><span class="p">;</span>
+        <span class="n">CCScrollView</span><span class="o">*</span> <span class="n">m_pListView</span><span class="p">;</span>
+        <span class="n">BaseBtn</span><span class="o">*</span> <span class="n">pBtnPrevious</span><span class="p">;</span>
+        <span class="n">BaseBtn</span><span class="o">*</span> <span class="n">pBtnNext</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">m_iCurIdx</span><span class="p">;</span>
+        <span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">m_stNotice</span><span class="p">;</span>
+        <span class="n">BaseBtn</span> <span class="o">*</span><span class="n">pBtnClose_l</span><span class="p">;</span>
+        <span class="n">BaseBtn</span> <span class="o">*</span><span class="n">pBtnClose_s</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="cp">#endif</span></code></pre></div>
+
+<h2>DEMO--.CPP</h2>
+
+<div class="highlight"><pre><code class="c--"><span class="cp">#include &quot;StartAnnounceLayer.h&quot;</span>
+<span class="cp">#include &quot;comm/RichTxtCreator.h&quot;</span>
+
+<span class="cp">#include &quot;comm/Utils.h&quot;</span>
+<span class="cp">#include &quot;comm/SmartRes.h&quot;</span>
+<span class="cp">#include &quot;comm/HallMsgParser.h&quot;</span>
+<span class="n">StartAnnounceLayer</span><span class="o">*</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">m_pInstance</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">touch_priority</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="o">+</span><span class="mi">3</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">touch_priority_menu</span> <span class="o">=</span> <span class="n">touch_priority</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">touch_priority_scrollview</span> <span class="o">=</span> <span class="n">touch_priority</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">StartAnnounceLayer</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">m_pListView</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">m_iCurIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">StartAnnounceLayer</span><span class="o">::~</span><span class="n">StartAnnounceLayer</span><span class="p">()</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="n">StartAnnounceLayer</span> <span class="o">*</span><span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">m_pInstance</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m_pInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StartAnnounceLayer</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m_pInstance</span> <span class="o">&amp;&amp;</span> <span class="n">m_pInstance</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">())</span>
+        <span class="p">{</span>
+
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">delete</span> <span class="n">m_pInstance</span><span class="p">;</span>
+            <span class="n">m_pInstance</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">m_pInstance</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">init</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">bool</span> <span class="n">isOk</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">CCLayer</span><span class="o">::</span><span class="n">init</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">setTouchEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+        <span class="n">initView</span><span class="p">();</span>
+        <span class="n">isOk</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">isOk</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">initView</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">CCSpriteFrameCache</span><span class="o">::</span><span class="n">sharedSpriteFrameCache</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addSpriteFramesWithFile</span><span class="p">(</span><span class="s">&quot;announce/announce.plist&quot;</span><span class="p">);</span>
+
+    <span class="c1">//设置游戏阴影</span>
+    <span class="n">CCLayerColor</span> <span class="o">*</span><span class="n">pShadow</span> <span class="o">=</span> <span class="n">CCLayerColor</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">ccc4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">190</span><span class="p">));</span>
+    <span class="n">addChild</span><span class="p">(</span><span class="n">pShadow</span><span class="p">);</span>
+
+    <span class="n">CCSprite</span> <span class="o">*</span><span class="n">pBg</span> <span class="o">=</span> <span class="n">CCSprite</span><span class="o">::</span><span class="n">createWithSpriteFrameName</span><span class="p">(</span><span class="s">&quot;bg.png&quot;</span><span class="p">);</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">_center</span><span class="p">);</span>
+    <span class="n">addChild</span><span class="p">(</span><span class="n">pBg</span><span class="p">);</span>
+
+    <span class="c1">//下一页    </span>
+    <span class="c1">//CCMenuItemImage* pSure = BaseBtn::create(&quot;下一页&quot;,BTN_STYLE_2,this,menu_selector(PetBagLayer::SureCallBack));</span>
+    <span class="c1">//CCMenuItemImage::create(&quot;petComm/sure.png&quot;,&quot;petComm/sure_s.png&quot;,this,menu_selector(PetBagLayer::SureCallBack));</span>
+    <span class="c1">//pSure-&gt;setPosition(pBg-&gt;getPosition()+ccp(205,-172));</span>
+    <span class="c1">//pSure-&gt;setScale(0.8);</span>
+    <span class="n">pBtnNext</span> <span class="o">=</span> <span class="n">BaseBtn</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;ÏÂÒ»Ò³&quot;</span><span class="p">,</span><span class="n">BTN_STYLE_2</span><span class="p">,</span><span class="k">this</span><span class="p">,</span><span class="n">menu_selector</span><span class="p">(</span><span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_Next</span><span class="p">));</span>
+    <span class="n">pBtnNext</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">0.75</span><span class="p">);</span>
+    <span class="n">pBtnNext</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="n">widthOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">),</span><span class="n">heightOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">))</span><span class="o">+</span><span class="n">ccp</span><span class="p">(</span><span class="o">-</span><span class="mi">240</span><span class="p">,</span><span class="o">-</span><span class="mi">290</span><span class="p">));</span>
+    <span class="n">CCMenu</span> <span class="o">*</span><span class="n">pMenu_N</span> <span class="o">=</span> <span class="n">CCMenu</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">pBtnNext</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">pMenu_N</span><span class="o">-&gt;</span><span class="n">setTouchPriority</span><span class="p">(</span><span class="n">touch_priority_menu</span><span class="p">);</span>
+    <span class="n">pMenu_N</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">CCPointZero</span><span class="p">);</span>
+    <span class="n">pBtnNext</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">pMenu_N</span><span class="p">);</span>
+
+    <span class="c1">//上一页</span>
+    <span class="n">pBtnPrevious</span> <span class="o">=</span> <span class="n">BaseBtn</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;上一页&quot;</span><span class="p">,</span><span class="n">BTN_STYLE_2</span><span class="p">,</span><span class="k">this</span><span class="p">,</span><span class="n">menu_selector</span><span class="p">(</span><span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_Previous</span><span class="p">));</span>
+    <span class="n">pBtnPrevious</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="n">widthOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">),</span><span class="n">heightOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">))</span><span class="o">+</span><span class="n">ccp</span><span class="p">(</span><span class="o">-</span><span class="mi">450</span><span class="p">,</span><span class="o">-</span><span class="mi">290</span><span class="p">));</span>
+    <span class="n">CCMenu</span> <span class="o">*</span><span class="n">pMenu_P</span> <span class="o">=</span> <span class="n">CCMenu</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">pBtnPrevious</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">pBtnPrevious</span><span class="o">-&gt;</span><span class="n">setScale</span><span class="p">(</span><span class="mf">0.75</span><span class="p">);</span>
+    <span class="n">pMenu_P</span><span class="o">-&gt;</span><span class="n">setTouchPriority</span><span class="p">(</span><span class="n">touch_priority_menu</span><span class="p">);</span>
+    <span class="n">pMenu_P</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">CCPointZero</span><span class="p">);</span>
+    <span class="n">pBtnPrevious</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="c1">//pBg-&gt;setVisible(bool) 设置图片是否可见</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">pMenu_P</span><span class="p">);</span>
+
+    <span class="c1">//离开当前图层</span>
+    <span class="n">pBtnClose_l</span> <span class="o">=</span> <span class="n">BaseBtn</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">BTN_STYLE_12</span><span class="p">,</span><span class="k">this</span><span class="p">,</span><span class="n">menu_selector</span><span class="p">(</span><span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_close_l</span><span class="p">));</span>
+    <span class="n">pBtnClose_l</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="n">widthOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">),</span><span class="n">heightOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">))</span><span class="o">+</span><span class="n">ccp</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="o">-</span><span class="mi">40</span><span class="p">));</span>
+    <span class="n">CCMenu</span> <span class="o">*</span><span class="n">pMenu_l</span> <span class="o">=</span> <span class="n">CCMenu</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">pBtnClose_l</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">pMenu_l</span><span class="o">-&gt;</span><span class="n">setTouchPriority</span><span class="p">(</span><span class="n">touch_priority_menu</span><span class="p">);</span>
+    <span class="n">pBtnClose_l</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">pMenu_l</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">CCPointZero</span><span class="p">);</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">pMenu_l</span><span class="p">);</span>
+
+    <span class="c1">//离开游戏</span>
+    <span class="n">pBtnClose_s</span> <span class="o">=</span> <span class="n">BaseBtn</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="n">BTN_STYLE_12</span><span class="p">,</span><span class="k">this</span><span class="p">,</span><span class="n">menu_selector</span><span class="p">(</span><span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_close_s</span><span class="p">));</span>
+    <span class="n">pBtnClose_s</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="n">widthOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">),</span><span class="n">heightOf</span><span class="p">(</span><span class="n">pBg</span><span class="p">))</span><span class="o">+</span><span class="n">ccp</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="o">-</span><span class="mi">40</span><span class="p">));</span>
+    <span class="n">CCMenu</span> <span class="o">*</span><span class="n">pMenu_s</span> <span class="o">=</span> <span class="n">CCMenu</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">pBtnClose_s</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">pBtnClose_s</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="n">pMenu_s</span><span class="o">-&gt;</span><span class="n">setTouchPriority</span><span class="p">(</span><span class="n">touch_priority_menu</span><span class="p">);</span>
+    <span class="n">pMenu_s</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">CCPointZero</span><span class="p">);</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">pMenu_s</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">CCSize</span> <span class="n">viewSize</span> <span class="o">=</span> <span class="n">CCSize</span><span class="p">(</span><span class="mi">395</span><span class="p">,</span><span class="mi">190</span><span class="p">);</span>
+    <span class="n">m_pListView</span> <span class="o">=</span> <span class="n">CCScrollView</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">viewSize</span><span class="p">);</span>
+    <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setTouchEnabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+    <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setDirection</span><span class="p">(</span><span class="n">kCCScrollViewDirectionVertical</span><span class="p">);</span>
+    <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setTouchPriority</span><span class="p">(</span><span class="n">touch_priority_scrollview</span><span class="p">);</span>
+    <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="mi">47</span><span class="p">,</span><span class="mi">93</span><span class="p">));</span>
+    <span class="n">pBg</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">m_pListView</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">show</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">string</span> <span class="n">xmlStr</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">getParent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">removeFromParent</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">HallMsgParser</span> <span class="o">*</span><span class="n">parser</span> <span class="o">=</span> <span class="n">HallMsgParser</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+        <span class="n">parser</span><span class="o">-&gt;</span><span class="n">setMaxLine</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">CCLayer</span> <span class="o">*</span><span class="n">pCntntNode</span> <span class="o">=</span> <span class="n">parser</span><span class="o">-&gt;</span><span class="n">parseMsgFromXMLStrAndShow</span><span class="p">(</span><span class="n">xmlStr</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="n">CCSize</span><span class="p">(</span><span class="mi">395</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pCntntNode</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">CCLayer</span> <span class="o">*</span><span class="n">pContainerLayer</span> <span class="o">=</span> <span class="n">CCLayer</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+            <span class="n">pContainerLayer</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">pCntntNode</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">());</span>
+            <span class="n">pContainerLayer</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">pCntntNode</span><span class="p">);</span>
+
+            <span class="n">pCntntNode</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">centerOf</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">));</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">m_pListView</span> <span class="o">&amp;&amp;</span> <span class="n">pContainerLayer</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContainer</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">);</span>
+                <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContentOffset</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">getViewSize</span><span class="p">().</span><span class="n">height</span> <span class="o">-</span> <span class="n">heightOf</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">)));</span>
+            <span class="p">}</span>
+            <span class="n">parent</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="n">INT_MAX</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">show2</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">string</span> <span class="n">content</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">getParent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">removeFromParent</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">CCLayer</span> <span class="o">*</span><span class="n">pContainerLayer</span> <span class="o">=</span> <span class="n">CCLayer</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+        <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">CCSize</span><span class="p">(</span><span class="mi">395</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+        <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">TxtItemStyle</span><span class="p">(</span><span class="n">content</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="n">STYLE_TXT_ANNOUNCE</span><span class="p">));</span>
+        <span class="n">CCNode</span> <span class="o">*</span><span class="n">pCntnt</span> <span class="o">=</span> <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pCntnt</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">pContainerLayer</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">pCntnt</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">());</span>
+            <span class="n">pCntnt</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">centerOf</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">));</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="n">m_pListView</span> <span class="o">&amp;&amp;</span> <span class="n">pContainerLayer</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContainer</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">);</span>
+                <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContentOffset</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">getViewSize</span><span class="p">().</span><span class="n">height</span> <span class="o">-</span> <span class="n">heightOf</span><span class="p">(</span><span class="n">pContainerLayer</span><span class="p">)));</span>
+            <span class="p">}</span>
+            <span class="n">parent</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="n">INT_MAX</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">show3</span><span class="p">(</span><span class="n">CCNode</span> <span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="n">Json</span><span class="o">::</span><span class="n">Value</span> <span class="n">stConf</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">stConf</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">m_stNotice</span> <span class="o">=</span> <span class="n">stConf</span><span class="p">;</span>
+    <span class="n">parent</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="n">INT_MAX</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">show4</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="c1">//if(stConf[m_iCurIdx+1][&quot;content&quot;].asString().size())</span>
+    <span class="c1">//{</span>
+    <span class="c1">//  //</span>
+    <span class="c1">//}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m_iCurIdx</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="n">stConf</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">pBtnNext</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">stConf</span><span class="p">[</span><span class="mi">0U</span><span class="p">][</span><span class="s">&quot;is_enter&quot;</span><span class="p">].</span><span class="n">isInt</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="c1">//CCLOG(&quot;sssss:%d&quot;,stConf[0U][&quot;is_enter&quot;].isUInt());</span>
+        <span class="n">pBtnClose_l</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+        <span class="n">pBtnClose_s</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">//CCLOG(&quot;bbbbbbb:%d&quot;,stConf[0U][&quot;is_enter&quot;].isUInt());</span>
+        <span class="n">pBtnClose_s</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+        <span class="n">pBtnClose_l</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">show4</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="n">CCLayer</span> <span class="o">*</span><span class="n">pContent</span> <span class="o">=</span> <span class="n">CCLayer</span><span class="o">::</span><span class="n">create</span><span class="p">();</span>
+    <span class="n">string</span> <span class="n">sTxt</span> <span class="o">=</span> <span class="n">m_stNotice</span><span class="p">[</span><span class="n">number</span><span class="p">][</span><span class="s">&quot;content&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span>
+    <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">TxtItemStyle</span><span class="p">(</span><span class="n">sTxt</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="n">STYLE_TXT_ANNOUNCE</span><span class="p">));</span>
+    <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">CCSize</span><span class="p">(</span><span class="mi">395</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+    <span class="n">CCNode</span> <span class="o">*</span><span class="n">pTxt</span> <span class="o">=</span>  <span class="n">RichTxtCreator</span><span class="o">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">(</span><span class="n">pContent</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pTxt</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">pContent</span><span class="o">-&gt;</span><span class="n">setContentSize</span><span class="p">(</span><span class="n">pTxt</span><span class="o">-&gt;</span><span class="n">getContentSize</span><span class="p">());</span>
+        <span class="n">pTxt</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">centerOf</span><span class="p">(</span><span class="n">pContent</span><span class="p">));</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">m_pListView</span> <span class="o">&amp;&amp;</span> <span class="n">pContent</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContainer</span><span class="p">(</span><span class="n">pContent</span><span class="p">);</span>
+            <span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">setContentOffset</span><span class="p">(</span><span class="n">ccp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">m_pListView</span><span class="o">-&gt;</span><span class="n">getViewSize</span><span class="p">().</span><span class="n">height</span> <span class="o">-</span> <span class="n">heightOf</span><span class="p">(</span><span class="n">pContent</span><span class="p">)));</span>
+        <span class="p">}</span>
+        <span class="c1">//parent-&gt;addChild(this,INT_MAX-1);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_close_l</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//CCMenuItem *pBtn = (CCMenuItem*)(pSender);</span>
+
+    <span class="c1">//CCTextureCache::sharedTextureCache()-&gt;removeUnusedTextures();</span>
+    <span class="n">removeFromParent</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_close_s</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//CCMenuItem *pBtn = (CCMenuItem*)(pSender);</span>
+
+    <span class="c1">//CCTextureCache::sharedTextureCache()-&gt;removeUnusedTextures();</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_Next</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender_n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">m_iCurIdx</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">m_stNotice</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">pBtnNext</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">m_iCurIdx</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">show4</span><span class="p">(</span><span class="n">m_iCurIdx</span><span class="p">);</span>
+        <span class="n">pBtnPrevious</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">menuCallback_Previous</span><span class="p">(</span><span class="n">CCObject</span> <span class="o">*</span><span class="n">pSender_p</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="n">m_iCurIdx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m_iCurIdx</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">show4</span><span class="p">(</span><span class="n">m_iCurIdx</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">pBtnPrevious</span><span class="o">-&gt;</span><span class="n">setVisible</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">scrollViewDidScroll</span><span class="p">(</span><span class="n">CCScrollView</span> <span class="o">*</span><span class="n">pScrollView</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">scrollViewDidZoom</span><span class="p">(</span><span class="n">CCScrollView</span> <span class="o">*</span><span class="n">pScrollView</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">registerWithTouchDispatcher</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">CCDirector</span><span class="o">::</span><span class="n">sharedDirector</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getTouchDispatcher</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addTargetedDelegate</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="n">touch_priority</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">onExit</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">CCDirector</span><span class="o">::</span><span class="n">sharedDirector</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getTouchDispatcher</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">removeDelegate</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="n">CCLayer</span><span class="o">::</span><span class="n">onExit</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kt">bool</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">ccTouchBegan</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">ccTouchMoved</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">StartAnnounceLayer</span><span class="o">::</span><span class="n">ccTouchEnded</span><span class="p">(</span><span class="n">CCTouch</span> <span class="o">*</span><span class="n">pTouch</span><span class="p">,</span><span class="n">CCEvent</span> <span class="o">*</span><span class="n">pEvent</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span></code></pre></div>
+
+    </div>
+    <hr>
+    <div id="disqus_thread">
+  <button type="button" name="liuwenyu" class="btn btn-default show-commend">显示评论</button>
+</div>
+
+  </div>
+  <!-- 目录 -->
+  <div id="content_table" style="position:fixed;right:20px;top:120px;display:none;">
+    <div class="panel panel-success">
+      <div class="panel-body" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:fixed;right:20px;top:10px;">
+  <button id="nav_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-left"></i></button>
+</div>
+<div style="position:fixed;right:20px;top:60px;">
+  <button id="content_btn" class="btn btn-lg" style="height:45px;width:45px;"><i class="fa fa-angle-down"></i></button>
+</div>
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script>
+    $('a[href="#学习"]').tab('show');
+</script>
+<script src="/public/js/base.js"></script>
+ 
+</body>
+</html>
