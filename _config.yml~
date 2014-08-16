@@ -31,7 +31,7 @@ disqus:
   shortname: liuwenyu
 
 # 主题设置，自动激活某个标签
-active: cocos2d
+active: 学习
 
 # 首页除了最新文章外显示分类
 cates: 
